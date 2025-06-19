@@ -1,14 +1,3 @@
-/*       声明。
-//本功能由Fly_world 设计。
-//colorTab是判定是否显示多色的tab栏 
-//isNewTabCmd是判定是否点击了新tab按钮
-//isFirstRun 是判定是否第一次运行
-//currenColor当前的色彩
-//当isLastTab为true时，代表是关闭了最后一个tab。
-//insertRelatedAfterCurrent 在ff3.6中true时，打开新tab在当前tab后来
-//newTabLocation是取得的insertRelatedAfterCurrent的值，关闭FF时，恢复到原来的值
-*/
-
 var myTabBar = {
 	colorTab : true ,
 	isNewTabCmd : false ,
@@ -25,10 +14,7 @@ var myTabBar = {
 	ctrlTab : "browser.ctrlTab.previews",
 	insertRelatedAfterCurrent:"browser.tabs.insertRelatedAfterCurrent",
 	newTabLocation:null,
-	isCnFox :null,	
-	
-
-	/*读取当前ff3.6中的tab栏打开方式,并设置CtrlTab功能*/	
+	isCnFox :null,		
 	setTabOpenLocation: function (){
 		var tabOpenLocation = null ;
 		if (!gPrefService)
@@ -48,8 +34,6 @@ var myTabBar = {
 			if(me.newTabLocation)	gPrefService.setBoolPref(me.insertRelatedAfterCurrent,me.newTabLocation);
 		},false);
 	},
-
-	/*读取出是否使用有颜色的tab栏*/
 	getColorTab : function (){
 		var isUseColorTab = null ;
 		if (!gPrefService)
@@ -62,8 +46,6 @@ var myTabBar = {
 		}
 		if(isUseColorTab != null) this.colorTab=isUseColorTab;
 	},
-	
-	/*保存是否使用有颜色的tab栏*/
 	saveColorTab : function (value){
 		this.colorTab= value=='true' ? true : false ;
 		gPrefService.setBoolPref(this.savedColorTab,this.colorTab);
@@ -90,8 +72,6 @@ var myTabBar = {
 			}			
 		}
 	},
-	
-	/*得到当前要使用的颜色*/
 	getColor : function(tab){
 		var preTab=tab.previousSibling;	
 		var nextTab=tab.nextSibling.nextSibling ;
@@ -110,8 +90,6 @@ var myTabBar = {
 		var color= myTabBar.colorList[n].name ;			
 		return color;
 	},
-	
-	/* 去除只有唯一色彩的tab*/
 	setColorDefalut : function(){
 		var container = gBrowser.tabContainer;
 		var group=false ;
@@ -139,8 +117,6 @@ var myTabBar = {
 			}		
 		}
 	},	
-
-	/*设置tab栏的事件*/
 	setTabbarEvent : function(){		
 		function TabAdded(event){			
 			if(!myTabBar.colorTab) return ;

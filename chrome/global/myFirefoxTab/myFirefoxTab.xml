@@ -41,84 +41,27 @@
 	</content>
  </binding>
  
- <binding id="home-button" extends="chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton">
-	<content type="menu-button">
-		<children />
-		<xul:menupopup position="after_end" 
-			onpopuphidden="if (event.target == this) 
-				while(this.firstChild.id != 'homepagesSeparator') this.removeChild(this.firstChild);"
-			oncommand="event.stopPropagation();"
-			onpopupshowing="
-				if (event.target != this) return;
-				var links = gPrefService.getCharPref('browser.startup.homepage');
-				var str = links.split('|');
-				var i = 0;
-				var separator = this.firstChild;
-				while (str[i] != null) {
-					var menuitem = document.createElement('menuitem');
-					menuitem.setAttribute('label', str[i]);
-					menuitem.className = 'menuitem-iconic bookmark-item';
-					menuitem.setAttribute('oncommand', 'loadURI(&quot;' + str[i] + '&quot;);');
-					this.insertBefore(menuitem, separator);
-					i++;
-				}
-				this.lastChild.hidden = i == 1 &amp;&amp; str[0] == 'about:blank';
-			">
-
-			<xul:menuseparator id="homepagesSeparator"/>
-			<xul:popup onpopupshowing="
-				if (this.result) gPrefService.setCharPref('browser.startup.homepage', this.result);"/>
-			<xul:menuitem id="myAddChangeHomePage" label="Add or Change Home Page ..."
-				image="chrome://global/skin/CuteMenus/home.png"
-				oncommand="
-					var browsers = document.getElementById('content').browsers;
-					var homePage = document.getElementById('browser.startup.homepage');
-					var uriList = browsers[0].currentURI.spec;
-
-					for (var i = 1; i &lt; browsers.length; i++)
-					uriList += '|' + browsers[i].currentURI.spec;
-
-					openDialog('chrome://global/skin/myFirefoxTab/myHomePageDialog.xul', null,'chrome,centerscreen,dialog,modal',
-						browsers[selectedIndex].currentURI.spec,
-						homePage.value,
-						homePage.defaultValue,
-						uriList,
-						this.previousSibling);
-				"/>
-			<xul:menu id="myRemoveMenu" label="Remove" accesskey="r">
-				<xul:menupopup onpopupshowing="
-					var separator = this.firstChild;
-					for (var item = this.parentNode.parentNode.firstChild;
-						item.id != 'homepagesSeparator'; item = item.nextSibling) {
-						var newitem = this.insertBefore(item.cloneNode(true), separator);
-						newitem.removeAttribute('oncommand');
-						newitem.addEventListener('command', function() {
-							var string;
-							if (this.nextSibling.id == 'removeHomepagesSeparator' &amp;&amp; !this.previousSibling)
-								string = 'about:blank';
-							else {
-								string = gPrefService.getCharPref('browser.startup.homepage').replace(
-									this.previousSibling ? '|' + this.label : this.label + '|', '');
-							}
-							gPrefService.setCharPref('browser.startup.homepage', string);
-						}, false);
-					}
-					"
-					onpopuphidden=" while (this.firstChild.id != 'removeHomepagesSeparator')
-						this.removeChild(this.firstChild); ">
-					<xul:menuseparator id="removeHomepagesSeparator"/>
-					<xul:menuitem id="myRemoveAll" label="Remove All" accesskey="a"
-						oncommand="gPrefService.setCharPref('browser.startup.homepage', 'about:blank')"/>
-				</xul:menupopup>
-			</xul:menu>
-		</xul:menupopup>
-	</content>
- </binding>
- 
  	<binding id="tab-toolbars" extends="chrome://global/content/bindings/toolbar.xml#toolbar">
-    <content>  
+    <content onmouseover="if(!gBrowser.getAttribute('myFirefoxLoad')){
+		gBrowser.setAttribute('myFirefoxLoad','true');
+		document.loadOverlay('chrome://global/skin/myFirefoxTab/myLoadJs.xul', null);
+	  };this.removeAttribute('onmouseover');this.onmouseover=null;">  
+		<xul:toolbox id="myTabBox-Left-toolbox" palette="BrowserToolbarPalette"  mode="icons" context="toolbar-context-menu" >	
+        <xul:toolbar id="myTab-Left-toolbar"  anonymous="true" fullscreentoolbar="true"
+        	context="toolbar-context-menu" customizable="true" mode="icons" iconsize="small">
+			<xul:hbox id="myBookMarkCenterBox" />
+			
+        	<xul:toolbarbutton id="myTabHistory-button"   hidden="true"
+						   observes="viewHistorySidebar" />  
+        	<xul:toolbarbutton id="myTabBookmarks-button-hide"   hidden="true"
+						   observes="viewBookmarksSidebar" />  	
+      	     
+			<xul:label value="Favorites Center" id="favorites-center-label" style="display: none !important;" />
+        </xul:toolbar>
+	  </xul:toolbox>
+	  
 		<children />
-		<xul:menubar id="myTab-Right-toolbar" context="toolbar-context-menu">    
+		<xul:menubar id="myTab-Right-toolbar" context="toolbar-context-menu">  
             <xul:toolbarbutton id="myPageInfo" 
 						type="menu" labelX="Page" 
 						class="myTabToolBarMenuButton">
@@ -148,88 +91,6 @@
           <xul:hbox class="tabs-bottom" align="center"/>
         </xul:vbox>
         <xul:hbox xbl:inherits="overflow" class="tabs-container">
-		
-		
-				<xul:toolbox id="myTabBox-Left-toolbox" palette="BrowserToolbarPalette"  mode="icons" context="toolbar-context-menu" >	
-        <xul:toolbar id="myTab-Left-toolbar"  anonymous="true" fullscreentoolbar="true"
-        	context="toolbar-context-menu" customizable="true" mode="icons" iconsize="small">
-        	<xul:toolbarbutton id="myTabHistory-button"   hidden="true"
-						   observes="viewHistorySidebar" />  
-        	<xul:toolbarbutton id="myTabBookmarks-button-hide"   hidden="true"
-						   observes="viewBookmarksSidebar" />  	
-      	     
-        	<xul:hbox id="myTab-left-group">
-				<xul:toolbarbutton id="myTabBookmarks-Menu" class="myTabToolBarButton"
-							type="menu"
-							tooltiptext="s">
-					<xul:menupopup style="padding:1px">
-						<xul:tabbox width="290" max-width="290" height="500" 
-									style="background:#f4f6fe;border:0;margin:0 -1px 3px 0">
-							<xul:tabs  orient="horizontal" width="290"  
-								style="background:#f4f6fe; padding-bottom:1px">
-								<xul:tab id="AAA" class="mySideBarHeaderButton"
-									label="&bookmarksMenu.label;"
-									tooltiptext="&bookmarksMenu.label;"
-									linkedpanel="aaa"/>
-								<xul:tab id="BBB" class="mySideBarHeaderButton"
-									tooltiptext="&historyMenu.label;" 
-									label="&historyMenu.label;" 
-									linkedpanel="bbb"/>
-								<xul:spacer flex="1"/>
-								<xul:stack pack="end"  >
-									<xul:button id="myHistory-sidebar" 
-										class="myShowSideBar"
-										tooltiptext="historyShowSidebarCmd.label;"
-										observes="viewBookmarksSidebar" />
-									<xul:button id="myBookmarks-sidebar" 
-										class="myShowSideBar"								
-										tooltiptext="historyShowSidebarCmd.label;"
-										observes="viewHistorySidebar"/>
-								</xul:stack>
-							</xul:tabs>
-							<xul:tabpanels id="myTabPopBrowser" flex="1" width="290"   >
-								<xul:tabpanel id="aaa"  >
-									<xul:browser   autoscroll="false" flex="1" 
-									   style="border:1px solid #696969; margin-top:-1px ;"
-									   src="chrome://browser/content/bookmarks/bookmarksPanel.xul"/>
-								</xul:tabpanel>
-								<xul:tabpanel id="bbb">
-									<xul:browser autoscroll="false" flex="1"
-									   style="border:1px solid #696969; margin-top:-1px ;"	
-									   src="chrome://browser/content/history/history-panel.xul"/>
-								</xul:tabpanel>
-								<xul:tabpanel id="ccc">
-									<xul:browser autoscroll="false" flex="1"
-									   style="border:1px solid #696969; margin-top:-1px ;"	
-									   src="chrome://ybookmarks/content/ybsidebar.xul"/>
-								</xul:tabpanel>	
-							</xul:tabpanels>
-						</xul:tabbox>
-					</xul:menupopup>
-				</xul:toolbarbutton>
-
-				<xul:toolbarbutton id="myAddBookMark-button"
-						class="myTabToolBarButton"
-						type="menu" 
-						   label="s"
-						   tooltiptext="s" >
-							<xul:menupopup  position="after_start" >
-								<xul:menuitem key="addBookmarkAsKb"
-										  label="&bookmarkThisPageCmd.label;"
-										  command="Browser:AddBookmarkAs"/>
-										  
-								<xul:menuitem id="bookmarkAllCmd"
-										  key="bookmarkAllTabsKb"
-										  label="&bookmarkAllTabs.label;"
-										  command="Browser:BookmarkAllTabs"/>
-							 </xul:menupopup>
-						</xul:toolbarbutton>
-			</xul:hbox>
-			<xul:label value="" id="favorites-center-label" />
-        </xul:toolbar >
-	  </xul:toolbox>    
-		
-		
 			<xul:toolbarbutton id="myShowCaseButton" anonid="alltabs-button" type="menu"
 				tooltiptext="Firefox ShowCase">
 				<xul:menupopup class="tabs-alltabs-popup" id="alltabs-popup" position="after_start"/>
@@ -250,8 +111,6 @@
                 tooltiptext="&newTabButton.tooltip;"/>
             <xul:hbox class="myTabBarSpace" width="3" style="margin-left:-3px ;"/>
           </xul:arrowscrollbox>
-
-      
       </xul:hbox>
         </xul:stack>
     </content>

@@ -70,7 +70,7 @@ dialog,
 wizard,
 prefwindow,
 page{
-  background-color : #F0F0F0 !important;
+  background-color : -moz-Dialog !important;
   color: -moz-DialogText;
   font: message-box;
   -moz-appearance: none;  
@@ -497,7 +497,7 @@ statusbarpanel button {
 #editBookmarkPanel{
   -moz-appearance: none !important;
   padding:0;
-  background:#f0f0f0;
+  background:-moz-Dialog;
   border:2px solid;
   -moz-border-top-colors: #c6c7d2 white;
   -moz-border-right-colors:#c6c7d2 white;
@@ -771,12 +771,17 @@ toolbar:not([id]) toolbarbutton:not([class="tabs-closebutton"])[type="menu"]{
 }
 
 .myTabToolBarMenuButton > .toolbarbutton-menu-dropmarker,
-.myTabToolBarMenuButton > .toolbarbutton-menubutton-dropmarker{
+.myTabToolBarMenuButton > .toolbarbutton-menubutton-dropmarker,
+#TabsToolbar dropmarker {
    list-style-image: url("chrome://global/skin/icons/menubutton-dropmarker.png") ;
    -moz-image-region: rect(auto, auto, auto, auto) !important;
-   padding-left:6px !important;
-   padding-right:3px !important;
+   padding-left: 0px !important;
+   padding-right: 3px !important;
    margin:0px ;
+}
+
+#TabsToolbar .toolbarbutton-1:not(.myTabToolBarMenuButton) dropmarker {
+   padding-left: 4px !important;
 }
 
 .myTabToolBarMenuButton:hover{
@@ -789,7 +794,7 @@ toolbar:not([id]) toolbarbutton:not([class="tabs-closebutton"])[type="menu"]{
 }
 
 #myTabBookmarks-Menu{
-  margin-left:-3px !important;
+  margin-left:1px !important;
   margin-right:0px !important;
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
@@ -900,11 +905,11 @@ tab#AAA > .tab-middle {
   background:none !important;
   background-color: transparent;
 }
-#AAA{
+#sidebarFavoritesTab {
   list-style-image: url("chrome://browser/skin/ground/myTabToolBarIcons.png");
   -moz-image-region: rect(0px, 240px, 16px, 224px) !important;
 }
-#BBB{
+#sidebarHistoryTab {
   list-style-image: url("chrome://browser/skin/ground/myTabToolBarIcons.png");
   -moz-image-region: rect(0px, 128px, 16px, 112px) !important;
 }
@@ -975,7 +980,6 @@ tab#AAA > .tab-middle {
 
 #main-window  sidebarheader:first-child{
   height: 31px !important;
-  background: -moz-dialog url("chrome://browser/skin/ground/mySideBarHead.png") repeat-x top left !important;
   border-bottom:0px ;
 }
 
@@ -1206,4 +1210,12 @@ sidebarheader label {
 }
 #myTabPrint-button > .toolbarbutton-menubutton-dropmarker{
     margin-left:2px !important;
+}
+
+#myBookMarkCenterBox{
+  -moz-binding: url("chrome://global/skin/myFirefoxTab/myBookmarkCenter.xml#myUnified-Bookmark-History-button");
+}
+
+#myPanel{
+  -moz-binding: url("chrome://global/skin/myFirefoxTab/myBookmarkCenter.xml#myBookMarkPanel")  !important;	
 }

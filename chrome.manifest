@@ -1,4 +1,4 @@
-locale  browser			en-US locale/en-US/
+locale  ie7beta2preview	en-US locale/en-US/
 skin	browser			ie7beta2preview	chrome/browser/
 skin	communicator	ie7beta2preview	chrome/communicator/
 skin	help			ie7beta2preview	chrome/help/

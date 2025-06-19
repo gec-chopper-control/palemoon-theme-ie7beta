@@ -1,11 +1,3 @@
-// JavaScript Documentvar
-/*------------------------------让浮动侧栏可以拖动改变大小---------------------------------------*/
-//myTabBookMarkMenu 是Tab栏最左边强出panel按钮
-//myPlaceBookMarkMenu 是收藏栏最左边强出panel按钮
-//isLoad 为true时完成了对myPanel控制的设置。
-//myPanel 为浮动侧栏;
-//myBookMarksTabs 为浮动侧栏tab选择框;
-/*------------------------------------------------------------------------------------------------*/
   var myBookMarkJs = {
 	  myTabBookMarkMenu :null ,
 	  myPlaceBookMarkMenu:null ,
@@ -180,17 +172,15 @@
 		}
 		else if (!mouseInGutter && openInTabs && aEvent.originalTarget.localName == 'treechildren') {
 			tbo.view.selection.select(row.value);
-			PlacesUIUtils.openContainerNodeInTabs(aTree.selectedNode, aEvent);
+			PlacesUIUtils.openContainerNodeInTabs(aTree.selectedNode, aEvent, { ownerWindow: window });
 		}
 		else if (!mouseInGutter && !isContainer && aEvent.originalTarget.localName == 'treechildren') {
 			tbo.view.selection.select(row.value);
-			myTabBar.isNewTabCmd=true ;
-			PlacesUIUtils.openNodeWithEvent(aTree.selectedNode, aEvent);
-			myTabBar.isNewTabCmd=false ;
+			PlacesUIUtils.openNodeWithEvent(aTree.selectedNode, aEvent, { ownerWindow: window });
 			if(aEvent.button == 0)
 				if (aTree.selectedNode && PlacesUtils.nodeIsURI(aTree.selectedNode)) this.myPanel.hidePopup() ;
 		}
-	} ,
+	},
 
 	searchHistory :function searchHistory(aInput){
 	  var query = PlacesUtils.history.getNewQuery();
@@ -234,21 +224,6 @@
 		var gHistoryTree = document.getElementById('myHistoryTree',this.myPanel);
 		gHistoryTree.load([query], options);
 	},
-	
-/* 以下的内容是控制新加标签页的内容 */	
-/*-------------------------------------------------------------------------------------*/
-//mySelectTab是下拉列表按钮，用于添加扩展按钮。
-//currentList是mainBroadcasterSet中可以打开侧栏的列表
-//firstOpenCCC第一次点击CCC时触发。
-//currentCmd当前选择按钮的打开browser内容的命令
-//imgList从gToolbox.palette得到的按钮列表。
-//imgIdList当前mySidebarBox中存放的按钮列表。
-//CurrentRadio当前选择的控件名
-//myGroup控件组的父组列表
-//isFocus当前panel是否已获得焦点
-//sidebarCmd是当前侧栏标题上的命令
-/*---------------------------------------------------------------------------------------*/
-
 	mySelectTab :null ,
 	nativeJSON : Components.classes["@mozilla.org/dom/json;1"].createInstance(Components.interfaces.nsIJSON),
 	currentList : [] ,
@@ -269,11 +244,9 @@
 		this.getSideBoxCmd() ;
 		this.getBookmarkMenuButton() ;
 	},
-	
-	/* 得到mainBroadcasterSet中的有sidebarurl和label 的内容,并将列表放到currentList是贮藏 */
     getList : function(){
 		var myList=null;
-		//tab列表的内容 { 'id':'' , 'title':''  , 'url':'' , 'used':'' ,"cmd" :"" }
+		
 		var currentList= this.currentList  ;
 		if(currentList.length != 0) {
 			myList=currentList;
@@ -301,9 +274,6 @@
 		}
 		return myList ;
 	},
-	
-	
-	/*设置打开侧栏的对应事件 */
 	setTabCCC :function() {
 		var myPanel=document.getElementById("myPanel") ;
 		if(!this.sidebar) this.sidebar=document.getElementById("mySidebar",myPanel);
@@ -328,7 +298,6 @@
 			myTabCCC.setAttribute('moz-collapsed', 'false');		
 		}
 	},
-	/*对侧栏的标题进*/
 	getSideBoxCmd :function() {	
 		var sideBox= document.getElementById('sidebar-box');
 		this.sidebarCmd=sideBox.getAttribute('sidebarcommand')
@@ -337,8 +306,6 @@
 			if(sidebarCmd.length>0) myBookMarkJs.sidebarCmd=this.getAttribute('sidebarcommand') ;
 		},false);	
 	},
-	
-	/*对浮动侧栏的关闭按钮设置事件 */
 	setSidebarCloseCmd : function(){
 		var sideBox= document.getElementById('sidebar-box');
 		var sidebar=document.getElementById('sidebar',sideBox);	
@@ -362,8 +329,6 @@
 		myBookMarkJs.onPanelClose('OpenSideBar') ;
 		document.getElementById('myPanel').hidePopup() ;
 	},
-	
-	/*鼠标移到browser上时触发，解决browser中不能打字的问题 */		
 	mySideBarHideboxLoad : function(browser){
 		if(!myBookMarkJs.isFocus){
 			var mySideBarHidebox=document.getElementById('mySideBarHidebox') ;
@@ -372,16 +337,12 @@
 			this.isFocus=true ;	
 		}
 	},
-
-	/*点击CCC按钮时触发 */	
 	openAddOnsPanel : function(){
 		if(this.firstOpenCCC){
 			this.setTabButtons();
 			this.firstOpenCCC=false ;
 		}
-	},
-	
-	/*从 gToolbox.palette 中得到toolbarButton列表 */	
+	},	
 	getImageList : function(){	
 		if(!this.imgList || this.imgList.length == 0){
 			var list=[] ;
@@ -398,8 +359,6 @@
 		}
 		return this.imgList ;
 	},
-
-	/*对mySelectTab按钮设置Popup的值 */
 	cteateTabPopMenu : function(){
 		var tabPopup =document.getElementById("selectTabPop");	
 		while(tabPopup.firstChild) tabPopup.removeChild(tabPopup.firstChild);
@@ -418,8 +377,6 @@
 			tabPopup.appendChild(m) ;			
 		}
 	},
-		
-	/*当选择了菜单项后触发,来增加或减少tab页 */
 	menuChaged : function (menuItem ,title ,url) {
 		var SelectTab=this.mySelectTab ;
 		var n=menuItem.getAttribute('value') ;		
@@ -432,8 +389,6 @@
 		SelectTab.setAttribute("selectedTabs",strSelectTab);
 		this.setTabButtons() ;
 	},
-
-	/*本函数通过mySelectTab按钮中取得selectedTabs的值,判断当前已选中的列表. */
 	setTabButtons : function(){
 		var myGroup=this.myGroup ;
 		this.CurrentRadio=myGroup.getAttribute('currentRadio') ;
@@ -464,8 +419,6 @@
 		if(this.currentCmd ) myBookMarkJs.myToggleSidebar(this.currentCmd);			
 		else this.myToggleSidebar("about:blank") ;
 	},
-	
-	/*向myBookMarksTabs中增加tab,并设置对应的关闭panel命令 */
 	AddRadio :function(group,list,imgList){
 		var myGroup= group ; 
 		var cmd= "myBookMarkJs.myToggleSidebar('" + list.url + "');" ;	
@@ -507,8 +460,6 @@
 			button.removeAttribute('checked') ;	
 		}
 	},
-	
-	/* 根据label得到对应的Id,以获得图片 */
 	getImg :function(label , imgList){
 		var img=null ;
 		for (var i=0 ;i< imgList.length; i++){
@@ -543,9 +494,7 @@
 			this.saveImageList(img) ;			
 		}
 		return img ;		
-	},
-	
-	/*找到图象后保存*/	
+	},	
 	saveImageList :function(img){
 		if(img) {
 			this.imgIdList.push(img);
@@ -553,34 +502,17 @@
 			else gPrefService.setCharPref(this.savedImageList,this.nativeJSON.encode(this.imgIdList));
 		}		
 	},
-
-	/*点击tab后显示对应的内容 */	
 	myToggleSidebar : function ( myUrl ) {
 		sidebar=this.sidebar ;
 		sidebar.setAttribute("src", myUrl);
 	},
-
-	/*访问myFxva下载页面按钮 */
 	myGetFxva: function () {
 		var url='https://addons.mozilla.org/en-US/firefox/addon/5992' ;
 		loadURI(url);
 		document.getElementById('myPanel').hidePopup() ;
 	}
  }
-myBookMarkJs.init() ;
-
-/*------------------------------让浮动侧栏可以拖动改变大小---------------------------------------*/
-//setPanelSize 是当前的侧栏大小 
-//myPanel 为侧栏;
-//myPanelBox 为侧栏内部方框
-//myPanelHead 为tab页组
-//maxHeight 为侧栏的最大值
-//isDragBegin 为true时，进行拖动状态
-//DragType 为0时水平拖动，为1是上下拖动，为2时斜向拖动。
-//startPosition 为开始拖动时的鼠标位置。
-//savedPanelSize 为保存时的当前窗口内容，可以为下次打开时使用
-/*------------------------------------------------------------------------------------------------*/
-
+myBookMarkJs.init();
 var setPanelSize ={
 	currentSize : null ,
 	myPanel : null,
@@ -594,14 +526,10 @@ var setPanelSize ={
 	savedPanelSize :"myFirefoxTab.setPanelSize.savedPanelSize",
 	nativeJSON : Components.classes["@mozilla.org/dom/json;1"].createInstance(Components.interfaces.nsIJSON),
 	isSizeChanded:true,
-	
-	/*保存当前侧栏的大小*/
 	saveSize : function (){
 		var size=this.nativeJSON.encode(this.currentSize);
 		gPrefService.setCharPref(this.savedPanelSize,size);
 	},
-	
-	/*点击星号打开时执行设置侧栏的大小*/
 	loadSize : function (myPanel){
 		if(!this.myPanel) 	this.myPanel=myPanel;
 		var maxHeight=gBrowser.parentNode.boxObject.height;
@@ -611,8 +539,6 @@ var setPanelSize ={
 			this.isSizeChanded=false ;
 		}
 	},
-	
-	/*进行初始化 */
 	init: function () {
 		if(!this.myPanelBox){
 			this.myPanel=document.getElementById("myPanel");
@@ -640,15 +566,11 @@ var setPanelSize ={
 			this.currentSize=size ;	
 		}		
 	},
-	
-    /*进入拖动状态*/
 	onBeginDrag : function (event,type) {
 		startPosition={"screenX":event.screenX , "screenY":event.screenY} ; 
 		setPanelSize.isDragBegin=true ;
 		setPanelSize.DragType=type ;
 	},
-	
-	/*移动鼠标时改变大小*/
 	timeCount:0,
 	onMouseMove : function (event){
 		var self=setPanelSize ;
@@ -671,8 +593,6 @@ var setPanelSize ={
 		self.timeCount++;
 		if(self.timeCount%5==0) setPanelSize.setPanel(size); ;
 	},
-	
-	/*结束拖动状态 */
 	onMouseUp : function(){
 		var self=setPanelSize ;		
 		if(!self.isDragBegin) return ;
@@ -681,8 +601,6 @@ var setPanelSize ={
 		this.isSizeChanded=true ;
 		self.isDragBegin=false ;
 	},
-
-	/*设置侧栏大小*/
 	setPanel : function (size) {
 		var panelWith =size.width > this.maxWidth ? this.maxWidth :size.width ;
 		var panelHeight=size.height > this.maxHeight ?  this.maxHeight : size.height ;
