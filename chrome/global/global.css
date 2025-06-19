@@ -918,8 +918,7 @@ tab#AAA > .tab-middle {
   padding:0px !important;
   margin:0px 6px 2px 6px !important;
   background:#f4f6fe;
-  border:0px  ;
-  border-top:1px solid #696969;
+  border:1px solid rgb(105, 105, 105);
 }
 
 

@@ -24,7 +24,7 @@
 	<resources>
 		<stylesheet src="chrome://global/skin/myFirefoxTab/myBookmarkCenter.css"/>
 	</resources>
-	<content onmouseover="myBookMarkJs.initPanel();this.onmouseover=null;">
+	<content>
 		<xul:toolbarbutton id="myTabBookmarks-Menu" class="myTabToolBarButton" popup="myPanel" />
 		<xul:panel id="myPanel" position="after_start" firstOpen="true" />
 		<xul:toolbarbutton id="myAddBookMark-button"
@@ -54,7 +54,7 @@
 	</resources> 
     <content onpopupshowing="if(event.target==this) myBookMarkJs.openPanel(this);"
 		onpopupshown="document.getElementById('myTabBookmarks-Menu').setAttribute('checked', 'true'); if(event.target==this) myBookMarkJs.BookMarkFillData();this.onpopupshown=null;" 
-		onpopuphidden="document.getElementById('myTabBookmarks-Menu').removeAttribute('checked'); if(event.target==this) myBookMarkJs.onPanelClose(this);">
+		onpopuphidden="if(event.target==this) myBookMarkJs.onPanelClose(this);">
 		 <xul:hbox flex="1" id="myPanelBox">
 			<xul:vbox flex="1">
 				<xul:hbox id="myPanelHead" maxheight="60" style="display: none !important;"></xul:hbox>

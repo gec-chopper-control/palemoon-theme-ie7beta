@@ -42,10 +42,7 @@
  </binding>
  
  	<binding id="tab-toolbars" extends="chrome://global/content/bindings/toolbar.xml#toolbar">
-    <content onmouseover="if(!gBrowser.getAttribute('myFirefoxLoad')){
-		gBrowser.setAttribute('myFirefoxLoad','true');
-		document.loadOverlay('chrome://global/skin/myFirefoxTab/myLoadJs.xul', null);
-	  };this.removeAttribute('onmouseover');this.onmouseover=null;">  
+    <content>  
 		<xul:toolbox id="myTabBox-Left-toolbox" palette="BrowserToolbarPalette"  mode="icons" context="toolbar-context-menu" >	
         <xul:toolbar id="myTab-Left-toolbar"  anonymous="true" fullscreentoolbar="true"
         	context="toolbar-context-menu" customizable="true" mode="icons" iconsize="small">
@@ -117,12 +114,7 @@
  </binding>
  
   <binding id="myTabpanels" extends="chrome://global/content/bindings/tabbox.xml#tabpanels"> 
-    <content onmouseover="
-	if(!gBrowser.getAttribute('myFirefoxLoad')){
-		gBrowser.setAttribute('myFirefoxLoad','true');
-		document.loadOverlay('chrome://global/skin/myFirefoxTab/myLoadJs.xul', null);
-	}
-	this.isFirstRun=true ;this.removeAttribute('onmouseover');this.onmouseover=null;">
+    <content>
 		<children/>				   
     </content>   
  </binding>

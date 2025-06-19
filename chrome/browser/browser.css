@@ -2660,15 +2660,6 @@ window#main-window {
 	margin: 2px 3px !important;
 }
 
-#myFeed {
-	list-style-image: url("chrome://browser/skin/feeds/feed-icons-16.png");
-	-moz-image-region: rect(0px 16px 16px 0px);
-}
-
-#myFeed[disabled="true"] {
-	filter: saturate(0) !important;
-}
-
 #ub-feed-button {
 	display: none !important;
 }
