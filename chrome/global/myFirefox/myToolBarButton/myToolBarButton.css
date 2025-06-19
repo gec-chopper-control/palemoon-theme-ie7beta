@@ -1,0 +1,82 @@
+/* ***** BEGIN LICENSE BLOCK *****
+本功能由FlyWorld设计。
+ * ***** END LICENSE BLOCK ***** */
+
+/* ===== myBookmarkCenter.css =====================================================
+  == Styles that apply myBookmarkCenter.xml
+  ======================================================================= */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+toolbarbutton{
+  -moz-appearance: none !important;
+  -moz-box-orient: horizontal !important ;
+  margin:0 1px 0 1px ;
+  padding:0 !important;
+  border:none !important;
+}
+toolbarbutton > hbox {
+  height: 24px  !important;
+  min-height: 24px  !important;
+}
+toolbarbutton image{
+  margin-left:1px ;
+  margin-right:1px ;
+}
+toolbarbutton[type="menu-button"] .button-icon{
+  margin-left:4px ;
+  margin-right:3px ;
+}
+
+toolbarbutton[type="menu-button"] dropmarker{
+  margin-left:2px ;
+  margin-right:0px ;
+}
+
+toolbarbutton[type="menu"] .toolbarbutton-icon{
+  margin-left:0px ;
+  margin-right:0px ;
+}
+
+toolbarbutton[type="menu"] .toolbarbutton-menu-dropmarker{
+	margin:0
+}
+toolbarbutton .button-icon,
+toolbarbutton .button-text,
+toolbarbutton > .myButton-arrowBox > dropmarker,
+toolbarbutton .toolbarbutton-icon,
+toolbarbutton .toolbarbutton-text,
+toolbarbutton .toolbarbutton-menu-dropmarker {
+  padding:1px ;
+}
+toolbarbutton:hover > toolbarbutton:active  .button-icon,
+toolbarbutton:hover > toolbarbutton:active  .button-text,
+toolbarbutton:hover:active .toolbarbutton-icon,
+toolbarbutton:hover:active .toolbarbutton-text,
+toolbarbutton:hover:active .toolbarbutton-menu-dropmarker,
+toolbarbutton[type="menu"][open="true"] .toolbarbutton-icon,
+toolbarbutton[type="menu"][open="true"] .toolbarbutton-text,
+toolbarbutton[type="menu"][open="true"] .toolbarbutton-menu-dropmarker{
+  padding:2px 0px 0px 2px ;
+}
+
+toolbarbutton >  dropmarker{
+  list-style-image: url("chrome://global/skin/icons/menubutton-dropmarker.png") ;
+}
+
+toolbarbutton > .myButton-arrowBox > dropmarker{
+  list-style-image: url("chrome://global/skin/icons/menubutton-dropmarker.png") ;
+}
+
+toolbarbutton  label{
+  margin-right:4px !important;
+  margin-top:0px ;
+  text-align: left ;
+}
+toolbarbutton  label{
+  margin-right:4px ;
+  margin-top:0px ;
+  text-align: left ;
+}
+toolbarbutton:not([label]) label{
+	display:none;
+}

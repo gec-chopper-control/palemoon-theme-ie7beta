@@ -1,0 +1,90 @@
+<?xml version="1.0"?> <!-- -*- Mode: xml; indent-tabs-mode: nil; -*- -->
+
+
+<?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?>
+<?xml-stylesheet href="chrome://global/skin/myFirefoxTab/myTree.css" type="text/css"?>
+
+<!DOCTYPE page SYSTEM "chrome://browser/locale/history/history.dtd">
+
+<page id="myHistory-panel" orient="vertical"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      onload="HistoryCommonInit();"
+      elementtofocus="historyTree">
+
+  <script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js"/>
+  <script type="application/x-javascript" src="chrome://global/content/nsTransferable.js"/>
+  <script type="application/x-javascript" src="chrome://global/content/nsTreeController.js"/>
+  <script type="application/x-javascript" src="chrome://global/content/nsTreeSorting.js"/>
+  <script type="application/x-javascript" src="chrome://global/content/globalOverlay.js"/>
+  <script type="application/x-javascript" src="chrome://browser/content/history/history.js"/>
+  <script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"/>
+  <script type="application/x-javascript" src="chrome://global/content/contentAreaUtils.js"/>
+  <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"/>
+
+  <stringbundle id="historyBundle" src="chrome://global/locale/history/history.properties"/>
+
+  <commandset id="editMenuCommands"/>
+  <keyset id="editMenuKeys">
+  </keyset>
+
+  <hbox align="center">
+    <label value="&find.label;" accesskey="&find.accesskey;"  hidden="true"  control="search-box"/>
+    <textbox id="search-box" flex="1" type="timed" timeout="500" hidden="true"
+             oncommand="searchHistory(gSearchBox.value);"/>
+	<checkbox checked="false" id="myShowSelectItem"  label="&view.label;"/>             
+	<radiogroup id="viewButton" selectedsort="day" persist="selectedsort">
+		<hbox>
+			<vbox>
+				<radio  label="&byLastVisited.label;" accesskey="&view.accesskey;" 
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort', 'lastvisited');
+									GroupBy('lastvisited');" />			
+			    <radio  label="&byDayAndSite.label;" 
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort', 'dayandsite'); GroupBy('dayandsite');" />  
+			</vbox>	
+			<vbox>
+				<radio  label="&byMostVisited.label;"
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort', 'visited');
+								GroupBy('visited');" /> 			
+			    <hbox>			
+					<radio  label="&byDate.label;" 
+							oncommand="this.parentNode.parentNode.setAttribute('selectedsort', 'day');
+							 GroupBy('day');"/> 
+					<radio  label="&bySite.label;" 
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort', 'site');
+							 GroupBy('site');"/>  					 
+				</hbox>	
+			</vbox>			
+		</hbox>
+	</radiogroup>
+
+  </hbox>
+  <tree id="historyTree" flex="1" class="plain"
+        seltype="multiple"
+        datasources="rdf:history" ref="NC:HistoryByDate" flags="dont-build-content"
+        onkeypress="if (event.keyCode == 13) openURL(event);" 
+        hidecolumnpicker="true"
+        ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event, historyDNDObserver);"
+        onclick="handleHistoryClick(event);">
+    <template>
+      <rule>
+        <treechildren>
+          <treeitem uri="rdf:*" rdf:type="rdf:http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+            <treerow>
+              <treecell label="rdf:http://home.netscape.com/NC-rdf#Name"
+                        sortName="rdf:http://home.netscape.com/NC-rdf#Name?sort=true"
+                        visitcount="rdf:http://home.netscape.com/NC-rdf#VisitCount"
+                        date="rdf:http://home.netscape.com/NC-rdf#Date"/>
+            </treerow>
+          </treeitem>
+        </treechildren>
+      </rule>
+    </template>
+    <treecols id="historyTreeCols">
+      <treecol flex="1" id="Name" persist="sortActive sortDirection" 
+               hideheader="true" primary="true"
+               sort="rdf:http://home.netscape.com/NC-rdf#Name?sort=true"
+               sortActive="true"/>
+    </treecols>
+  </tree>
+</page>

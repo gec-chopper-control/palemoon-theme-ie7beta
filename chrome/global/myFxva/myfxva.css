@@ -1,0 +1,321 @@
+/*控制是否显示myFxva-Settings */
+#main-window[myfxva-black] #myFxva-Settings{
+	display:-moz-box !important;
+}
+/*tab栏右侧的边距*/
+#main-window[myfxva-black] #myTab-Right-toolbar{
+	padding-right:4px !important;
+}
+/*控制浮动侧栏中是否显示get myFxva按钮*/
+#main-window[myfxva-black] #myGetFxva{
+  display:none  !important;	
+}
+/*控制收藏栏的项目宽度*/
+#main-window[myfxva-bookmarkItemWidth="0"] toolbarbutton.bookmark-item{
+	max-width:150px !important;
+}
+#main-window[myfxva-bookmarkItemWidth="1"] toolbarbutton.bookmark-item{
+	max-width:80px !important;
+}
+#main-window[myfxva-bookmarkItemWidth="2"] toolbarbutton.bookmark-item > label{
+	display:none !important;
+}
+#main-window[myfxva-bookmarkItemWidth="0"] #navigator-toolbox toolbarbutton.bookmark-item > label,
+#main-window[myfxva-bookmarkItemWidth="1"] #navigator-toolbox toolbarbutton.bookmark-item > label{
+	display:-moz-box !important;
+}
+/*控制书签栏上按钮的显示 */
+#main-window[myfxva-favoriteButton="false"] #myPlaceBookmarksMenu{display:none }
+#main-window[myfxva-favoriteButton="false"] #myPlaceSep{display:none !important}
+#main-window[myfxva-addFavoriteButton="false"] #myPlaceBookmarkCurrentPage{display:none !important}
+
+/* 非作用中时, 菜单文字变灰 */
+#main-window[myfxva-black="-1"]:not([active="true"]) #toolbar-menubar:first-child #main-menubar > menu:not([_moz-menuactive="true"]):not([disabled="true"]) > label,
+#main-window[myfxva-color="8"]:not([active="true"]) #toolbar-menubar:first-child #main-menubar > menu:not([_moz-menuactive="true"]):not([disabled="true"]) > label,
+#main-window:not([sizemode="maximized"]):not([active="true"]) #toolbar-menubar:first-child #main-menubar > menu:not([_moz-menuactive="true"]):not([disabled="true"]) > label{
+  color:rgb(67, 78, 84)!important
+}
+#main-window:not([active="true"]) #nav-bar + #toolbar-menubar #main-menubar > menu:not([_moz-menuactive="true"]):not([disabled="true"]) > label{
+  color:rgb(160, 160, 160)
+}
+#main-window[myfxva-color="8"]:not([active="true"]) #nav-bar + #toolbar-menubar #main-menubar > menu:not([_moz-menuactive="true"]):not([disabled="true"]) > label{
+  color:rgb(128, 128, 128)
+}
+/*控制刷新与重载的显示*/
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #reload-button{
+  list-style-image: url("chrome://browser/skin/Goarrow/reload-normal.png");
+}
+
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #stop-button{
+  list-style-image: url("chrome://browser/skin/stop/stop-normal.png") ;  
+}
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #reload-button,
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #stop-button{
+  margin: 0 0 3px 3px  !important;
+  display :-moz-box ;	
+  -moz-image-region: rect(0px 26px 26px 0px);
+}
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #reload-button:hover,
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #stop-button:hover{
+  -moz-image-region: rect(0px 52px 26px 26px) ;
+}
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #reload-button:hover:active,
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] > #stop-button:hover:active{
+  -moz-image-region: rect(0px 78px 26px 52px) ;
+}
+
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #urlbar-container #reload-button,
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #urlbar-container #stop-button{
+	display:none ;
+}
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #urlbar-container  #go-button-stack{
+	margin-right:4px ;
+	margin-left:0px ;
+	width:0 ;
+}
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #urlbar-container #myUrlbarSpace{
+	display:none ;
+}
+
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #urlbar-container #myGoBox > #go-button{
+  display:-moz-box ;
+   position:relative ;
+  z-index:1 ;
+  margin-right:-1px !important; 
+}
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #urlbar[pageproxystate="invalid"] #myGoBox > :not(#go-button) ,
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #urlbar[pageproxystate="valid"] #myGoBox > #go-button {
+  visibility: visible ;
+}
+#main-window[myfxva-stopReloadInUrlBar="false"] toolbar[iconsize="large"] #home-button{
+  display:none ;
+}
+
+
+/*控制状态栏的显示 */  
+#main-window[myfxva-originalStatusbar="true"] statusbar {
+  -moz-appearance: statusbar;
+  border-top: 1px solid ThreeDLightShadow;
+  border-left: 1px solid ThreeDShadow;
+  border-right: 1px solid ThreeDHighlight;
+  border-bottom: 1px solid ThreeDHighlight;
+  background-color: -moz-Dialog;
+  min-height: 22px;
+}
+
+#main-window[myfxva-originalStatusbar="true"] statusbarpanel {
+  -moz-appearance: statusbarpanel;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  border-left: 1px solid ThreeDHighlight;
+  border-top: 1px solid ThreeDHighlight;
+  border-right: 1px solid ThreeDShadow;
+  border-bottom: 1px solid ThreeDShadow;
+  padding: 0 2px;
+}
+
+#main-window[myfxva-originalStatusbar="true"] .statusbar-resizerpanel {
+  -moz-box-align: end;
+  -moz-box-pack: end;
+  -moz-appearance: resizerpanel;
+  padding: 0px;
+  border: none;
+}
+
+  /* 控制最大化时,文字变黑 */
+#main-window[sizemode="maximized"][myfxva-color]:not([myfxva-black="-1"]) #main-menubar > menu > label {
+  background:none ;
+}
+#main-window[sizemode="maximized"][myfxva-color]:not([myfxva-black="-1"]) #main-menubar > menu > label {
+  background:none ;
+}
+
+#main-window[myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"])[sizemode="maximized"] 
+	#toolbar-menubar:first-child #main-menubar > menu > label,
+#main-window[myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"])[sizemode="maximized"] 
+	#toolbar-menubar:first-child #personal-bookmarks  label ,
+#main-window[myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"])[sizemode="maximized"] 
+	#toolbar-menubar:first-child toolbarbutton >label {
+  font-weight:bold ;
+} 
+
+#main-window[sizemode="maximized"][myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"]) #main-menubar > menu > label ,
+#main-window[sizemode="maximized"][myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"]) #toolbar-menubar:first-child toolbarbutton >label {
+  color:white ;
+}
+
+#main-window[myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"])[sizemode="maximized"] #toolbar-menubar:first-child #personal-bookmarks toolbarbutton > label,
+#main-window[myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"])[sizemode="maximized"] #nav-bar #personal-bookmarks toolbarbutton > label ,
+#main-window[myfxva-color]:not([myfxva-color="8"]):not([myfxva-black="-1"])[sizemode="maximized"] #nav-bartoolbarbutton > label{
+  color:white ;
+}
+
+#nav-bar + #toolbar-menubar{
+  min-height:21px ;
+}
+
+#main-window:not([persona]) #nav-bar + #toolbar-menubar #main-menubar> menu > label {
+  color:black ;
+}
+#nav-bar + #toolbar-menubar #main-menubar> menu[_moz-menuactive="true"] > label {
+  color:white ;
+}
+
+/*控制搜索栏的engineImage显示*/
+#main-window[myfxva-engineImage="false"] .searchbar-engine-image{
+	display:none;
+}
+
+/*控制tab栏与Urlbar 的ICON 显示 */
+#main-window[myfxva-icon="0"]  .tab-icon-image {
+  list-style-image: url("chrome://global/skin/icons/folder-item.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+#main-window[myfxva-icon="0"]  #page-proxy-favicon{
+  list-style-image: url("chrome://global/skin/icons/folder-item.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+#main-window[myfxva-icon="1"]  .tab-icon-image {
+  list-style-image: url("chrome://global/skin/CuteMenus/internet-explorer.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+#main-window[myfxva-icon="1"]  #page-proxy-favicon{
+  list-style-image: url("chrome://global/skin/myFxva/tab-icon/iedoc.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+#main-window[myfxva-icon="2"]  .tab-icon-image {
+  list-style-image: url("chrome://global/skin/myFxva/tab-icon/firefox-icon.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+#main-window[myfxva-icon="2"] #page-proxy-favicon{
+  list-style-image: url("chrome://global/skin/myFxva/tab-icon/fxdoc.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+#main-window[myfxva-icon="3"] .tab-icon-image {
+  list-style-image: url("chrome://global/skin/myFxva/tab-icon/vista-icon.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+#main-window[myfxva-icon="3"]   #page-proxy-favicon{
+  list-style-image: url("chrome://global/skin/myFxva/tab-icon/vista-icon.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+#main-window[myfxva-icon="4"] .tab-icon-image {
+  list-style-image: url("chrome://global/skin/myFxva/tab-icon/vista-white.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+#main-window[myfxva-icon="4"]   #page-proxy-favicon{
+  list-style-image: url("chrome://global/skin/myFxva/tab-icon/vista-white.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+
+  /*  控制新NewTabButton 的显示 */
+#main-window[myfxva-newTabButton="false"] .tabs-newtab-button{
+	display:none ;
+}
+
+#main-window[myfxva-newTabButton="false"] .tabbrowser-tabs:not([overflow]) .tabbrowser-arrowscrollbox{
+  margin-right:-2px;
+}
+
+#main-window[myfxva-newTabButton="false"] .tabbrowser-tabs:not([overflow]) .tabbrowser-tab[selected="true"][last-tab="true"]> .myTab-right-corner {
+  -moz-image-region: rect(0px, 5px, 5px, 0px);
+  margin-right:-3px!important
+}
+  #main-window[myfxva-newTabButton="false"] .tabbrowser-tabs:not([overflow]) .tabbrowser-tab[last-tab="true"]{
+  margin-right:3px!important
+}
+  #main-window[myfxva-newTabButton="false"] .tabbrowser-tabs:not([overflow]) .tabbrowser-tab[selected="true"][last-tab="true"] > .myTab-right-corner {
+  margin-right: -3px!important;
+}
+
+  /* 控制在Vista-base的底边框的显示 */
+#main-window[myfxva-color="8"]  #nav-bar {
+  background:url("urlbar/Vista-base-urlbar-bottom.png") repeat-x bottom !important;
+}
+
+#main-window[myfxva-color="8"]:not([active="true"]) #nav-bar {
+  background:url("urlbar/Vista-base-urlbar-bottom-nofocus.png")   repeat-x bottom !important;
+} 
+/*安装了glasser时的变化 background:none  !important; */
+#main-window[glasser="true"] #navigator-toolbox,
+#main-window[glasser="true"][myfxva-color] #navigator-toolbox,
+#main-window[glasser="true"][myfxva-color]:not([myfxva-black="-1"])[sizemode="maximized"] #navigator-toolbox{
+  background: transparent ;
+} 
+
+/* 控制toolbox 背景图片 */  
+#main-window[myfxva-color] #navigator-toolbox{  
+  background-image: url("chrome://global/skin/myFxva/toolbox-ground/active_normal_default_color.png");
+}
+#main-window[myfxva-color]:not([myfxva-black="-1"])[sizemode="maximized"] #navigator-toolbox{
+	background-image: url("chrome://global/skin/myFxva/toolbox-ground/active_max_default_color.png");
+}
+
+#main-window[myfxva-color="0"] #navigator-toolbox{
+  background:url("chrome://global/skin/myFxva/toolbox-ground/2.png") repeat-x top left;
+}
+
+#main-window[myfxva-color="1"] #navigator-toolbox{
+	background-color:#5B5B5B; 
+} 
+
+#main-window[myfxva-color="2"] #navigator-toolbox{
+	background-color:#0057AB; 
+} 
+ 
+#main-window[myfxva-color="3"] #navigator-toolbox{
+	background-color:#00FFFF; 
+} 
+
+#main-window[myfxva-color="4"] #navigator-toolbox{
+	background-color:#FF0000; 
+} 
+
+#main-window[myfxva-color="5"] #navigator-toolbox{
+	background-color:#FF7D00; 
+} 
+
+#main-window[myfxva-color="6"] #navigator-toolbox{
+	background-color:#0000FF; 
+}
+#main-window[myfxva-color="7"] #navigator-toolbox{
+	background-color:white; 
+} 
+#main-window[myfxva-color="8"] #navigator-toolbox{
+background:rgb(185, 209, 234);
+}
+#main-window[myfxva-color="8"]:not([active="true"]) #navigator-toolbox{
+  background:#d7e4f2;
+} 
+
+#main-window[myfxva-color="9"] #navigator-toolbox{
+	background-color:#C6DFF8; 
+} 
+
+#main-window[myfxva-color="10"] #navigator-toolbox{
+	background-color:#F7C4F2; 
+} 
+
+/*设置对按钮的显示与隐藏*/
+#main-window[myfxva-homeButton="false"] #myTabhome,
+#main-window[myfxva-printButton="false"] #myTabPrint,
+#main-window[myfxva-pageButton="false"] #myPageInfo,
+#main-window[myfxva-securityButton="false"] #mySecurity,
+#main-window[myfxva-undoCloseButton="false"] #myUndoClose,
+#main-window[myfxva-downloadButton="false"] #myTabdownloads,
+#main-window[myfxva-liveBookmarkButton="false"] #myFeed-button,
+#main-window[myfxva-optionButton="false"] #myOptions{display:none !important}
+
+#main-window[myfxva-homeButton="true"] #myTabhome,
+#main-window[myfxva-printButton="true"] #myTabPrint,
+#main-window[myfxva-pageButton="true"] #myPageInfo,
+#main-window[myfxva-securityButton="true"] #mySecurity,
+#main-window[myfxva-undoCloseButton="true"] #myUndoClose,
+#main-window[myfxva-downloadButton="true"] #myTabdownloads,
+#main-window[myfxva-liveBookmarkButton="true"] #content #myFeed-button,
+#main-window[myfxva-optionButton="true"] #myOptions{display:-moz-box !important}

@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE bindings [
+<!ENTITY % searchBarDTD SYSTEM "chrome://browser/locale/searchbar.dtd" >
+%searchBarDTD;
+<!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
+%globalDTD;
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
+%browserDTD;
+<!ENTITY % engineManagerDTD SYSTEM "chrome://browser/locale/engineManager.dtd">
+%engineManagerDTD;
+]>
+
+<bindings id="SearchBindings"
+      xmlns="http://www.mozilla.org/xbl"
+      xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      xmlns:xbl="http://www.mozilla.org/xbl">
+  <!-- 本功能flyWorld设计 -->
+  <binding id="mySearchbar"  extends="chrome://browser/content/search/search.xml#searchbar">
+	<resources>
+		<stylesheet src="chrome://global/skin/myFirefoxTab/mySearchBar.css"/>
+	</resources>  
+    <content onmouseover="if(!gBrowser.getAttribute('myFirefoxLoad')){
+	  document.loadOverlay('chrome://global/skin/myFirefoxTab/myLoadJs.xul', null);
+	  gBrowser.setAttribute('myFirefoxLoad','true');}
+	  this.removeAttribute('onmouseover');this.onmouseover=null;">
+	<xul:stringbundle src="chrome://browser/locale/search.properties" anonid="searchbar-stringbundle"/>
+      <xul:hbox class="searchbar-box" flex="1">
+			<xul:hbox class="myUrlbar-left-corner" width="3px" pack="end" align="center">
+				<xul:hbox class="myUrlbar-Middle" width="1px" height="22px"/>
+			</xul:hbox>
+			<xul:textbox class="searchbar-textbox" anonid="searchbar-textbox" type="autocomplete" flex="1000"
+					autocompletepopup="myPopupAutoComplete" autocompletesearch="search-autocomplete"
+					autocompletesearchparam="searchbar-history" maxrows="10" completeselectedindex="true"
+					showcommentcolumn="true" tabscrolling="true" timeout="250"
+					xbl:inherits="disabled,disableautocomplete,searchengine,src"
+					oninput="if(this.value=='') mySearchBar.openPanel();"
+					onmouseup="mySearchBar.onSearchBoxClick(event);"
+					onsearchcomplete="mySearchBar.onSearchComplete(this)"
+					onblur="mySearchBar.onBlur();">
+				<xul:image class="searchbar-engine-image" xbl:inherits="src"
+					onclick="mySearchBar.SearchbarImageOpen();event.stopPropagation()"		
+				/>			   
+				<xul:hbox id="mySearchTextBox"/> 
+			</xul:textbox>
+			<xul:hbox class="myUrlbar-right-corner" width="3px" pack="start" align="center">
+				<xul:hbox class="myUrlbar-Middle" width="1px" height="22px"/>
+			</xul:hbox>          
+         <xul:hbox class="mySearch-go-box" >
+				<xul:toolbarbutton class="search-go-button" anonid="search-go-button" chromedir="&locale.dir;"
+					 onclick="handleSearchCommand(event);" label="&searchEndCap.label;" />   
+				<xul:toolbarbutton class="searchbar-engine-button" type="menu" anonid="searchbar-engine-button"
+						popup="_child">
+				  <xul:image class="searchbar-dropmarker-image"/>
+				  <xul:menupopup class="searchbar-popup" anonid="searchbar-popup" position="after_end">
+					<xul:menuseparator/>
+					<xul:menuitem label="&addEngine.label;" oncommand="
+						loadURI('https://addons.mozilla.org/en-US/firefox/browse/type:4/cat:all?sort=name');"/>
+					<xul:menuitem anonid="open-engine-manager" label="&cmd_engineManager.label;"
+						oncommand="openManager(event);"/>
+				  </xul:menupopup>
+				</xul:toolbarbutton>
+        </xul:hbox>
+      </xul:hbox>      
+    </content>
+  </binding>
+  
+ <binding id="mySearchPopup" extends="chrome://browser/content/urlbarBindings.xml#browser-autocomplete-result-popup">
+	<resources>
+		<stylesheet src="chrome://global/skin/myFirefoxTab/mySearchBar.css"/>
+	</resources> 
+    <content noautofocus="true" ignorekeys="true"
+		onpopuphidden ="mySearchBar.onPanelHide(this);"
+		onpopupshowing="mySearchBar.closePanel();
+		mySearchBar.setPanelWidth(this,false);
+		mySearchBar.onPanelShow(this); ">
+		<xul:tree id="mySearchTree" anonid="tree" class="autocomplete-tree plain" 
+			hidecolumnpicker="true" flex="1" seltype="single">
+			<xul:treecols anonid="treecols">
+				<xul:treecol id="treecolAutoCompleteValue" class="autocomplete-treecol" flex="1" overflow="true"/>
+			</xul:treecols>
+			<xul:treechildren class="autocomplete-treebody"/>
+		</xul:tree>
+		<xul:hbox class="myChangeSearchBox">
+			<xul:hbox id="mySearchEngineBox" flex="1"/>
+			<xul:toolbarseparator class="mySearchPanelSep"/>
+			<xul:toolbarbutton class="mySearchGo mySearchEngineButton" label="&searchEndCap.label;" 
+				onclick="mySearchBar.goSearch(event);"/>
+		</xul:hbox>      
+    </content>
+  </binding> 
+  
+ <binding id="mySearchEnginePanel"  extends="chrome://global/content/bindings/popup.xml#panel">
+	<resources>
+		<stylesheet src="chrome://global/skin/myFirefoxTab/mySearchBar.css"/>
+	</resources> 
+    <content noautofocus="true" ignorekeys="true"  
+		onpopuphidden="mySearchBar.onPanelHide(this);"
+		onpopuphiding ="mySearchBar.onPanelHiding(event);"
+		onpopupshowing="mySearchBar.onPanelShow(this);">
+		<xul:hbox flex="1" class="myChangeSearchBox">
+			  <xul:hbox id="myEngineBox" flex="1"/>
+			  <xul:toolbarseparator class="mySearchPanelSep"/>
+			  <xul:toolbarbutton class="mySearchGo mySearchEngineButton" label="&searchEndCap.label;" 
+				  onclick="mySearchBar.goSearch(event);"/>
+		</xul:hbox>
+    </content>
+  </binding>
+</bindings>

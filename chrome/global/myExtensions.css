@@ -1,0 +1,511 @@
+/* ***** BEGIN LICENSE BLOCK *****
+本功能由FlyWorld设计。
+* ***** END LICENSE BLOCK ***** */
+/* ===== myExtensions.css ========================================================================== */
+/* ===== Add to Global.css   ======================================================================= */
+/* 支持 tab mix plus 中的新建按钮*/
+#main-window[onload="TMP_TBP_Startup();"] #content .tabbrowser-tabs .tabbrowser-tab{
+  -moz-binding: url( "chrome://global/skin/myFirefox/Tmp/tabmix_3.xml#browser-tab") !important;
+}
+#main-window[onload="TMP_TBP_Startup();"] #content .tabbrowser-tabs {
+  -moz-binding: url( "chrome://global/skin/myFirefox/Tmp/tabmix_3.xml#scroll-tabs_3") !important;
+}
+
+#TM_ButtonBox > button{
+  -moz-binding: url(chrome://global/content/bindings/button.xml#button);
+}
+
+#main-window[onload="TMP_TBP_Startup();"] .tabbrowser-tabs[useProgressColor=true] .tabbrowser-tab .progress-bar{
+  -moz-appearance: none;
+  background:url("chrome://global/skin/progressmeter/tab-process.png") repeat-x left center !important ;
+  background-color:transparent !important; 
+}
+
+
+/*支持Tab Mix Lite */
+#main-window[onload="TM_Startup()"] tabs[hideTabsNewTabButton="true"] .tabs-newtab-button {
+	display:-moz-box !important;
+}
+#main-window[onload="TM_Startup()"] tabbox[dir="rtl"] tabs{
+	border-top:none  !important;
+}
+/* ::::: All in one side bar Extension Support ::::: */
+#main-window #sidebar-box[aiosVersion]  > sidebarheader{
+   -moz-binding: none !important;
+   border-top:none !important;
+   border-bottom: 2px solid !important;
+   -moz-border-bottom-colors: #e0e2e8 #e9ecfa !important;
+}
+#extensionsManager[aios_appDefTheme="true"]:-moz-system-metric(windows-default-theme) richlistitem[selected="true"] {
+	background:white !important;
+}
+
+#main-window[aios_appOS][aiosOpen="true"]  #myTab-left-group toolbarbutton{
+	display:none ;
+}
+
+#main-window[aios_appOS][aiosOpen="true"] #sidebarheader > #myTabBookmarks-Menu{
+	display:-moz-box !important;
+	margin:-2px 0 0px 1px !important;
+	padding:6px 7px 6px 7px  !important; 
+}
+#main-window[aios_appOS][aiosOpen="true"] #sidebarheader >#myPanel{
+	display: -moz-popup !important;
+}
+
+#main-window[aios_appOS] #browser{
+  border-top:none !important;
+}
+
+#sidebar-box[aiosVersion] toolbox,
+#sidebar-box[aiosVersion] toolbox  toolbar,
+#sidebar-box[aiosVersion] hbox{
+  background-color:transparent !important;
+  border:none !important;
+}
+#sidebar-box[aiosVersion] #aios-sidebardivider-1{
+	border-top:0  !important;
+}
+#aiostbx-toolbar-sidebarheader{
+height:26px !important;
+}
+#sidebar-box[aiosVersion] toolbarbutton{
+  margin:0px 1px 0px 1px !important;
+  padding:3px 0 3px 0 !important; 
+}
+window[aiosColors] #searchPanel,
+window[aiosColors] #search{
+    background: white !important;
+	border-bottom:1px solid #e0e2e8 !important ;
+}
+
+window[aiosColors] #commandBarBottom {
+  background:rgb(212, 219, 238) url("chrome://browser/skin/ground/bookmark-ground.png") repeat-x top !important;
+  border-bottom:1px solid #a0a0a0 !important ;
+}
+window[aiosColors] #commandBarBottom  toolbarbutton {
+	padding:0px 3px 0px 3px !important;
+	margin-top:0px  !important;
+	margin-bottom:0px  !important; 
+}
+#commandBarBottom button{
+  -moz-appearance: none !important;
+  border:none !important;
+  padding:0 !important;
+  margin:4px !important;
+  }
+#downloadManager > #downloadView:not([staticHint]) richlistitem[selected=true] {	/* Fx2 */
+	background:white  !important;
+}
+
+/* ::::: Fission Extension Support ::::: */
+
+#urlbar[fission] > .autocomplete-textbox-container > stack ,
+#urlbar[fission] #page-proxy-deck ,
+#urlbar[fission] #page-proxy-button,
+#urlbar[fission] #page-proxy-favicon ,
+#urlbar[fission] #lock-icon{
+  margin-top:0px !important;
+  margin-bottom:0px !important;
+}
+#urlbar[fission] .progressmeter-statusbar {
+  border:0px ;
+  background:none  ;
+}
+#nav-bar[iconsize="large"] #urlbar[fission] .progressmeter-statusbar {
+  margin:0px;
+}
+#nav-bar[iconsize="small"] #urlbar[fission] .progressmeter-statusbar {
+  margin:0 0 0 3px !important;
+}
+#urlbar[fission] .progressmeter-statusbar .progress-bar {
+  background:none  ;
+}
+#urlbar[fission] #urlbar-icons image{
+	margin:0 1px  0 1px  !important;
+}
+
+/* ::::: sage Extension Support ::::: */
+#sidebar-box[src="chrome://sage/content/sage.xul"] > sidebarheader{
+  -moz-binding:none !important;
+}
+
+#sagePanel > .plain > #feedListToolbar{
+	border-top:0 !important;
+	background:#E3EDFA !important;
+}
+
+/* ::::: adblock Plus Extension Support ::::: */
+#abp-toolbarbutton{
+   margin-left:5px !important;
+}
+
+/* ::::: Ctrl-Tab Extension Support ::::: */
+#ctrlTab-panel button,
+#allTabs-panel button{
+
+}
+#allTabs-panel button[selected="true"] {
+  font-weight: bold;
+  background-color: rgba(50, 170, 255, .3);
+}
+
+.tabs-alltabs-button {
+  list-style-image: none  !important;
+}
+
+statusbarpanel resizer + box{
+  width:2px  !important;
+  border-left:2px solid !important;
+  -moz-border-left-colors: #9D9DA1 #FFFFFF !important;
+  border-top:0px !important;
+  border-bottom:0px !important;
+  border-right:0 !important;
+  margin:2px !important;
+}
+#foxytunes-volume-thumb{
+  -moz-appearance: none !important;
+  width:10px !important;
+  height:10px !important;   
+  border:none !important;
+  background:url("chrome://global/skin/icons/bullet.png"  ) no-repeat center center; 
+}
+#foxytunes-volume-thumb > *,
+#foxytunes-volume-thumb > *{
+  display:none !important;
+}
+
+.myTabs-alltabs-box > .tabs-alltabs-button > .toolbarbutton-icon {
+  list-style-image:none !important;
+}
+
+/* 对Google toolbar 进行支持 */
+window[gtbPlatform="win"] #gtbGoogleSearchBox,
+window[gtbPlatform="linux"] #gtbGoogleSearchBox{
+  -moz-background-clip: padding !important;
+  border: 2px solid !important;
+  -moz-border-top-colors:#f7f9fd #3f4040 !important;
+  -moz-border-right-colors:#f8fafd  rgba(100, 100, 100, .8)  !important;
+  -moz-border-bottom-colors: #f9fafd #adadaf !important;
+  -moz-border-left-colors: #fafcfe rgba(50, 50, 50, .8) !important;
+  -moz-border-radius: 2px !important;
+}
+window[gtbPlatform="win"] #gtbGoogleSearchBox[focused="true"],
+window[gtbPlatform="linux"] #gtbGoogleSearchBox[focused="true"]{
+  -moz-border-top-colors:#f7f9fd #3d7bad   !important;
+  -moz-border-right-colors:#f8fafd #a4c9e3  !important; 
+  -moz-border-bottom-colors:#f9fafd #b7d9ed !important;
+  -moz-border-left-colors:#fafcfe #b5cfe7  !important;
+} 
+.gtb-menubutton{
+	padding-left:2px !important;
+	padding-right:1px !important;
+}
+
+/* 对火狐中国版支持*/
+#main-window #content .tabbrowser-tabs{
+   -moz-binding: url("chrome://global/skin/myFirefoxTab/myFirefoxTab.xml#tabbrowser-tabs")  !important;
+}
+
+#zoompanel-statusbar{
+  display:none !important;
+}
+#ilinkoolbar-button ,
+#nav-bar[glassToMe="true"][iconsize="large"] > #ilinkoolbar-button ,
+#nav-bar[glassToMe="true"][iconsize="large"] > #ilinkoolbar-button [checked="true"]{
+  border:none !important;
+  margin-top:0px !important;
+  margin-bottom:3px !important;
+}
+
+#applications_icons_box{
+  border:none ;
+  background:url(chrome://global/skin/icons/tabbrowser-strip.png)  repeat-x;
+}
+
+#ilinkoolbar-splitter{
+  border:none !important;;
+  width:2px !important;;
+  background:url("chrome://global/skin/myFirefox/sidebar-splitter/mySidebar-splitter.png") no-repeat top left !important;
+}
+
+/*对 scrapBook 支持 */
+#sbMainToolbox > toolbar{
+	background:#f4f6fe !important;
+}
+
+/*对 glasser 支持 */
+#main-window toolbar[iconsize="large"]  #searchbar .searchbar-textbox {
+	border-left:0 !important;
+	-moz-border-top-colors: rgba(252, 254, 253, 0.27 ) rgba(51, 51, 51, 0.76) rgba(254, 254, 254, 0.93 ) !important ;	
+	border-right:0 !important;
+	-moz-border-bottom-colors: rgba(253, 255, 255, 0.36) rgba(157, 157, 157, 0.56) rgba(254, 254, 254, 0.93) !important;	
+	-moz-border-radius: 0 !important;
+	-moz-background-clip: padding !important;	
+}
+
+#nav-bar[glassToMe="true"][iconsize="small"] #urlbar-icons image{
+	margin:0 1px 0 1px ;
+}
+
+#main-window[glasser="true"][iconsize="large"] #urlbar,
+#main-window[glasser="true"]  #searchbar,
+#main-window[glasser="true"] >#navigator-toolbox toolbarbutton{
+	opacity: 1.0 !important;
+}
+
+#main-window[glasser="true"] #urlbar label,
+#main-window[glasser="true"] #myInputBox{
+	opacity: 0.99 !important;
+}
+
+#main-window>#navigator-toolbox:not([PersonalToolbar]) #nav-bar[glassToMe="true"]+#customToolbars+toolbar{
+	-moz-appearance: none !important;
+	background: url("chrome://browser/skin/ground/firstToolbar.png") repeat-x top;
+}
+
+#main-window[glasser="true"]>#navigator-toolbox[PersonalToolbar="true"]>#PersonalToolbar +toolbar,
+#main-window[glasser="true"]>#navigator-toolbox[PersonalToolbar="true"]>#PersonalToolbar+toolbar[collapsed="true"]+toolbar{
+	border-top:2px solid !important;	
+	-moz-border-top-colors:#a0a0a0 white !important;
+}
+
+#main-window[glasser="true"] >#navigator-toolbox[PersonalToolbar]>toolbar:not([id="toolbar-menubar"]):not([id="nav-bar"]):not([id="PersonalToolbar"]){
+	-moz-appearance: none !important;
+	border-top:0 !important;
+	border-bottom:2px solid !important;
+	-moz-border-bottom-colors:white #a0a0a0 !important;  
+}
+
+#main-window>#navigator-toolbox:not([PersonalToolbar])>toolbar:not([id="toolbar-menubar"]):not([id="nav-bar"]){
+	-moz-appearance: none !important;
+	border-top: 1px solid white !important;
+	border-bottom: 1px solid #a0a0a0 !important;
+}
+
+/*对statusbuttons支持*/
+#status-bar toolbox ,
+#status-bar toolbar {
+	background:none !important;
+	border:none !important;
+}
+#status-bar .statusbuttons-toolbox toolbarbutton{
+	background:none !important;
+	margin:0 1px 0 1px !important;
+	padding:0 !important;
+}
+
+/*对Personal的支持*/
+#main-window[style] {
+	background-position:right top;	
+}
+#main-window[styleId] #navigator-toolbox menubar > menu,
+#main-window[styleId] #navigator-toolbox  toolbarbutton{
+	color: inherit !important;;
+}
+
+#main-window[style] tabbrowser .tabbrowser-tab,
+#main-window[style] tabbrowser .tabbrowser-tab[selected="true"]{
+	opacity: 1;
+}
+#main-window[style] .tabbrowser-tab:not([color]):not([selected="true"]){
+	background:#e3eefb ;
+}
+#main-window[style] .tabbrowser-tab:not([color]):hover:not([selected="true"]){
+	background:transparent url("chrome://global/skin/icons/tab-bgt-hover.png") repeat-x top left;
+}
+
+#main-window[style] #navigator-toolbox,
+#main-window[style][myfxva-color] #navigator-toolbox{
+	background:none ;
+}
+
+#main-window[style] #nav-bar #urlbar,
+#main-window[style] #nav-bar #searchbar{
+	opacity:1.0 ;
+}
+#main-window #nav-bar[glassToMe] #urlbar,
+#main-window #nav-bar[glassToMe] #searchbar{
+	opacity:0.99 ;
+}
+
+#main-window[style] #status-bar #statusbar-icon{
+	margin-top:0px !important ;
+	margin-bottom:1px !important ;
+}
+
+#main-window[style][glasser="false"]>#navigator-toolbox[PersonalToolbar]>toolbar{
+	background:transparent !important ;
+	border:none !important;
+}
+#main-window[style][glasser="false"]>#navigator-toolbox[PersonalToolbar]{
+	border-bottom:2px solid ;
+  -moz-border-bottom-colors: rgba(0, 0, 0, 0.3)  rgba(225, 225, 225, 0.7) ;	
+}
+
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton{
+	border:2px solid transparent !important ;
+  -moz-border-radius: 3px; 
+  -moz-background-clip: padding !important;
+  margin:0 2px 0 2px !important;;
+}
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton > hbox{
+   height:0px  !important;
+   min-height: 0px !important;
+   display:none !important;
+}
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton > image{
+	margin:0 !important;
+}
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton:hover > hbox,
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton[checked="true"] > *,
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton[open="true"] > hbox,
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton:hover:active >  *{
+	background:none !important;
+}
+
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton:hover{
+  -moz-border-top-colors:rgba(0, 0, 0, 0.3) rgba(255, 255, 255, 0.7) !important ;
+  -moz-border-right-colors: rgba(0, 0, 0, 0.3)  rgba(225, 225, 225, 0.7) !important;
+  -moz-border-bottom-colors: rgba(0, 0, 0, 0.3)  rgba(225, 225, 225, 0.7)!important ;
+  -moz-border-left-colors:  rgba(0, 0, 0, 0.3) rgba(225, 225, 225, 0.7) !important; 	
+  background:url("chrome://browser/skin/ground/toolbarButtonHover.png") repeat-x top !important;
+}
+
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton[checked="true"],
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton[open="true"],
+#main-window[style][glasser="false"]>#navigator-toolbox>#PersonalToolbar toolbarbutton:hover:active{
+  -moz-border-top-colors:rgba(0, 0, 0, 0.65) rgba(0, 0, 0, 0.2)   !important;
+  -moz-border-right-colors: rgba(0, 0, 0, 0.65)  rgba(225, 225, 225, 0.01)  !important;
+  -moz-border-bottom-colors: rgba(0, 0, 0, 0.65)  rgba(0, 0, 0, 0.2)  !important;
+  -moz-border-left-colors:  rgba(0, 0, 0, 0.65) rgba(225, 225, 225, 0.01)  !important;
+  background:url("chrome://browser/skin/ground/toolbarButtonActive.png") repeat-x top !important;  
+}
+#main-window[style][glasser="false"] .tabbrowser-strip{
+	opacity:0.8 ;
+  background:url("chrome://global/skin/icons/tabbrowser-strip.png");
+}
+#main-window[glasser="true"][style] .tabbrowser-strip{
+	background:rgb(227,238,251) url("chrome://global/skin/icons/tabbrowser-strip-bottom.png");
+}
+#main-window[style][glasser="true"]>#navigator-toolbox toolbar:not([id="toolbar-menubar"]) label{
+	color:black ;
+}
+#main-window[style][glasser="false"]>#navigator-toolbox[PersonalToolbar="true"] #myPlaceSep{
+	border-left-color: rgba(0, 0, 0, 0.3); 
+	border-right-color: rgba(225, 225, 225, 0.7);
+}
+#browser-bottombox[style]{
+	background-position:right top;
+}
+
+#browser-bottombox[style] #status-bar,
+#browser-bottombox[style] #FindToolbar{
+	background:none ;
+	border:none;
+	
+}
+
+/*对relad-menu 支持*/
+#reload-button[type="menu-button"]{
+  display :-moz-box;
+  margin: 0 1px 0px 0px !important;
+}
+toolbar[iconsize="large"] #reload-button[type="menu-button"]{
+  list-style-image: url("chrome://browser/skin/Goarrow/reload-normal.png");	
+  margin: 0 0 3px 3px !important;
+  -moz-image-region: rect(0px 26px 26px 0px);
+}
+toolbar[iconsize="large"] #reload-button[type="menu-button"]:hover{
+  -moz-image-region: rect(0px 52px 26px 26px) ;
+  margin: 0 0 3px 3px !important;  
+}
+
+toolbar[iconsize="large"] #reload-button[type="menu-button"]:hover:active,
+toolbar[iconsize="large"] #reload-button[type="menu-button"][open="true"]{
+  -moz-image-region: rect(0px 78px 26px 52px) ;
+  margin: 0 0 3px 3px !important;
+}
+
+/*对treestyletab-style="square default"支持*/
+tabbrowser[treestyletab-tabbar-position="left"] tabs,
+tabbrowser[treestyletab-tabbar-position="right"] tabs{
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+tabbrowser[treestyletab-mode="vertical"] #myShowCaseButton,
+tabbrowser[treestyletab-mode="vertical"] .myTabs-alltabs-box,
+tabbrowser[treestyletab-mode="vertical"] .myTab-left-corner,
+tabbrowser[treestyletab-mode="vertical"] .myTab-right-corner{
+	display:none  !important;
+}
+
+tabbrowser[treestyletab-mode="vertical"] .tabbrowser-tab,
+tabbrowser[treestyletab-mode="vertical"] .tabbrowser-tab:not([selected="true"]){
+	margin-top:0  !important;
+	margin-bottom:2px !important;
+	height:24px  !important;
+}
+
+tabbrowser[treestyletab-mode="vertical"] .tabbrowser-strip ,
+tabbrowser[treestyletab-mode="vertical"] .tabbrowser-strip > vbox { 
+	background:none  !important;
+}
+
+tabbrowser[treestyletab-mode="vertical"] .tabs-container[overflow="true"] > .tabs-newtab-button{
+	visibility:collapse !important;
+}
+tabbrowser[treestyletab-mode="vertical"] .tabs-container > .tabbrowser-arrowscrollbox > .tabs-newtab-button {
+  list-style-image:none ;
+}
+tabbrowser[treestyletab-mode="vertical"] .tabs-container[overflow="true"] > .tabbrowser-arrowscrollbox > .tabs-newtab-button {
+  visibility:visible !important;
+}
+
+
+#navigator-toolbox[PersonalToolbar="true"] + #browser tabbrowser[treestyletab-mode="vertical"] #myTab-Left-toolbar{
+	min-height:0 !important;
+	height:0  !important;
+}
+#main-window:not([style]) #navigator-toolbox[PersonalToolbar="false"] + #browser tabbrowser[treestyletab-mode="vertical"] #myTab-Left-toolbar{
+	min-height:24px !important;
+	height:24px  !important;
+   border-bottom: 2px solid !important;
+   -moz-border-bottom-colors: #e0e2e8 #e9ecfa !important;
+}
+
+/*支持finjan*/
+#urlbar-container > #urlbar-button-box{
+	margin:0 4px 0 0px ;
+}
+/*searchbar autosize*/
+#searchbar[oninput="autosizer.genWidth('onInput');"] panel {
+	display:none ;
+}
+/*支持search engine manager*/
+window[id="engineManager2"] #command-toolbar{
+	display:-moz-box !important;
+}
+/* read it later*/
+#isRitL-ListSort{
+	-moz-binding: url(chrome://global/content/bindings/menulist.xml#menulist) ;
+}
+#isRitL-ListPage{
+	margin-bottom:0px ;
+	height:22px ;
+}
+	
+/*支持personas在tab栏上的按钮*/
+#myPersona {
+  list-style-image:url("chrome://global/skin/icons//personas_16x16.png") !important ;
+  -moz-image-region: rect(16px, 16px, 32px, 0px) !important;
+}
+#persona-current .menu-iconic-icon{
+  display:none;	
+}
+
+/*支持gmail manager*/
+#status-bar .gmanager-account-info{
+-moz-appearance: none !important;
+}

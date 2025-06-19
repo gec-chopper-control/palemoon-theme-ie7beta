@@ -1,0 +1,187 @@
+/* ***** BEGIN LICENSE BLOCK *****
+本功能由FlyWorld设计。
+ * ***** END LICENSE BLOCK ***** */
+
+/* ===== myBookmarkCenter.css =====================================================
+  == Styles that apply myfirefoxTab.xml ,和 myTabbarright
+  ======================================================================= */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+/* 支持tab栏 */
+#myTab-Left-toolbar,
+#myTab-Right-toolbar{
+  height: 34px !important;
+  -moz-appearance: none;
+  border: 0 !important;
+}
+
+#myTabBox-Left-toolbox{
+  background:transparent !important;
+}
+#myTabBox-Left-toolbox{
+	margin-right: 2px;
+}
+
+#myTab-Left-toolbar{
+  background:none !important;
+}
+
+#sidebar-box[sidebarcommand=""] + #sidebar-splitter + vbox > #content #myTab-Left-toolbar{
+  background:transparent url("chrome://browser/skin/ground/myTabBox-Left.png") no-repeat top left !important;
+}
+
+#navigator-toolbox[PersonalToolbar="true"]+#browser #sidebar-box[sidebarcommand=""] + #sidebar-splitter + vbox > #content #myTab-Left-toolbar{
+  background:transparent url("chrome://browser/skin/ground/myTabBox-BookMarkOpen-Left.png") no-repeat top left !important;
+}
+
+#navigator-toolbox[PersonalToolbar="true"]+#browser #content #myTab-Right-toolbar{
+  background:transparent url("chrome://browser/skin/ground/myTabBox-BookMarkOpen-Right.png") no-repeat top right !important;
+}
+#myTab-Right-toolbar{
+  padding-right:0px ;
+  padding-left:7px;
+  background:transparent url("chrome://browser/skin/ground/myTabBox-Right.png") no-repeat top right !important;
+}
+#navigator-toolbox[PersonalToolbar="true"] + #browser #myTab-Right-toolbar{
+  padding-right:0px ;
+}
+toolbarbutton > label{
+  display:none ;
+}
+
+.myTabToolBarButton,
+.myTabToolBarMenuButton{
+  -moz-appearance  : none !important;
+  list-style-image: url("chrome://browser/skin/ground/myTabToolBarIcons.png");
+  border: 0px;
+}
+.myTabToolBarButton{
+  -moz-binding: url("chrome://global/skin/globalBindings.xml#toolbarbutton");
+  margin:0 0 6px 0;
+}
+.myTabToolBarMenuButton[type="menu-button"]{
+  -moz-binding: url("chrome://global/skin/globalBindings.xml#myToolbar-Menu-button");
+  margin:0 1px 6px 1px;
+}
+.myTabToolBarMenuButton[type="menu"]{
+  -moz-binding: url("chrome://global/skin/globalBindings.xml#myMenu");
+  margin:0 1px 6px 1px;
+}
+
+#myFeed-button{
+  -moz-binding: url("chrome://global/skin/globalBindings.xml#myToolbar-Menu-button") !important;
+
+}
+
+#myFeed-button[feeds] {
+  list-style-image: url("chrome://browser/skin/feeds/myFeed-button.png");
+  -moz-image-region: rect(0px 32px 16px 16px);
+}
+
+#myFeed-button[feeds]:hover {
+  -moz-image-region: rect(0px 32px 16px 16px);
+}
+
+#myFeed-button[feeds][open="true"],
+#myFeed-button[feeds]:hover:active {
+  -moz-image-region: rect(0px 48px 16px 32px);
+}
+#myFeed-button:not([feeds]) {
+  list-style-image: url("chrome://browser/skin/feeds/myFeed-button.png") !important;
+  -moz-image-region: rect(0px 16px 16px 0px);
+}
+
+#myFeed-button:not([feeds="true"]):hover ,
+#myFeed-button:not([feeds="true"]):hover > *{
+	background:none ;
+}
+#myFeed-button:not([feeds="true"]):hover:active .button-icon{
+	padding:1px ;
+}
+#myFeed-button:not([feeds="true"]) .toolbarbutton-menubutton-dropmarker{
+  list-style-image: url("chrome://global/skin/arrow/menubutton-dropmarker-disabled.gif");  
+}
+
+#myTabhome{
+  margin-left:0px !important;
+  -moz-image-region: rect(0px, 48px, 16px, 32px);
+}
+
+#myTabdownloads{
+  -moz-image-region: rect(0px, 96px, 16px, 80px);
+}
+
+#mySecurity{
+  -moz-image-region: rect(0px, 272px, 16px, 256px);	
+}
+
+#myPageInfo{
+  -moz-image-region: rect(0px, 112px, 16px, 96px);
+}
+
+#myUndoClose{
+  display:none;
+  -moz-image-region: rect(0px, 224px, 16px, 208px);
+}
+
+#myTabdownloads{
+  display:none;
+  -moz-image-region: rect(0px, 96px, 16px, 80px);
+  margin-left:3px ;
+}
+#myTabdownloads > .toolbarbutton-icon{
+	margin-right:0 ;
+}
+
+#myTabPrint{
+  -moz-image-region: rect(0px, 64px, 16px, 48px);
+}
+
+#myFxva-Settings{
+  list-style-image: url("chrome://global/skin/CuteMenus/myFxVa.png");
+}
+#myOptions{
+  -moz-image-region: rect(0px, 80px, 16px, 64px);
+}
+
+#myExtendButton{
+  -moz-binding: url(chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton);	
+  list-style-image: url("chrome://browser/skin/ground/myExtend.png");	
+  -moz-image-region: rect(0px, 17px, 27px, 0px);
+  margin:0px 2px 5px 4px !important;
+  padding:0 !important;
+  position:relative  !important;
+  z-index:1  !important;   
+}
+#myExtendButton:hover{
+  list-style-image: url("chrome://browser/skin/ground/myExtend.png");		
+  -moz-image-region: rect(0px, 34px, 27px, 17px);
+  background:none  !important;  
+}
+#myExtendButton:hover:active,
+#myExtendButton[open="true"]{
+  list-style-image: url("chrome://browser/skin/ground/myExtend.png");		
+  -moz-image-region: rect(0px, 51px, 27px, 34px);
+  background:none  !important;
+}
+#myExtendButton > image{
+	margin-right:0 ;
+}
+
+#myPrivateBrowser{
+  list-style-image: url("chrome://global/skin/CuteMenus/private.png");		
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+/*两个菜单分隔符时，只显示一个。*/
+#myOptions menuseparator+menuseparator{
+  display:none;
+}
+
+menuitem[command="Browser:ShowAllBookmarks"] {
+  list-style-image: url("chrome://browser/skin/ground/myTabToolBarIcons.png");
+  -moz-image-region: rect(0px, 240px, 16px, 224px) ;	
+}
+
+#mySetPanel{
+  color:black;
+}

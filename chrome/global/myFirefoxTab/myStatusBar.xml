@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE bindings [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+]>
+<bindings id="myFireFoxStatusBar-bindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+  <!-- 本功能由FlyWorld 设计 -->
+  <binding  id="myStatusBar" >
+    <content>
+		<xul:hbox pack="end" flex="1">
+			 <children/>
+		</xul:hbox>
+		<xul:hbox >  
+			<xul:toolbarbutton id="myTextZoomEnlarge" class="myStatusBarMenuButton" iconsize="small"
+				current="0" type="menu-button"  tooltiptext="&fullZoom.label;"
+				oncommand="
+					var CurrentZoom=parseInt(this.getAttribute('current'), 10)  ;
+					if(CurrentZoom !=3){FullZoom.enlarge() ; CurrentZoom +=1 ;}
+					else{ FullZoom.reset() ; CurrentZoom =0 ; }
+					this.setAttribute('current',CurrentZoom);
+				">     
+				<xul:menupopup  position="before_end" oncommand="event.stopPropagation();" 
+				onpopuphidden="if (event.target != this) return ;
+					while(this.lastChild.id !='myZoomSep') this.removeChild(this.lastChild);"
+				onpopupshowing="
+					function createMenuItem(value , isChecked ,menu){
+						var m = document.createElement('menuitem');
+						m.setAttribute('label', value + '%');
+						m.setAttribute('type', 'radio');
+						m.setAttribute('name', 'myZoon');
+						if(isChecked) m.setAttribute('checked', true);
+						m.setAttribute('oncommand',
+						'ZoomManager.zoom='+ value/100 +';FullZoom._applySettingToPref();');
+						menu.appendChild(m) ;					
+					}
+					var z=ZoomManager.zoom ;
+					var zoomNum=[3 , 2 , 1.5 , 1.25 , 1 , 0.75 ,0.5 ,0 ] ;
+					var flag=false ;
+					for (var i = 0; i != zoomNum.length -1 ; i++) {
+						createMenuItem(zoomNum[i] *100 ,zoomNum[i]== z ,this );
+						if(z &lt; zoomNum[i] &amp;&amp; z &gt; zoomNum[i+1]) 
+							createMenuItem(parseInt(z *100),true ,this);
+					}
+					m = document.getElementById('myToggle_zoom');
+					m.setAttribute('checked', !ZoomManager.useFullZoom);
+				">
+					<xul:menuitem key="key_fullZoomEnlarge" label="&fullZoomEnlargeCmd.label;" 
+						accesskey="&fullZoomEnlargeCmd.accesskey;" command="cmd_fullZoomEnlarge"/>
+					<xul:menuitem key="key_fullZoomReduce"  label="&fullZoomReduceCmd.label;"  
+						accesskey="&fullZoomReduceCmd.accesskey;" command="cmd_fullZoomReduce"/>
+					<xul:menuseparator/>
+					<xul:menuitem key="key_fullZoomReset" label="&fullZoomResetCmd.label;" 
+						accesskey="&fullZoomResetCmd.accesskey;" command="cmd_fullZoomReset"/>	
+					<xul:menuitem id="myToggle_zoom" label="&fullZoomToggleCmd.label;" type="checkbox" 
+						accesskey="&fullZoomToggleCmd.accesskey;" command="cmd_fullZoomToggle"/>
+					<xul:menuseparator  id="myZoomSep"/>
+				  </xul:menupopup>
+			</xul:toolbarbutton> 
+      </xul:hbox>
+    </content>
+  </binding>
+</bindings>

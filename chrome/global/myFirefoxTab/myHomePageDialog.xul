@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://communicator/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/content/browser.css" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE dialog [
+<!ENTITY % mainDTD SYSTEM "chrome://browser/locale/preferences/main.dtd">
+%mainDTD;
+]>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	title="Add or Chage Home Page"
+	onload="onLoad();"
+	buttons="accept,cancel"
+	buttonlabelaccept="Yes"
+	buttonlabelcancel="No"
+	ondialogaccept="onYes();"
+>
+	<hbox align="left" pack="end" flex="1">
+		<image id="myHomeImage" />
+		<vbox>
+			<vbox >
+				<label id="myTitle" value="Would you like to use the following as your home page" />
+				<textbox id="myBrowserCurrentPage"/>
+			</vbox>
+
+			<vbox  pack="start">
+				<radiogroup id="myPageOption">
+					<radio label="Use this webpage as your only home page" value="1" id="useCurrent"/>
+					<radio label="Add this webpage to your home page tabs" value="2" id="addCurrent"/>
+					<radio label="Use the current tab set as your home page" value="3" id="addAllPage"/>
+					<radio label="&restoreDefault.label;" value="4" id="restoreDefaultHomePage"/>
+				</radiogroup>
+			</vbox>
+		</vbox>
+	</hbox>
+
+<script type="application/x-javascript">
+<![CDATA[
+	var onLoad = function() {
+		document.getElementById("myBrowserCurrentPage").value = window.arguments[0];
+	}
+
+	var onYes = function() {
+		var currentURI = window.arguments[0];
+		var homePageValue = window.arguments[1];
+		var homePageDefault = window.arguments[2];
+		var uriList = window.arguments[3];
+		var doCmd = window.arguments[4];
+		var myPageOption = document.getElementById("myPageOption");
+
+		switch(myPageOption.value) {
+			case "1":
+				var newVal = currentURI;
+				break;
+			case "2":
+				var newVal = homePageValue + "|" + currentURI;
+				break;
+			case "3":
+				var newVal = uriList;
+				break;
+			default:
+				var newVal = homePageDefault;
+		}
+		doCmd.result = newVal;
+		doCmd.showPopup();
+	}
+]]>
+</script>
+</dialog>

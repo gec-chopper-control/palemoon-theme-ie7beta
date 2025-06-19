@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bindings [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+]>
+
+<bindings id="mySideBarHeader-bindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <!-- 本功能FlyWorld设计 ,对侧栏的的头部定制 -->
+  <binding  id="mySideBarHeader" >
+    <resources>
+      <stylesheet src="chrome://browser/skin/places/places.css"/>
+      <stylesheet src="chrome://global/skin/myFirefoxTab/myBookmarkCenter.css"/>            
+    </resources>  
+    <content> 
+	<xul:hbox id="mySiderBarTitle" flex="1" align="center">
+		<children/>
+	</xul:hbox>
+    <xul:vbox flex="1" id="mySideBarVbox" style="min-width: 1px;">
+		<xul:hbox align="center" flex="1">
+			<xul:toolbarbutton id="mySideBarCenter" class="bookMarkCenter" label="&bookmarksMenu.label;"
+				tooltiptext="Close sidebar" oncommand="toggleSidebar( myBookMarkJs.sidebarCmd)"/>
+		</xul:hbox>		
+		<xul:hbox flex="1">
+			<xul:toolbarbutton id="mySideBarAddBookMark" type="menu-button" class="mySideBarButton" flex="1"
+				command="Browser:AddBookmarkAs" label="&bookmarkThisPageCmd.label;" tooltiptext="">
+				<xul:menupopup position="after_start" oncommand="event.stopPropagation();">
+					<xul:menuitem label="&bookmarkThisPageCmd.label;" command="Browser:AddBookmarkAs"/>
+					<xul:menuitem label="&bookmarkAllCmd.label;" command="Browser:BookmarkAllTabs"/>
+					<xul:menuseparator/>
+					<xul:menuitem label="&import.label;" oncommand="BrowserImport();"/>
+					<xul:menuseparator/>
+					 <xul:menuitem label="&organizeBookmarks.label;" command="Browser:ShowAllBookmarks"/>
+				 </xul:menupopup>
+			</xul:toolbarbutton>
+			<xul:hbox align="center" pack="end" flex="1000">
+				<xul:toolbarbutton id="mySideBarClose" class="tabs-closebutton" 
+					oncommand="toggleSidebar( myBookMarkJs.sidebarCmd)"/>
+			</xul:hbox>
+		</xul:hbox>
+		
+		<xul:radiogroup id="mySideBarTabs" orient="horizontal" flex="1">
+			<xul:toolbarbutton id="mySideBarBookmarks" class="myTab" type="radio" group="mySideBarTabs"
+				label="&bookmarksButton.label;" observes="viewBookmarksSidebar"/>
+			<xul:toolbarbutton class="myTab" isLabel="true" label="&bookmarksButton.label;"/>
+			<xul:toolbarbutton id="myHistory-button" class="myTab" type="radio" group="mySideBarTabs"
+				label="&historyButton.label;" value="1" observes="viewHistorySidebar"/>
+			<xul:toolbarbutton class="myTab" isLabel="true" label="&historyButton.label;"/>				
+		</xul:radiogroup>
+	</xul:vbox>	
+	</content> 
+  </binding>
+</bindings>

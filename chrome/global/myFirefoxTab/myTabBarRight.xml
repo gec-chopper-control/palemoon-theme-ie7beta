@@ -1,0 +1,483 @@
+<?xml version="1.0"?>
+<?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?>
+<?xul-overlay href="chrome://browser/content/baseMenuOverlay.xul"?>
+<?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
+<!DOCTYPE bindings [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd" >
+%baseMenuOverlayDTD;
+<!ENTITY % tabBrowserDTD SYSTEM "chrome://browser/locale/tabbrowser.dtd" >
+%tabBrowserDTD;
+<!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
+%globalDTD;
+<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd" >
+%brandDTD;
+<!ENTITY % mainDTD SYSTEM "chrome://browser/locale/preferences/main.dtd">
+%mainDTD;
+<!ENTITY % preferencesDTD SYSTEM "chrome://browser/locale/preferences/preferences.dtd">
+%preferencesDTD;
+<!ENTITY % extensionsDTD SYSTEM "chrome://mozapps/locale/extensions/extensions.dtd">
+%extensionsDTD;
+]>
+
+<bindings id="myTabBarRightBox"
+ xmlns="http://www.mozilla.org/xbl"
+ xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+ xmlns:xbl="http://www.mozilla.org/xbl">
+  <!-- 本功能由FlyWorld设计 -->
+<binding id="myTabBarRight" extends="chrome://browser/content/places/toolbar.xml#places-bar">
+	<resources>
+		<stylesheet src="chrome://global/skin/myFirefoxTab/myFireFoxTab.css"/>
+	</resources>
+	<content onmouseover="this._allowPopupShowing = true;this.onmouseover=''"
+		onmousemove="
+		this._cachedMouseMoveEvent = event;
+        if (this._openedMenuButton == null || PlacesControllerDragHelper.getSession()) return;
+
+        var target = event.originalTarget;
+        if (this._openedMenuButton != target &amp;&amp;
+            target.localName == 'toolbarbutton' &amp;&amp; (
+            target.type == 'menu' || target.type == 'menu-button'
+            )) {
+          this._openedMenuButton.open = false;
+          target.open = true;
+        }"
+    >
+
+	<xul:hbox id="myTab-Right-toolbar" context="toolbar-context-menu">
+		<!-- 恢复打开的tab-->
+		<xul:toolbarbutton id="myUndoClose" class="myTabToolBarMenuButton" type="menu"
+				label="&undoCloseTab.label;"  disAbled="true" tooltiptext="&undoCloseTab.label;">
+				<xul:menupopup id="myhistoryUndoPopup" position="after_end"
+					oncommand="event.stopPropagation();"
+					onpopupshowing="
+				var undoPopup = this;
+				while (undoPopup.hasChildNodes()) undoPopup.removeChild(undoPopup.firstChild);
+
+				var ss = Cc['@mozilla.org/browser/sessionstore;1'].getService(Ci.nsISessionStore);
+				if (ss.getClosedTabCount(window) == 0) {
+					undoPopup.parentNode.setAttribute('disAbled',true);
+					return;
+				}
+				undoPopup.parentNode.removeAttribute('disAbled');
+				var nativeJSON =Cc['@mozilla.org/dom/json;1'].createInstance(Components.interfaces.nsIJSON);
+				var undoItems = nativeJSON.decode( ss.getClosedTabData(window));
+				for (var i = 0; i != undoItems.length; i++) {
+					var m = document.createElement('menuitem');
+					m.setAttribute('label', undoItems[i].title);
+					if (undoItems[i].image) m.setAttribute('image', undoItems[i].image);
+					m.setAttribute('class', 'menuitem-iconic bookmark-item');
+					m.setAttribute('value', i);
+					m.setAttribute('oncommand', 'undoCloseTab(' + i + ');');
+					if (i == 0)
+						m.setAttribute('key', 'key_undoCloseTab');
+						undoPopup.appendChild(m);
+					}
+					var strings = gNavigatorBundle;
+					undoPopup.appendChild(document.createElement('menuseparator'));
+					m = undoPopup.appendChild(document.createElement('menuitem'));
+					m.addEventListener('command', function() {
+					for (var i = 0; i != undoItems.length; i++)
+					undoCloseTab();
+					}, false);					
+					m.setAttribute('label', strings.getString('menuOpenAllInTabs.label'));
+					m.setAttribute('accesskey', strings.getString('menuOpenAllInTabs.accesskey'));
+			"/>
+		</xul:toolbarbutton>
+
+
+		<!-- 选择Persona-->
+		<xul:toolbarbutton id="myPersona"  class="myTabToolBarMenuButton" type="menu"
+			label="Personas" tooltiptext="Personas">
+			<xul:menupopup id="myhistoryUndoPopup" position="after_end" oncommand="event.stopPropagation();"
+				onpopuphidden="if (event.target == this) 
+					while(this.firstChild.id != 'myPersonaSeparator') this.removeChild(this.firstChild);
+					document.getElementById('myPersonaSeparator',this).setAttribute('hidden',true);"
+				onpopupshowing="
+					function getItem(persona) {
+						var item = document.createElement('menuitem');
+						item.setAttribute('class', 'menuitem-iconic');
+						item.setAttribute('image', persona.iconURL);
+						item.setAttribute('label', persona.name);
+						item.setAttribute('oncommand','myLightWeightThemeWebInstaller.changeTheme(event)');
+						item.setAttribute('persona', JSON.stringify(persona));
+						item.addEventListener('DOMMenuItemActive',
+							function(evt){myLightWeightThemeWebInstaller._preview(evt); }
+						, false);
+						item.addEventListener('DOMMenuItemInactive', 
+							function(evt){myLightWeightThemeWebInstaller._resetPreview(evt);}
+						, false);
+						return item;
+					}	
+					
+					var themes=themeService.usedThemes;
+					var separator=document.getElementById('myPersonaSeparator',this);
+					for(var i=0 ;i!=themes.length;i++)			
+						this.insertBefore(getItem(themes[i]), separator);
+					if(themes.length!=0) separator.removeAttribute('hidden');
+				   ">
+				   
+				   
+				<xul:menuseparator id="myPersonaSeparator" hidden="true"/>
+				  <xul:menuitem id="themeDefault"
+						 oncommand="myLightWeightThemeWebInstaller.clearSetting();"
+						 label="Vista-Aero"/>					
+				  <xul:menuitem
+						 oncommand="openURL(Components.classes['@mozilla.org/toolkit/URLFormatterService;1']
+                                 .getService(Components.interfaces.nsIURLFormatter)
+                                 .formatURLPref('extensions.getMoreThemesURL'));"
+						 label="&getThemes.label;"/>
+			</xul:menupopup>
+		</xul:toolbarbutton>
+
+
+
+		<!-- 主页按钮-->
+		<xul:preferences id="mainPreferences">
+		  <xul:preference id="browser.startup.homepage"  name="browser.startup.homepage" type="wstring"/>
+		  <xul:preference id="browser.startup.page"  name="browser.startup.page" type="int"/>		  
+		</xul:preferences>
+
+		<xul:toolbarbutton id="myTabhome" class="myTabToolBarMenuButton" myType="button" type="menu-button"
+				label="&historyHomeCmd.label;" command="Browser:Home" tooltiptext="&homeButton.label;">
+			<xul:menupopup position="after_end" 
+				onpopuphidden="if (event.target == this) 
+					while(this.firstChild.id != 'homepagesSeparator') this.removeChild(this.firstChild);"
+				oncommand="event.stopPropagation();"
+				onpopupshowing="
+					if (event.target != this) return;
+					var links = gPrefService.getCharPref('browser.startup.homepage');
+					var str = links.split('|');
+					var i = 0;
+					var separator = this.firstChild;
+					while (str[i] != null) {
+						var menuitem = document.createElement('menuitem');
+						menuitem.setAttribute('label', str[i]);
+						menuitem.className = 'menuitem-iconic bookmark-item';
+						menuitem.setAttribute('oncommand', 'loadURI(&quot;' + str[i] + '&quot;);');
+						this.insertBefore(menuitem, separator);
+						i++;
+					}
+					this.lastChild.hidden = i == 1 &amp;&amp; str[0] == 'about:blank';
+				">
+
+				<xul:menuseparator id="homepagesSeparator"/>
+				<xul:popup onpopupshowing="
+					if (this.result) gPrefService.setCharPref('browser.startup.homepage', this.result);"/>
+				<xul:menuitem id="myAddChangeHomePage" label="Add or Change Home Page ..."
+					image="chrome://global/skin/CuteMenus/home.png"
+					oncommand="
+						var browsers = document.getElementById('content').browsers;
+						var homePage = document.getElementById('browser.startup.homepage');
+						var uriList = browsers[0].currentURI.spec;
+
+						for (var i = 1; i &lt; browsers.length; i++)
+						uriList += '|' + browsers[i].currentURI.spec;
+
+						openDialog('chrome://global/skin/myFirefoxTab/myHomePageDialog.xul', null,'chrome,centerscreen,dialog,modal',
+							browsers[selectedIndex].currentURI.spec,
+							homePage.value,
+							homePage.defaultValue,
+							uriList,
+							this.previousSibling);
+					"/>
+				<xul:menu id="myRemoveMenu" label="Remove" accesskey="r">
+					<xul:menupopup onpopupshowing="
+						var separator = this.firstChild;
+						for (var item = this.parentNode.parentNode.firstChild;
+							item.id != 'homepagesSeparator'; item = item.nextSibling) {
+							var newitem = this.insertBefore(item.cloneNode(true), separator);
+							newitem.removeAttribute('oncommand');
+							newitem.addEventListener('command', function() {
+								var string;
+								if (this.nextSibling.id == 'removeHomepagesSeparator' &amp;&amp; !this.previousSibling)
+									string = 'about:blank';
+								else {
+									string = gPrefService.getCharPref('browser.startup.homepage').replace(
+										this.previousSibling ? '|' + this.label : this.label + '|', '');
+								}
+								gPrefService.setCharPref('browser.startup.homepage', string);
+							}, false);
+						}
+						"
+						onpopuphidden=" while (this.firstChild.id != 'removeHomepagesSeparator')
+							this.removeChild(this.firstChild); ">
+						<xul:menuseparator id="removeHomepagesSeparator"/>
+						<xul:menuitem id="myRemoveAll" label="Remove All" accesskey="a"
+							oncommand="gPrefService.setCharPref('browser.startup.homepage', 'about:blank')"/>
+					</xul:menupopup>
+				</xul:menu>
+			</xul:menupopup>
+		</xul:toolbarbutton>
+		
+		<!-- 使用feed FeedHandler.onFeedButtonClick(event);-->
+		<xul:toolbarbutton id="myFeed-button"  class="myTabToolBarMenuButton" type="menu-button" 
+			chromedir="&locale.dir;" label="feed-button"
+			oncommand="var feeds = gBrowser.selectedBrowser.feeds;
+				if (feeds == null)  return false;
+				if (feeds.length != 0) return FeedHandler.subscribeToFeed(feeds[0].href, event);
+			">
+			<xul:menupopup position="after_end" onpopupshowing="
+				var feeds = gBrowser.selectedBrowser.feeds;
+				if (feeds == null) return false;
+				if (feeds.length == 1) {
+					while (this.firstChild)	this.removeChild(this.firstChild);
+					var feedInfo = feeds[0];
+					var menuItem = document.createElement('menuitem');
+					var baseTitle = feedInfo.title || feedInfo.href;
+					var labelStr = gNavigatorBundle.getFormattedString('feedShowFeedNew', [baseTitle]);
+					menuItem.setAttribute('label', labelStr);
+					menuItem.setAttribute('feed', feedInfo.href);
+					menuItem.setAttribute('tooltiptext', feedInfo.href);
+					menuItem.setAttribute('crop', 'center');
+					menuItem.setAttribute('oncommand',
+						'return FeedHandler.subscribeToFeed(this.getAttribute(&quot;feed&quot;), event)');
+					this.appendChild(menuItem);	
+				}
+				else return FeedHandler.buildFeedList(this);"
+
+				oncommand="var feeds = gBrowser.selectedBrowser.feeds;
+					if(feeds.length == 1) event.stopPropagation();
+					else return FeedHandler.subscribeToFeed(null, event);"
+				onclick="checkForMiddleClick(this, event);"/>
+		</xul:toolbarbutton>
+		
+		<!-- 下载的内容 -->
+		<xul:toolbarbutton id="myTabdownloads" class="myTabToolBarButton" observes="Tools:Downloads"
+			label="&downloads.label;" tooltiptext="&downloads.tooltip;"/>
+
+		<!-- 打印 -->
+		<xul:toolbarbutton id="myTabPrint" class="myTabToolBarMenuButton" label="&printButton.label;"
+				 type="menu-button" myType="button" command="cmd_print" tooltiptext="&printButton.tooltip;">
+			<xul:menupopup position="after_end" >
+			<xul:menuitem label="&printCmd.label;" accesskey="&printCmd.accesskey;"
+				key="printKb" command="cmd_print"/>
+			<xul:menuitem label="&printPreviewCmd.label;" accesskey="&printPreviewCmd.accesskey;"
+				command="cmd_printPreview"/>
+			<xul:menuseparator />
+			<xul:menuitem label="&printSetupCmd.label;" accesskey="&printSetupCmd.accesskey;"
+				command="cmd_pageSetup"/>
+		</xul:menupopup>
+		</xul:toolbarbutton>
+		<!-- 页面 -->
+		<xul:toolbarbutton id="myPageInfo" type="menu" class="myTabToolBarMenuButton" label="&pageInfoCmd.label;" 
+			tooltiptext="&pageInfoCmd.label;">
+			<xul:menupopup position="after_end" >
+
+			<xul:menuitem id="menu_newNavigator" label="&newNavigatorCmd.label;" 
+				accesskey="&newNavigatorCmd.accesskey;" key="key_newNavigator" command="cmd_newNavigator"/>
+			<xul:menuseparator/>
+				<xul:menuitem label="&cutCmd.label;" accesskey="&cutCmd.accesskey;" command="cmd_cut"/>
+				<xul:menuitem label="&copyCmd.label;" accesskey="&copyCmd.accesskey;" command="cmd_copy"/>
+				<xul:menuitem label="&pasteCmd.label;" accesskey="&pasteCmd.accesskey;" command="cmd_paste"/>
+				<xul:menuseparator/>
+				<xul:menuitem label="&savePageCmd.label;" accesskey="&savePageCmd.accesskey;"
+					key="key_savePage" command="Browser:SavePage"/>
+				<xul:menuitem id="menu_sendLink" label="&sendPageCmd.label;"
+					accesskey="&sendPageCmd.accesskey;" command="Browser:SendLink"/>
+				<xul:menuseparator/>
+				<xul:menu id="viewFullZoomMenu" label="&fullZoom.label;" accesskey="&fullZoom.accesskey;" observes="isImage">
+					<xul:menupopup    oncommand="event.stopPropagation();"
+					onpopuphidden="if (event.target != this) return ;
+						while(this.lastChild.id !='myZoomSep') this.removeChild(this.lastChild);"
+					onpopupshowing="
+						function createMenuItem(value , isChecked ,menu){
+							var m = document.createElement('menuitem');
+							m.setAttribute('label', value + '%');
+							m.setAttribute('type', 'radio');
+							m.setAttribute('name', 'myZoon');
+							if(isChecked) m.setAttribute('checked', true);
+							m.setAttribute('oncommand',
+							'ZoomManager.zoom='+ value/100 +';FullZoom._applySettingToPref();');
+							menu.appendChild(m) ;					
+						}
+						var z=ZoomManager.zoom ;
+						var zoomNum=[3 , 2 , 1.5 , 1.25 , 1 , 0.75 ,0.5 ,0 ] ;
+						var flag=false ;
+						for (var i = 0; i != zoomNum.length -1 ; i++) {
+							createMenuItem(zoomNum[i] *100 ,zoomNum[i]== z ,this );
+							if(z &lt; zoomNum[i] &amp;&amp; z &gt; zoomNum[i+1]) 
+								createMenuItem(parseInt(z *100),true ,this);
+						}
+						m = document.getElementById('myToolBarToggle_zoom');
+						m.setAttribute('checked', !ZoomManager.useFullZoom);
+					">
+						<xul:menuitem key="key_fullZoomEnlarge" label="&fullZoomEnlargeCmd.label;" 
+							accesskey="&fullZoomEnlargeCmd.accesskey;" command="cmd_fullZoomEnlarge"/>
+						<xul:menuitem key="key_fullZoomReduce"  label="&fullZoomReduceCmd.label;"  
+							accesskey="&fullZoomReduceCmd.accesskey;" command="cmd_fullZoomReduce"/>
+						<xul:menuseparator/>
+						<xul:menuitem key="key_fullZoomReset" label="&fullZoomResetCmd.label;" 
+							accesskey="&fullZoomResetCmd.accesskey;" command="cmd_fullZoomReset"/>	
+						<xul:menuitem id="myToolBarToggle_zoom" label="&fullZoomToggleCmd.label;" type="checkbox" 
+							accesskey="&fullZoomToggleCmd.accesskey;" command="cmd_fullZoomToggle"/>
+						<xul:menuseparator  id="myZoomSep"/>
+					  </xul:menupopup>
+				</xul:menu>
+				<xul:menuseparator/>
+				<xul:menuitem accesskey="&pageSourceCmd.accesskey;" label="&pageSourceCmd.label;" 
+					key="key_viewSource" command="View:PageSource"/>
+				<xul:menuitem accesskey="&pageInfoCmd.accesskey;" label="&pageInfoCmd.label;" 
+					command="View:PageInfo"/>
+			</xul:menupopup>
+		</xul:toolbarbutton>
+        <!-- 安全 -->        
+        <xul:toolbarbutton id="mySecurity" type="menu" class="myTabToolBarMenuButton" 
+				tooltiptext="&paneSecurity.title;" label="&paneSecurity.title;">
+			<xul:menupopup  position="after_end" 
+				onpopupshowing="
+					if (event.target != this) return;
+					/*设置私有模式*/
+					var myMenu=document.getElementById('privateBrowsingItem') ;
+					var myPrivateBrowser=document.getElementById('myPrivateBrowser',this);					
+					if(myMenu){
+						myPrivateBrowser.setAttribute('hidden','false');
+						myPrivateBrowser.setAttribute('label',myMenu.getAttribute('label') ) ;
+					}
+					else{
+						myPrivateBrowser.setAttribute('hidden','true');
+					}
+				">
+				<xul:menuitem id="mySanitizeItem" label="&clearRecentHistoryCmd.label;" key="key_sanitize" 
+					command="Tools:Sanitize"/>
+				<xul:menuitem id="myPrivateBrowser" label="" command="Tools:PrivateBrowsing"/>				
+				<xul:menuitem id="myidentity-popup-more-info-button" label="&identity.moreInfoLinkText;"
+					image="chrome://global/skin/CuteMenus/security.png" command="View:PageInfo"/>                  
+				<xul:menuseparator/>
+				<xul:menuitem disabled="false" label="&updateCmd.label;" id="checkForUpdates"
+					oncommand="checkForUpdates();" accesskey="o" class="menuitem-iconic" />
+			</xul:menupopup>
+		</xul:toolbarbutton>			
+		
+		<!-- 选项 -->
+	 <xul:toolbarbutton id="myOptions" type="menu" tooltiptext="&toolsMenu.label;" 
+			 class="myTabToolBarMenuButton" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">
+		<xul:menupopup id="myTabToolsPopup" position="after_end"
+			onpopuphidden="if (event.target != this) return ;					
+			var popup=this.popup;
+			for (var i = 0; i  &lt; popup.childNodes.length; i++){
+				var item = popup.childNodes[i] ;
+				if(item.hasAttribute('myFirefox')) {
+					var m=this.firstChild ;				
+					while(m){
+						if(m.myNo==i){							
+							item.parentNode.replaceChild(m ,item) ;	
+							break ;
+						}
+						m=m.nextSibling ;
+					}
+				}
+			}
+			var menu=document.getElementById('tools-menu');
+			menu.replaceChild(popup ,menu.firstChild ) ;
+			popup='';					
+			"
+			onpopupshown="this.setAttribute('firstOpen','false');"
+			onpopupshowing="
+			if (event.target != this) return;
+			var PassItem='|Tools:Search|Tools:Sanitize|View:PageInfo'
+				+ '|Tools:Downloads|Tools:Addons|Tools:PrivateBrowsing';
+							
+			var toolPopup=document.getElementById('menu_ToolsPopup');
+			for (var i = 0; i &lt; toolPopup.childNodes.length; i++) {
+				toolPopup.childNodes[i].myNo=i ;			
+			}
+			
+			this.popup =toolPopup.cloneNode(true);
+			for (var i = 0; i &lt; this.popup.childNodes.length; i++) {
+				var item=this.popup.childNodes[i] ;
+
+				var indexNo=PassItem.indexOf(item.getAttribute('command'));
+				if(item.id != 'menu_preferences'){
+					if(indexNo &lt; 1){
+						var m=toolPopup.firstChild ;				
+						while(m){
+							if(m.myNo==i) {							
+								if(m.getAttribute('hidden')) m.removeAttribute('hidden');					
+								item.setAttribute('myFirefox','true')	;
+								this.insertBefore(m,this.lastChild);
+								break ;
+							}
+							m=m.nextSibling ;
+						}
+					}
+				}
+			}
+			var myColorTab=document.getElementById('myColorTab',this) ;
+			myColorTab.setAttribute('checked', myTabBar.colorTab) ;
+			var myAccelator=document.getElementById('myAccelator',this) ;
+			myAccelator.setAttribute('checked', mySelectText.Accelator) ;		
+			">
+				<xul:menuitem label="&organizeBookmarks.label;"
+					command="Browser:ShowAllBookmarks" key="manBookmarkKb"/>
+				<xul:menuitem id="myColorTab" label="useColorTab"
+					type="checkbox" 					
+					oncommand="myTabBar.saveColorTab(this.getAttribute('checked')) ;" />
+				<xul:menuitem id="myAccelator" label="Accelator"
+					type="checkbox" 					
+					oncommand="mySelectText.saveAccelator(this.getAttribute('checked')) ;" />										
+				<xul:menuitem id="myFxva-Settings" label="Theme Settings..." style="display:none "
+					oncommand="window.openDialog('chrome://myfxva/content/option.xul','','chrome,dialog,modal')"/>
+				<xul:menuseparator/>
+				<xul:menuitem label="&downloads.label;" accesskey="&downloads.accesskey;"
+					key="key_openDownloads" command="Tools:Downloads"/>
+				<xul:menuitem label="&addons.label;" accesskey="&addons.accesskey;" command="Tools:Addons"/>
+				<xul:menuseparator/>
+				<xul:menuitem id="goOfflineMenuitem"
+					label="&goOfflineCmd.label;" accesskey="&goOfflineCmd.accesskey;"
+					type="checkbox" oncommand="BrowserOffline.toggleOfflineStatus();"/>
+				<xul:menuitem accesskey="&fullScreenCmd.accesskey;" label="&fullScreenCmd.label;" 
+					key="key_fullScreen" id="myFullScreenItem" type="checkbox" command="View:FullScreen"/>
+				<xul:menuitem id="myMenu_preferences"
+					label="&preferencesCmd.label;"
+					accesskey="&preferencesCmd.accesskey;"
+					oncommand="openPreferences();"/>
+		</xul:menupopup>
+	</xul:toolbarbutton>
+	
+	  <xul:panel id="mySetPanel" position="after_end"
+		onpopuphidden="if (event.target != this) return ;
+			var vBox=this.firstChild;
+			while(vBox.firstChild) vBox.removeChild(vBox.firstChild);
+			var myExtendButton=document.getElementById('myExtendButton',gBrowser);
+			myExtendButton.setAttribute('open','false');			
+			"			
+		onpopupshowing="
+	var bool='myTabBookmarks-Menu myUndoClose myPersona myTabhome myFeed-button myTabdownloads myTabPrint myPageInfo mySecurity myOptions myGetFxva';	
+	bool=bool.split(' ') ;		   
+	var myToolbar=gBrowser;
+	var myExtendButton=document.getElementById('myExtendButton',myToolbar);
+	myExtendButton.setAttribute('open','true');
+	
+	for(var i=0 ;i &lt; bool.length ;i++){
+		var m = document.createElement('checkbox');
+		if(bool[i]=='myGetFxva') myToolbar=document.getElementById('main-window');
+		else myToolbar=gBrowser ;		
+		m.setAttribute('label',document.getElementById(bool[i],myToolbar).getAttribute('label'));
+		m.setAttribute('checked',myToolbar.getAttribute(bool[i]));
+		m.setAttribute('type','checkbox');
+		m.setAttribute('value',bool[i]);
+		m.addEventListener('command', function() {
+			var myToolbar= null ;
+			if(this.getAttribute('value')=='myGetFxva') myToolbar=document.getElementById('main-window');
+			else myToolbar=gBrowser ;
+			var isChecked=false ;
+			if (this.getAttribute('checked')=='true') isChecked=true ;
+			var fieldName=this.getAttribute('value');
+			myToolbar.setAttribute(fieldName,isChecked);
+			document.persist(myToolbar.id, fieldName);
+			
+		}, false);
+		this.firstChild.appendChild(m);
+	}"
+		>
+		<xul:vbox />
+	  </xul:panel>	
+		<!-- 扩展 -->         
+        <xul:toolbarbutton id="myExtendButton" class="myTabToolBarButton"  popup="mySetPanel"/>
+  </xul:hbox>
+  <xul:hbox class="chevron" collapsed="true"> <xul:scrollbox class="bookmarks-toolbar-items"/></xul:hbox>
+  </content>
+ </binding>
+</bindings>

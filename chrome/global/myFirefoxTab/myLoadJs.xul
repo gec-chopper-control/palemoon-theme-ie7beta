@@ -1,0 +1,57 @@
+<?xml version="1.0"?> 
+<!DOCTYPE bindings [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % searchBarDTD SYSTEM "chrome://browser/locale/searchbar.dtd" >
+%searchBarDTD;
+<!ENTITY % preferencesDTD SYSTEM "chrome://browser/locale/preferences/preferences.dtd">
+%preferencesDTD;
+]>
+<overlay id="myFirefox"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<popupset  id="mainPopupSet">	
+		<panel id="myChangeSearchEngine" position="after_end" hidden="true" engineBox="myEngineBox"/>	  
+		<panel id="myPopupAutoComplete" type="autocomplete" hidden="true" engineBox="mySearchEngineBox"/>
+		<panel id="myPanel" position="after_start" firstOpen="true"/>
+		<popup id="mySelectSearchPop" 
+				onpopupshowing="if(event.target==this) mySelectText.bulidPopup(this);"
+				onpopuphidden="if(event.target==this) mySelectText.unBulidPopup(this,event);"
+				onpopuphiding ="if(event.target==this) mySelectText.popupClosing();">
+			<menuitem id="mySelectSearchFirstItem" 
+				oncommand="BrowserSearch.loadSearch(getBrowserSelection(), true);"/>
+			<menuseparator /> 		
+			<menuseparator id="mySelectSearchPopSep"/>	 
+			<menuitem class="myCopyItem" label="&copyCmd.label;" accesskey="&copyCmd.accesskey;" oncommand="if(event.target==this) mySelectText.copyText()"/>	
+			<menuseparator /> 			
+			<menu label="Google Dictionary" id="myGoogleDic" />
+			<menuseparator />
+			<menu label="&preferencesCmd.label;">
+				<menupopup>
+					<menuitem label="&cmd_engineManager.label;" oncommand="searchBar.openManager(event);"/>
+					<menu id="languageBox" value="" label="Dictionary">
+						<menupopup onpopupshowing="if(event.target==this) mySelectText.addLanguage(this);"/>
+					</menu>
+				</menupopup>
+			</menu>			
+		</popup>
+		<menupopup id="myDicPanel" noautofocus="true" ignorekeys="true">
+			<stack width="312" height="210" style="background:white;margin:4px;">
+				<box align="center" pack="center">
+					<image id="myDicBoxImg" width="16" height="16" class="tab-icon-image" />
+					<label>Please wait </label>
+					<image id="myLoadProcess" width="24" height="4"/>
+				</box>
+				<box id="myDicBox" flex="1"/>
+			</stack>
+		</menupopup>		
+	</popupset> 
+	<script type="application/x-javascript" src="mySearchBar.js"/>        
+	<script type="application/x-javascript" src="myBookmarkCenter.js" />
+	<script type="application/x-javascript" src="myUrlbar.js" />  
+	<script type="application/x-javascript" src="mySetState.js"/>   
+	<script type="application/x-javascript" src="myFirefoxTab.js"/>
+	<script type="application/x-javascript" src="mySelectPopup.js"/>
+	<script type="application/x-javascript" src="myLightWeightTheme.js"/>		
+</overlay>
+

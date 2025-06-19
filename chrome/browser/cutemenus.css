@@ -1,0 +1,714 @@
+/*:::::::::: Cutemenus for Firefox ::::::::::*/
+/* last review :  3 july 2008, by GD */
+/********* detection of system setting to use icons in menus ***********/
+menuitem:not([type]):not(:-moz-system-metric(images-in-menus)) > .menu-iconic-left {
+  visibility: visible  !important;
+}
+
+menu:not(:-moz-system-metric(images-in-menus)) > .menu-iconic-left {
+  visibility: visible  !important;
+}
+
+#myGoogleDic{
+list-style-image: url("chrome://global/skin/CuteMenus/myDic.png") !important;
+}
+
+/****************************************************************/
+
+menuitem[id|="context"],
+menuitem[tabid],
+menuitem[label],
+menuitem[name],
+menuitem[id|="textlink"]/*Textlink*/{
+  -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-iconic") !important;
+}
+
+menupopup menu[label],
+menupopup menu[key],
+menupopup menu[tabid],
+popup menu[label],
+popup menu[key],
+popup menu[tabid] {
+-moz-binding: url("chrome://global/content/bindings/menu.xml#menu-iconic") !important;
+}
+/****************/
+/*   File Menu  */
+/****************/
+
+#context-openlink, #quicknote-fopenfloat, #quicknote-tbtab, 
+#tm-duplicateinWin, #tm-openAllLinks, #openselectedlinks_menuitem, 
+#miOpenInNewWindow,
+menuitem[command="newCalculatorWindow"], 
+menuitem[command="cmd_newNavigator"],
+menuitem[command="cmd_bm_openinnewwindow"], 
+menuitem[oncommand="gContextMenu.openFrame();"],
+menuitem[oncommand="openURLIn('window');"] {
+list-style-image: url("chrome://global/skin/CuteMenus/new-window.png") !important;
+}
+
+#cmd_close, #menu_closeWindow, #tm-undoCloseList, 
+menuitem[command="cmd_close"], 
+menuitem[command="cmd_closeWindow"],
+menuitem[oncommand="BrowserCloseTabOrWindow()"],
+menuitem[oncommand="BrowserTryToCloseWindow()"] ,
+menuitem[oncommand="inspector.exit();"],
+menuitem[oncommand="viewer.cmdDeleteSelectedProperty()"] {
+list-style-image: url("chrome://global/skin/CuteMenus/delete.png") !important;
+}
+
+#context-saveimage, #context-savepage, #openselectedlinks_savepage_menuitem, 
+#context-savelink, #menu_saveFrame, #menu_saveframe, #openselectedlinks_download_menuitem,
+#mi-save,
+menuitem[command="Browser:SavePage"], 
+menuitem[command="Tools:Downloads"], 
+menuitem[command="cmd_bm_export"], 
+menuitem[command="cmd_savePage"], 
+menuitem[oncommand="MsgSaveAsFile();"], 
+menuitem[oncommand="saveDocument(gContextMenu.target.ownerDocument);"] {
+list-style-image: url("chrome://global/skin/CuteMenus/download.png") !important;
+}
+
+menuitem[command="cmd_bm_import"],
+menuitem[oncommand="toImport();"],
+menuitem[oncommand="BrowserImport();"]{
+list-style-image: url("chrome://global/skin/CuteMenus/import.png") !important;
+}
+
+#printSetupMenuItem,
+menuitem[command="cmd_pageSetup"],
+menuitem[command="cmd_pagesetup"], 
+menuitem[oncommand="PrintUtils.showPageSetup();"] {
+list-style-image: url("chrome://global/skin/CuteMenus/printsettings.png") !important;
+}	
+
+#messagePaneContext-printpreview, #printPreviewMenuItem,
+menuitem[command="cmd_printPreview"], menuitem[command="cmd_printpreview"],
+menuitem[oncommand="PrintUtils.printPreview(onEnterPrintPreview, onExitPrintPreview);"] {
+list-style-image: url("chrome://global/skin/CuteMenus/preview.png") !important;
+}
+
+#printMenuItem, #print_menu, #messagePaneContext-print,
+menuitem[command="cmd_print"], 
+menuitem[oncommand="mromarkhan.gmail.openselectedlinks.goPrint();"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/print.png") !important;
+}
+
+/****************/
+/*  Edit Menu   */
+/****************/
+
+#context-undo, #menu_undo, 
+#tm-content-undoCloseTab, #tm-undoCloseTab, #tm_undocloseContextMenu,
+#mnEditUndo,
+#historyUndoMenu,
+menuitem[command="cmd_undo"],
+menuitem[cmd="cmd_undo"] {
+list-style-image: url("chrome://global/skin/CuteMenus/undo.png") !important;
+}
+
+#context-redo, #cmd_redo, #menu_redo,
+#mnEditRedo,
+menuitem[command="cmd_redo"],
+menuitem[cmd="cmd_redo"] {
+list-style-image: url("chrome://global/skin/CuteMenus/redo.png") !important;
+}
+
+#context-cut, #menu_cut, #cmd_cut, 
+#mnEditCut,
+menuitem[command="cmd_cut"], 
+menuitem[cmd="cmd_cut"] {
+list-style-image: url("chrome://global/skin/CuteMenus/cut.png") !important;
+}
+
+#context-copy, #menu_copy, #context-copyemail, #cmd_copy, #cls-context,
+#mnEditCopy,
+.myCopyItem,
+menuitem[command="cmd_copy"], 
+menuitem[cmd="cmd_copy"],
+menuitem[oncommand="viewer.cmdCopyValue()"] {
+list-style-image: url("chrome://global/skin/CuteMenus/copy.png") !important;
+}
+
+#context-paste, #cmd_paste, #menu_paste, 
+#mnEditPaste,
+menuitem[command="cmd_paste"] , 
+menuitem[cmd="cmd_paste"] {
+list-style-image: url("chrome://global/skin/CuteMenus/paste.png") !important;
+}
+
+#context-delete, #cmd_delete, #menu_delete, 
+#mnEditDelete,
+menuitem[command="cmd_delete"], 
+menuitem[cmd="cmd_delete"] {
+list-style-image: url("chrome://global/skin/CuteMenus/delete.png") !important;
+}
+
+#menu_delete {
+list-style-image: url("chrome://global/skin/CuteMenus/Cleanup.png") !important;
+}
+
+#context-selectall,
+#cmd_selectAll, #menu_selectAll, #menuitem_selectAll,
+menuitem[command="cmd_selectAll"],
+menuitem[cmd="cmd_selectAll"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/select-all.png") !important;
+}
+
+
+#context-searchselect, #context-keywordfield, #searchMailCmd, #searchAddressesCmd, 
+menuitem[command="Tools:Search"], 
+menuitem[command="cmd_find"], 
+menuitem[oncommand="goDoCommand('cmd_find')"],
+menuitem[oncommand="inspector.getViewer('dom').showFindDialog()"] {
+list-style-image: url("chrome://global/skin/CuteMenus/search.png") !important;
+}
+
+menuitem[command="cmd_findAgain"],
+menuitem[oncommand="goDoCommand('cmd_findAgain')"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/search.png") !important;
+}
+
+#quicknote-options, #menu_preferences,
+menuitem[oncommand="openPreferences();"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/options.png") !important;
+}
+
+/******************/
+/*   View  Menu   */
+/******************/
+
+#viewToolbarsMenu,
+#RepairExtensions {
+list-style-image: url("chrome://global/skin/CuteMenus/configure_toolbars.png") !important;
+}
+
+#viewSidebarMenuMenu, #menu_MessagePaneLayout {
+  list-style-image: url("chrome://global/skin/CuteMenus/view_detailed.png") !important;
+}
+
+/********/
+
+#context-reload, #tm-reloadLeft, #tm-reloadRight, #tm-reloadOther, #menu-reload, 
+menuitem[command="Browser:Reload"], 
+menuitem[command="cmd_reload"],
+menuitem[command="placesCmd_reload"],
+menuitem[command="cmd_bm_refreshlivemark"],
+menuitem[oncommand="gContextMenu.reloadFrame();"],
+menuitem[oncommand="BrowserReload();"] {
+list-style-image: url("chrome://global/skin/CuteMenus/reload.png") !important;
+}
+
+/**/
+
+#tm-renametab, #viewTextZoomMenu,
+menuitem[command="cmd_textZoomReset"] {
+list-style-image: url("chrome://global/skin/CuteMenus/fonts.png") !important;
+}
+
+menuitem[command="cmd_textZoomEnlarge"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/font-increase.png") !important;
+}
+
+menuitem[command="cmd_textZoomReduce"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/font-decrease.png") !important;
+}
+
+#pageStyleMenu {
+	list-style-image: url("chrome://global/skin/CuteMenus/style.png") !important;
+}
+
+#rightencoding-frame,
+#charsetMenu, #mailviewCharsetMenu,
+menu[oncommand="MultiplexHandler(event)"]  {
+list-style-image: url("chrome://global/skin/CuteMenus/translate.png") !important;
+}
+
+#context-viewpartialsource-selection, #context-viewpartialsource-mathml, #context-viewsource,
+menuitem[oncommand="gContextMenu.viewFrameSource();"], 
+menuitem[command="View:PageSource"] {
+list-style-image: url("chrome://global/skin/CuteMenus/pageSouce.png") !important;
+}
+
+menuitem[command="View:FullScreen"], #fullScreenItem {
+list-style-image: url("chrome://global/skin/CuteMenus/fullscreen.png") !important;
+}
+
+/****************/
+/*   Go  Menu  ?/
+/****************/
+
+#context-back, #quicknote-fopensidebar,
+menuitem[oncommand="BrowserBack(event, true)"] {
+list-style-image: url("chrome://global/skin/CuteMenus/back.png") !important;
+}
+
+#context-forward, 
+menuitem[oncommand="BrowserForward(event, true)"] {
+list-style-image: url("chrome://global/skin/CuteMenus/forward.png") !important;
+}
+
+#context-home, #historyMenuHome,
+menuitem[command="Browser:Home"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/home.png") !important;
+}
+
+#tm-linkWithhistory,
+#tm-autoreload_menu,
+menuitem[command="Browser:ShowAllHistory"],
+menuitem[oncommand="toggleSidebar('viewHistorySidebar');"] {
+list-style-image: url("chrome://global/skin/CuteMenus/history.png") !important;
+}
+
+/*********************/
+/*  Bookmarks  Menu  */
+/*********************/
+
+#subscribeToPageMenuitem, #subscribeToPageMenupopup {
+  list-style-image: url("chrome://browser/skin/feeds/feedIcon16.png") !important;
+}
+
+menuitem[feed]{
+  list-style-image: url("chrome://browser/skin/feeds/myFeed-button.png") !important;
+  -moz-image-region: rect(0px 32px 16px 16px);	
+}
+
+menuitem[oncommand="toOpenWindowByType('bookmarks:manager', 'chrome://browser/content/bookmarks/bookmarksManager.xul');"],
+#bookmarksShowAll {
+list-style-image: url("chrome://global/skin/CuteMenus/customize.png") !important; 
+}
+
+#bookmarks-menuitem-sort,
+menuitem[oncommand="sortBookmarksService.sort()"] {
+list-style-image: url("chrome://global/skin/CuteMenus/bookmark-sort.png") !important;
+}
+
+/* Sub-Menu Manage Bookmarks */
+#backupBookmarks {
+  list-style-image: url("chrome://global/skin/CuteMenus/save.png") !important;
+}
+
+#fileImport {
+  list-style-image: url("chrome://global/skin/CuteMenus/html_imp.png") !important;
+}
+
+#fileExport {
+  list-style-image: url("chrome://global/skin/CuteMenus/html_exp.png") !important;
+}
+
+/*  , #viewSortMenu */
+#ascending, 
+#viewSort,
+menuitem[command="placesCmd_sortBy:name"],
+menuitem[command="cmd_bm_sortbyname"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/sort_incr.png") !important;
+}
+
+/* Also used for Show Columns ???? probably a wrong id in bookmarksManager.xul */
+#descending {
+	list-style-image: url("chrome://global/skin/CuteMenus/sort_decrease.png") !important;
+}
+
+menuitem[command="cmd_bm_newlivemark"],
+menuitem[oncommand="openUILink(this.getAttribute('siteURI'), event);"],
+#tm-addBookmarkAs {
+  list-style-image: url("chrome://global/skin/CuteMenus/bookmark.png") !important;
+}
+
+/****************/
+/*  Tools Menu  */
+/****************/
+
+menuitem[command="Browser:ReadMail"],
+menu[oncommand="goDoCommand('cmd_getNewMessages')"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/mail_get.png") !important;
+}
+
+#menu_New, 
+menuitem[command="Browser:NewMessage"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/mail_new.png") !important;
+}
+
+#emSidebar, #UMOExtensionContextPopup1,
+menuitem[command="Tools:Extensions"] {
+list-style-image: url("chrome://global/skin/CuteMenus/extensions.png") !important;
+}
+
+menuitem[command="Tools:Addons"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/UpdateAll.png") !important;
+}
+
+#tmSidebar, #UMOThemeContextPopup1,
+menuitem[command="Tools:Themes"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/themes.png") !important;
+}
+
+#tm-sessionmanager, #tm_sessionmanagerContextMenu, 
+#tm-sm-closedwindows, #tabmix-menu {
+  list-style-image: url("chrome://global/skin/CuteMenus/tmp.png") !important;
+}
+
+/* FireFTP has its own icon now */
+#menuitem_jsconsoleoutput, #javascriptConsole, #javaScriptConsole,
+menuitem[oncommand="toggleSidebar('viewConsole2Sidebar');"],
+menuitem[oncommand="toErrorConsole();"],
+menuitem[oncommand="toJavaScriptConsole();"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/babelfish.png") !important;
+}
+
+/* list-style-image: url("inspector.png") !important; */
+#menu_inspector {
+  list-style-image: url("chrome://global/skin/CuteMenus/DeveloperTools.png") !important;
+}
+
+menuitem[command="cmd_CustomizeToolbars"],
+menuitem[command="cmd_options"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/customize.png") !important;
+}
+
+#menueditor-options-fx, #menueditor-options-tb {
+  list-style-image: url("chrome://global/skin/CuteMenus/menuedit.png") !important;
+}
+
+/*  chrome://global/skin/CuteMenus/Cleanup.png */
+#sanitizeItem {
+  list-style-image: url("chrome://global/skin/CuteMenus/clearpv.png") !important;
+}
+#mySanitizeItem {
+  list-style-image: url("chrome://global/skin/CuteMenus/clearpv.png") !important;
+}
+/**** Tools - Sub Menus */
+
+menuitem[command="cmd_homepage"]  {
+list-style-image: url("chrome://global/skin/CuteMenus/home.png") !important;
+}
+
+menuitem[command="cmd_uninstall"] {
+list-style-image: url("chrome://global/skin/CuteMenus/Cleanup.png") !important;
+}
+
+menuitem[command="cmd_update"] {
+list-style-image: url("chrome://global/skin/CuteMenus/save.png") !important;
+}
+
+menuitem[command="cmd_disable"] {
+list-style-image: url("chrome://global/skin/CuteMenus/delete.png") !important;
+}
+
+menuitem[command="cmd_movetop"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/arrow-top.png") !important;
+}
+
+/* Download Manager */
+
+#menuitem_pause {
+  list-style-image: url("chrome://global/skin/CuteMenus/stop.png") !important;
+}
+
+#menuitem_remove, #menuitem_removeFromList {
+list-style-image: url("chrome://global/skin/CuteMenus/Cleanup.png") !important;
+}
+
+#menuitem_resume, #pauseResume {
+list-style-image: url("chrome://global/skin/CuteMenus/forward.png") !important;
+}
+
+#menuitem_retry {
+list-style-image: url("chrome://global/skin/CuteMenus/reload.png") !important;
+}
+
+#menuitem_cancel {
+list-style-image: url("chrome://global/skin/CuteMenus/delete.png") !important;
+}
+
+#menuitem_properties {
+list-style-image: url("chrome://global/skin/CuteMenus/options.png") !important;
+}
+
+/*************/
+/* Help Menu */
+/*************/
+#hintsAndTips, #menu_openHelp, menuitem[oncommand="openHelp('firefox-help');"],
+menuitem[oncommand="openHelp('firefox-help', 'chrome://browser/locale/help/help.rdf');"] {
+list-style-image: url("chrome://global/skin/CuteMenus/help.png") !important;
+}
+
+/* For IE View and IE Tab */
+#ieview-do-view, #ieview-do-viewlink, #ieview-do-forcepage-menu, 
+#ietab-toolsmenu, #ietab-viewpage-extapp, #ietab-viewpage, #ietab-viewlink-extapp, #ietab-viewlink,
+#ietab-bookmark, #ietab-bookmark-extapp,
+#ietab-tabbar-extapp, #ietab-tabbar-switch,
+menuitem[oncommand="openHelp('ieusers');"],
+menuitem[oncommand="openHelpLink('ieusers');"],
+menuitem[oncommand="openHelp('ieusers', 'chrome://browser/locale/help/help.rdf');"],
+menuitem[oncommand="WinUpdate_WindowsUpdate()"] {
+list-style-image: url("chrome://global/skin/CuteMenus/internet-explorer.png") !important;
+}
+
+#context-about,
+#new-menu,
+menuitem[command="cmd_about"],
+menuitem[oncommand="openAboutDialog();"],
+menuitem[oncommand="openUILink(getUILink('promote'), event, false, true);"] {
+list-style-image: url("chrome://global/skin/CuteMenus/phoenix.png") !important;
+}
+
+#menu_HelpPopup_reportertoolmenu,
+#menu_HelpPopup_reportPhishingtoolmenu,
+#context-blockimage {
+	list-style-image: url("chrome://browser/skin/Info.png") !important;
+}
+
+#context-viewinfo, 
+menuitem[command="View:PageInfo"], 
+menuitem[oncommand="gContextMenu.viewFrameInfo();"] {
+list-style-image: url("chrome://global/skin/CuteMenus/pageinfo.png") !important;
+}
+
+#releaseNotes,
+menuitem[oncommand="openReleaseNotes(event)"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/pageinfo.png") !important;
+}
+
+/*****************************************************************/
+/* Extension TabBrowser and or TabMixPlus (some still in French) */
+/*****************************************************************/
+
+#context-openlinkintab, #cmd_undo, #cmd_bm_undo, 
+#quicknote-fopentab, #tm-tabsList,
+#miOpenInNewTab, #tm-newtab,
+#tm-openinverselink,
+menuitem[command="cmd_undo"], 
+menuitem[command="newCalculatorTab"], 
+menuitem[command="cmd_newNavigatorTab"],
+menuitem[command="cmd_bm_openinnewtab"],
+menuitem[command="cmd_bm_openfolder"],
+menuitem[oncommand="BrowserOpenTab();"],
+menuitem[oncommand="gContextMenu.openFrameInTab();"], #textlink-open-tab,
+menuitem[oncommand="TextLink.openLinkTab(event);"] ,
+menuitem[tabid="tab-item-newTab"],
+menuitem[oncommand="openURLIn('tab');"]{
+list-style-image: url("chrome://global/skin/CuteMenus/new-tab.png") !important;
+}
+
+#undoclosetab,
+#tm-content-undoCloseList,  
+#tm-closeSimilar {
+	list-style-image: url("chrome://global/skin/CuteMenus/tab_remove.png") !important;
+}
+
+menu [id="tabsListMenu"] {
+list-style-image: url("chrome://global/skin/CuteMenus/folder_man.png") !important;
+}
+
+menu [tabid="save"] {
+list-style-image: url("chrome://global/skin/CuteMenus/save.png") !important;
+}
+menu [key="key_tabextensions_storedTabSet_openMenu"] {
+list-style-image: url("chrome://global/skin/CuteMenus/customize.png") !important;
+}
+
+menuitem[tabid="tab-item-reloadTab"] ,
+menuitem[tabid="tab-item-reloadAll"]{
+list-style-image: url("chrome://global/skin/CuteMenus/reload.png") !important;
+}
+
+menuitem[tabid="flush-item"] {
+list-style-image: url("chrome://global/skin/CuteMenus/Cleanup.png") !important;
+}
+
+menuitem[tabid="tab-item-bookmarkGroup"] {
+list-style-image: url("chrome://global/skin/CuteMenus/bookmark-sort.png") !important;
+}
+
+#tm-content-closetab,
+menuitem[tabid="tab-item-removeTab"] ,
+menuitem[tabid="tab-item-removeAll"]{
+list-style-image: url("chrome://global/skin/CuteMenus/delete.png") !important;
+}
+
+menuitem[tabid="tab-item-removeOther"] ,
+menuitem[tabid="tab-item-removeVisited"] {
+list-style-image: url("chrome://global/skin/CuteMenus/fileclose.png") !important;
+}
+
+#tm-closeLeftTabs,
+menuitem[tabid="tab-item-removeLeft"] {
+list-style-image: url("chrome://global/skin/CuteMenus/start_r.png") !important;
+}
+
+#tm-closeRightTabs,
+menuitem[tabid="tab-item-removeRight"] {
+list-style-image: url("chrome://global/skin/CuteMenus/finish_r.png") !important;
+}
+
+
+menuitem[tabid="tab-item-undoRemoveTab"],
+menu[key="key_tabextensions_closedTabsHistory_openMenu"] {
+list-style-image: url("chrome://global/skin/CuteMenus/undo.png") !important;
+}
+
+menuitem[tabid="tab-item-duplicateTab"],
+#tm-duplicateTab, #tm-duplicateTabContext {
+  list-style-image: url("chrome://global/skin/CuteMenus/tab_duplicate.png") !important;
+}
+
+menuitem[tabid="tab-item-duplicateInWindow"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/tab_new.png") !important;
+}
+
+menuitem[oncommand="gBrowser.selectedTab.setTabColor();"],
+menuitem[tabid="tab-item-setGroupColor"] ,
+menuitem[tabid="tab-item-setTabColorFor"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/colors.png") !important;
+}
+
+menuitem[tabid="tab-item-editMenu"],
+menuitem[oncommand="this.parentNode.hidePopup(); TabbrowserService.goPreferences();"]  {
+  list-style-image: url("chrome://global/skin/CuteMenus/options.png") !important;
+}
+
+#tm-docShell,
+menu [tabid="tab-item-allow"] {
+list-style-image: url("chrome://global/skin/CuteMenus/greenled.png") !important;
+}
+
+/************************/
+/* Calculator extension */
+/************************/
+
+#calculator, menuitem[command="newCalculatorSidebar"] {
+	list-style-image: url("chrome://global/skin/CuteMenus/calc.png") !important;
+}
+
+/************/
+/*  Others  */
+/************/
+
+/*  Pop Up Menus on a link or a  page */
+
+#context-openlink, #textlink-open-link, #tm-mergeWindows, #tm-mergeWindowsTab, 
+menuitem[oncommand="TextLink.openLinkHere(event);"],
+menuitem[command="placesCmd_open:window"] {
+list-style-image: url("chrome://global/skin/CuteMenus/new-window.png") !important;
+}
+
+#context-openlinkintab,
+menuitem[id="placesContext_openContainer:tabs"],
+menuitem[oncommand="PlacesUIUtils.openContainerNodeInTabs(this.parentNode._resultNode, event);"],
+menuitem[command="placesCmd_open:tab"] {
+list-style-image: url("chrome://global/skin/CuteMenus/new-tab.png") !important;
+}
+
+#context-copylink {
+list-style-image: url("chrome://global/skin/CuteMenus/copy.png") !important;
+}
+
+#context-stop,
+menuitem[command="Browser:Stop"] {
+list-style-image: url("chrome://global/skin/CuteMenus/stop.png") !important;
+}
+
+#menu_sendLink, #context-copyemail, #context-sendlink, 
+#context-sendpage, #context-sendimage {
+list-style-image: url("chrome://global/skin/CuteMenus/send.png") !important;
+}
+
+#context-metadata, #menu_properties,
+menuitem[command="cmd_bm_properties"] ,
+menuitem[command="placesCmd_show:info"] {
+list-style-image: url("chrome://global/skin/CuteMenus/options.png") !important;
+}
+
+
+menuitem[command="Browser:BookmarkAllTabs"]{
+  list-style-image: url("chrome://global/skin/CuteMenus/bookmark-sort.png") !important;
+}
+
+#frame, #viewColumns,
+menuitem[oncommand="gContextMenu.showOnlyThisFrame();"]  {
+	list-style-image: url("chrome://global/skin/CuteMenus/view_left_right.png") !important;
+}
+
+/*************************/
+/* Popup Menus on images */
+/*************************/
+
+#context-viewimage,
+#context-viewbgimage{
+list-style-image: url("chrome://global/skin/CuteMenus/image.png") !important;
+}
+
+#context-setWallpaper, #context-setDesktopBackground {
+	list-style-image: url("chrome://global/skin/CuteMenus/imagegallery.png") !important;
+}
+
+/***************************/
+/* Popup Menu in ImageZoom */
+/***************************/
+
+menu[id="context-zoomsub"] ,
+#context-zoomsub,
+#menu_ImageZoomMain  {
+list-style-image: url("chrome://global/skin/CuteMenus/viewmag+.png") !important;
+}
+
+menuitem[oncommand="izZoomIn();"],
+menuitem[command="cmd_fullZoomEnlarge"],
+#zoommain-increase {
+list-style-image: url("chrome://global/skin/CuteMenus/viewmag+.png") !important;
+}
+
+menuitem[oncommand="izSetZoom(100);"],
+menuitem[command="cmd_fullZoomReset"] {
+list-style-image: url("chrome://global/skin/CuteMenus/viewmag1.png") !important;
+}
+
+menuitem[oncommand="izZoomOut();"],
+menuitem[command="cmd_fullZoomReduce"],
+#zoommain-decrease {
+list-style-image: url("chrome://global/skin/CuteMenus/viewmag-.png") !important;
+}
+
+menuitem[oncommand="izShowCustomZoom();"],
+menuitem[oncommand="izShowCustomDim();"],
+menuitem[oncommand="izImageFit();"],
+#zoommain-custom, #viewFullZoomMenu  {
+list-style-image: url("chrome://global/skin/CuteMenus/viewmagfit.png") !important;
+}
+
+/* For DOM Inspector */
+
+menuitem[oncommand="viewer.cmdInspectInNewWindow()"],
+menuitem[oncommand="viewer.cmdInspectInNewView()"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/new-window.png") !important;
+}
+
+menuitem[oncommand="inspector.getViewer('dom').findNext()"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/forward.png") !important;
+}
+#mnWindowsFile, #mnInspectContentDocumentFile, #mnInspectChromeDocumentFile {
+  list-style-image: url("chrome://global/skin/CuteMenus/edit.png") !important;
+}
+menuitem[oncommand="inspector.getViewer('dom').selectByClick()"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/mouse.png") !important;
+}
+#mnEditEdit,
+menuitem[oncommand="viewer.cmdEditSelectedProperty()"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/edit.png") !important;
+}
+#mnEditInsert,
+menuitem[oncommand="viewer.cmdNewProperty()"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/edit_add.png") !important;
+}
+
+menuitem[oncommand="viewer.cmdShowPseudoClasses()"]{
+  list-style-image: url("chrome://global/skin/CuteMenus/style.png") !important;
+}
+menuitem[oncommand="viewer.cmdEvalExpr()"] {
+  list-style-image: url("chrome://global/skin/CuteMenus/java_src.png") !important;
+}
+
+#goOfflineMenuitem,
+menuitem[oncommand="BrowserOffline.toggleOfflineStatus();"]{
+  list-style-image: url("chrome://global/skin/CuteMenus/connect_no.png") !important;												
+}

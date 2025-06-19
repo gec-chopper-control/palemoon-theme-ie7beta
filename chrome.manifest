@@ -1,0 +1,6 @@
+locale  browser			en-US locale/en-US/
+skin	browser			ie7beta2preview	chrome/browser/
+skin	communicator	ie7beta2preview	chrome/communicator/
+skin	help			ie7beta2preview	chrome/help/
+skin	global			ie7beta2preview	chrome/global/
+skin	mozapps			ie7beta2preview	chrome/mozapps/

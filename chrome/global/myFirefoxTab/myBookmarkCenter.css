@@ -1,0 +1,297 @@
+/* ***** BEGIN LICENSE BLOCK *****
+本功能由FlyWorld设计。
+ * ***** END LICENSE BLOCK ***** */
+/* ===== myBookmarkCenter.css =====================================================
+  == Styles that apply myBookmarkCenter.xml
+  ======================================================================= */
+@charset "utf-8";  
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+/* 支持浮动的侧栏 */
+#myPanel{
+  margin-left:-3px;
+  background:rgb(240,237,237) url("chrome://browser/skin/ground/myPanelBox.png") repeat-x ;
+  border:1px solid #a0a0a0;
+}
+
+#myPanelBox{
+  margin-right:-1px;
+}
+
+#myBookMarksTabs{
+  margin-left:2px ;
+}
+
+#myBookCenterClose{
+  margin-right:0;
+}
+
+.mySideBarButton{
+  -moz-appearance: none !important;
+  list-style-image: url("chrome://browser/skin/ground/myTabToolBarIcons.png");  
+  -moz-binding: url("chrome://global/skin/globalBindings.xml#myToolbar-Menu-button") ; 
+  -moz-image-region: rect(0px, 32px, 16px, 16px);
+  padding:0 ;
+  border:none ;
+  height: 24px  !important;
+}
+.mySideBarButton label {
+  display:-moz-box !important;
+  margin-left:0px !important;
+}
+
+.mySideBarButton image{
+  margin:1px 4px 4px 2px !important;
+}
+
+#mySideBarAddBookMark{
+  margin:6px 0 6px 2px ;	
+}
+#myAddBookMark-button{
+  margin:5px 0 6px 2px ;	
+}
+	
+#mySideBarAddBookMarkBox,
+#myPanelHead{
+	margin-left: 4px; margin-bottom: 1px;
+}
+
+.bookMarkCenter{
+  -moz-appearance: none !important;
+  -moz-binding: url("chrome://global/skin/globalBindings.xml#toolbarbutton") ;
+  list-style-image: url("chrome://browser/skin/ground/myTabToolBarIcons.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+  margin:0 2px 4px 2px ;
+}
+
+.bookMarkCenter label{
+  margin:1px 8px 4px 3px !important;
+}
+.bookMarkCenter:hover:active image,
+.bookMarkCenter:hover:active label{
+   padding:1px !important;
+}
+
+/*tab 栏上的星星按钮*/
+#myTabBookmarks-Menu{
+	margin-bottom: 6px;
+	margin-right: 6px;
+	margin-left: 3px;
+}
+#myTabBookmarks-Menu > .toolbarbutton-icon{
+	margin:0 ;
+}
+
+/*侧栏标题按钮*/
+#mySideBarCenter{
+  margin:2px 2px 2px 3px  ;
+}
+#mySideBarCenter > .toolbarbutton-icon{
+  margin-right:0;
+}
+#mySideBarCenter label{
+  margin: 2px 4px 3px 2px ! important;
+  display:-moz-box !important;
+}
+
+/*收藏工具栏上的"收藏中心"按钮  margin-left:3px 1px 2px 1px !important; */
+#myPlaceBookmarksMenu{
+  display:none ;
+	margin-left: 1px !important;
+	margin-right:1px !important;
+}
+#myPlaceBookmarksMenu > .toolbarbutton-icon{
+  margin:0;
+}
+#myPlaceBookmarksMenu label{
+  margin:1px 0px 1px 0px !important;
+  font-size:9px;
+}
+
+/*收藏夹上的"收藏当前页"按钮 margin:0px 1px 2px 1px !important;*/
+#myPlaceBookmarkCurrentPage{
+  list-style-image: url("chrome://browser/skin/ground/myTabToolBarIcons.png");
+  -moz-binding: url("chrome://global/skin/globalBindings.xml#toolbarbutton") ;
+  -moz-image-region: rect(0px, 256px, 16px, 240px) !important;
+  margin-left: 1px !important;
+  margin-right:1px !important;  
+}
+
+#myPlaceBookmarkCurrentPage > .toolbarbutton-icon{
+  margin:0;
+}
+
+/*收藏栏上的分隔线*/
+#myPlaceSep{
+  display:none ;
+  margin:4px 2px 5px 2px!important
+}
+
+/*浮动侧栏中的访问myFxva */
+#myGetFxva {
+  list-style-image: url("chrome://global/skin/CuteMenus/myFxVa.png") !important;
+  margin:5px 0 0 7px ;
+}
+#myGetFxva image{
+  margin-left:0 !important;
+}
+#myGetFxva label{
+  display:-moz-box !important;
+  margin:1px 0 2px 3px !important;
+}
+
+.myTab{
+  margin-bottom:-1px ;
+  position:relative  ;
+  z-index:1 ;
+}
+.myTab image{
+  margin:0 ;
+  padding:0 ;
+}
+
+.myTab > .tab-middle {
+  border:0px !important;
+  outline: 0px  !important;
+}
+#mySelectTab{
+  list-style-image: url(chrome://global/skin/icons/add-button.png) !important;
+   margin:1px 2px 1px 2px  !important ;
+  padding:1px  !important  ;
+}
+#mySelectTab .toolbarbutton-icon{
+  margin:0 !important ;
+  padding:1px !important;
+}
+
+#mySelectTab  dropmarker{
+  display:none !important;
+}
+.myShowSideBar{
+  -moz-appearance: none !important;
+   background:none ;
+  list-style-image: url("chrome://global/skin/icons/ShowSideBar.png") !important;
+  -moz-image-region: rect(0px, 16px, 16px, 0px) !important;
+  border:none !important;
+  padding:0  !important;
+  margin-top:0px !important;
+	margin-right:0px !important;  
+}
+.myShowSideBar image{
+  margin: 0 !important;
+ padding:1px ;
+}
+.myShowSideBar:hover:active image{
+	padding:2px 0px 0px 2px ;
+}	
+.myShowSideBar:hover:active {
+   margin-top:0px !important;
+   padding:0  !important;  
+}
+.myShowSideBar  label{
+  display:none !important;
+} 
+#myTabPopBrowser{
+  padding:0px !important;
+  margin:0px 0px 2px 5px !important;
+  border:0px  ;
+  border:1px solid #898C95;
+  border-right: 3px solid;
+  -moz-border-right-colors: white white #898C95;
+}
+
+#myBookmarks-view >hbox,
+#myHistory-panel > hbox {
+  background:white !important;
+}
+
+toolbar[iconsize="small"] #myAddOnsGroup > toolbarbutton[group="myAddOnsGroup"],
+toolbar[iconsize="small"] #myAddOnsGroup > toolbarbutton[group="myAddOnsGroup"][checked="true"]{
+  -moz-appearance: none !important;	
+  margin:1px !important ;
+  padding:1px !important  ;
+  min-width:16px !important ;
+}
+toolbar[iconsize="small"] #myAddOnsGroup > toolbarbutton[group="myAddOnsGroup"]:hover {
+  -moz-border-top-colors:#76a5c8  transparent  !important;
+  -moz-border-left-colors:#76a5c8 transparent   !important;
+  -moz-border-right-colors:#76a5c8  transparent !important ;
+  -moz-border-bottom-colors:#76a5c8 transparent  !important;
+  -moz-border-radius: 2px !important;
+}
+
+toolbar[iconsize="small"] #myAddOnsGroup > toolbarbutton[group="myAddOnsGroup"][checked="true"]{
+  background:#d7f3ff !important;
+  -moz-border-top-colors:#279fd3  #d7f3ff !important;
+  -moz-border-left-colors:#279fd3  #d7f3ff   !important;
+  -moz-border-right-colors:#279fd3  #d7f3ff  !important ;
+  -moz-border-bottom-colors:#279fd3  #d7f3ff   !important;
+  -moz-border-radius: 2px !important;  
+}
+
+#myAddOnsGroup > toolbarbutton[group="myAddOnsGroup"] .toolbarbutton-icon{
+  margin:0 !important ;
+  padding:1px  !important;
+}
+
+.sidebar-placesTree{
+  -moz-border-top-colors:#E0E2E8 ;	
+}
+
+#mySideBarTabs{
+  margin-left:6px ;
+  margin-bottom:-1px ;
+  position:relative  ;
+  z-index:1 ; 
+  min-height:24px ;
+}
+
+toolbarbutton.myTab{
+  -moz-appearance: none !important;		
+  margin:2px -1px 0 0 !important;
+  padding: 0px 4px 0px 4px !important;
+  color: -moz-DialogText;
+  border:2px  solid ;
+  -moz-border-top-colors:#898c95 white  ;
+  -moz-border-left-colors:#898c95 white  ;
+  -moz-border-right-colors:#898c95 white  ;
+  border-bottom: 1px solid #898c95;
+  background:url("chrome://global/skin/tabbox/tab-back.png") repeat-x;
+}
+toolbarbutton.myTab label{
+	margin-bottom:3px !important;
+}
+	
+toolbarbutton.myTab:not([checked="true"]):hover{
+  -moz-border-top-colors:#3c7fb1 white  ;
+  -moz-border-left-colors:#3c7fb1 white  ;
+  -moz-border-right-colors:#3c7fb1 white  ;
+  background:url("chrome://global/skin/tabbox/tab-back-hover.png") repeat-x;
+}
+
+toolbarbutton.myTab[isLabel="true"]{
+  margin:0px -1px 0px 0 !important;
+  -moz-user-focus: normal;
+  margin-top: 0;
+  border-bottom-color: white ;
+  background:white ;
+}
+toolbarbutton.myTab[isLabel="true"]:hover{
+  -moz-border-top-colors:#898c95 white  ;
+  -moz-border-left-colors:#898c95 white  ;
+  -moz-border-right-colors:#898c95 white  ;	
+  background:white ;
+}
+toolbarbutton[isLabel="true"]{
+  display:none ;
+}
+toolbarbutton.myTab[checked="true"]{
+  display:none ;
+}
+toolbarbutton[checked="true"] + toolbarbutton[isLabel="true"]{
+  display:-moz-box ;
+}
+/*没有找到Id的按钮*/
+#myPanelNoFind {
+	list-style-image: url("chrome://global/skin/icons/folder-item.png") !important;
+	  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}

@@ -1,0 +1,68 @@
+/* ***** BEGIN LICENSE BLOCK *****
+本功能由FlyWorld设计。
+ * ***** END LICENSE BLOCK ***** */
+
+/* ===== mySearchBar.css =====================================================
+  == Styles that apply mySearchBar.xml
+  ======================================================================= */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/*对自定义的搜索面板支持*/
+#myPopupAutoComplete,
+#myChangeSearchEngine{
+  -moz-appearance: none !important;	
+	border:1px solid #B4B4B4 !important;
+	padding-left:2px;
+}
+
+.myChangeSearchBox{
+	background: url("chrome://browser/skin/ground/mySearchPanel.png") repeat-x top left;	
+}
+
+.mySearchEngineButton{
+  -moz-appearance: none !important;
+  -moz-border-radius: 2px !important;
+  margin:4px 1px 4px 1px !important ;
+  padding:0px  !important  ;
+}
+.mySearchEngineButton image{
+	margin:0px !important;
+	padding:2px !important ;
+}
+.mySearchEngineButton:hover {
+  -moz-appearance: none !important; 	
+  -moz-border-top-colors:#76a5c8  transparent  !important;
+  -moz-border-left-colors:#76a5c8 transparent   !important;
+  -moz-border-right-colors:#76a5c8  transparent !important ;
+  -moz-border-bottom-colors:#76a5c8 transparent  !important;
+  -moz-border-radius:2px !important;
+}
+.mySearchGo:hover:active,
+.mySearchEngineButton[checked="true"]{
+  -moz-appearance: none !important; 	
+  background:#d7f3ff !important;
+  -moz-border-top-colors:#279fd3  #d7f3ff !important;
+  -moz-border-left-colors:#279fd3  #d7f3ff   !important;
+  -moz-border-right-colors:#279fd3  #d7f3ff  !important ;
+  -moz-border-bottom-colors:#279fd3  #d7f3ff   !important; 
+  -moz-border-radius:2px !important;  
+}
+
+.mySearchGo{
+/* list-style-image: url(chrome://browser/skin/ground/myTabToolBarIcons.png);
+ -moz-image-region: rect(0px, 160px, 16px, 144px);*/
+  padding-right:2px !important;
+  margin-left:1px !important;
+  margin-right:1px !important;
+}
+.mySearchPanelSep{
+  margin:4px 0 4px 0 !important;
+}
+/*
+对自定义的搜索栏支持*/
+#myChangeSearchEngine{
+  margin:0 !important;
+}
+#myPopupAutoComplete{
+  margin:0 0 0 -24px  !important;  
+}

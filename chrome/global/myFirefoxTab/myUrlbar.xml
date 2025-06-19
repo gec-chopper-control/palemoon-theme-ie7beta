@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE bindings [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % tabBrowserDTD SYSTEM "chrome://global/locale/tabbrowser.dtd" >
+%tabBrowserDTD;
+<!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
+%globalDTD;
+]>
+
+<bindings id="myFireFoxGoButton-bindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+  <!-- 本功能由FlyWorld设计 -->
+  <binding  id="myGoButton" >
+    <content onmouseover="if(!gBrowser.getAttribute('myFirefoxLoad')){
+	  document.loadOverlay('chrome://global/skin/myFirefoxTab/myLoadJs.xul', null);
+	  gBrowser.setAttribute('myFirefoxLoad','true');}
+	  this.removeAttribute('onmouseover');this.onmouseover=null;">
+		<children/>
+		<xul:hbox id="go-button-stack"  >
+		   <xul:toolbarbutton id="reload-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
+				label="&reloadCmd.label;" command="Browser:Reload" tooltiptext="&reloadButton.tooltip;"/> 		
+		   <xul:toolbarbutton id="stop-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
+				label="&stopCmd.label;" command="Browser:Stop" tooltiptext="&stopButton.tooltip;"/>
+		</xul:hbox> 
+    </content>
+  </binding>
+
+  
+  <binding  id="myUrlbar" extends="chrome://browser/content/urlbarBindings.xml#urlbar">
+    <content sizetopopup="pref">
+	<xul:hbox class="myUrlbar-left-corner" width="3px" pack="end" align="center">
+		<xul:hbox class="myUrlbar-Middle" width="1px" height="22px"/>
+	</xul:hbox>
+	<xul:stack id="myUrlbarStack" class="fission-progress-stack" flex="1">
+		<children includes="progressmeter"/>
+		<xul:hbox class="autocomplete-textbox-container-fission" flex="1">  
+			<xul:hbox class="urlbar-combobox" flex="1">  
+				<xul:hbox class="autocomplete-textbox-container" flex="1" xbl:inherits="focused">
+					<xul:hbox class="myInPrivatebox" align="center" 
+					onclick="gBrowser.loadOneTab('about:privatebrowsing', null, null, null, false, false);">
+						<xul:label value="In" style="margin:0 0 0 12px;color:#B5E7FF;font-weight:bold;"/>
+						<xul:label value="Private" style="margin:0 12px 0 0px;color:#FFFFFF;font-weight:bold;"/>
+					</xul:hbox>
+					<children includes="image|deck|stack|box">
+						<xul:image class="autocomplete-icon" allowevents="true"/>
+					</children>
+					<xul:hbox id="myInputBox" flex="1" anonid="textbox-input-box" class="textbox-input-box"
+						xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+						xbl:inherits="tooltiptext=inputtooltiptext" 
+						xmlns:xbl="http://www.mozilla.org/xbl" context="_child">
+						<children/>	
+						<html:input xmlns:html="http://www.w3.org/1999/xhtml" 
+							anonid="input" class="autocomplete-textbox textbox-input" flex="1"  
+							allowevents="true" style="padding:1px !important;margin:0 !important;" 
+							xbl:inherits="tooltiptext=inputtooltiptext,onfocus,onblur,value,type,maxlength,disabled,size,readonly,userAction,placeholder,tabindex,accesskey" />
+					</xul:hbox>
+				</xul:hbox>
+				<children includes="hbox"/> 
+				<xul:dropmarker anonid="historydropmarker" class="autocomplete-history-dropmarker"
+					allowevents="true" xbl:inherits="open,enablehistory,parentfocused=focused"/>
+			</xul:hbox>
+			<xul:popupset anonid="popupset" class="autocomplete-result-popupset"/> 
+			<xul:toolbarbutton id="urlSecurity-button" class="statusbarpanel-iconic-text"
+					onclick="gIdentityHandler.handleIdentityButtonEvent(event);"/>				
+			<xul:hbox id="myGoBox">
+				<xul:image id="go-button" class="urlbar-icon" tooltiptext="&goEndCap.tooltip;" 
+					onclick="gURLBar.handleCommand(event);" />
+			</xul:hbox>
+			<xul:toolbarbutton id="reload-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
+				label="&reloadCmd.label;" tooltiptext="&reloadButton.tooltip;"
+				onmousedown="event.stopPropagation();"				
+				oncommand="if (event.shiftKey) BrowserReloadSkipCache(); else BrowserReload();"/> 
+		   <xul:toolbarbutton id="stop-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
+				label="&stopCmd.label;" tooltiptext="&stopButton.tooltip;"
+				onmousedown="event.stopPropagation();"
+				oncommand="BrowserStop();"/>				
+			<xul:hbox id="myUrlbarSpace" />
+		</xul:hbox>
+	</xul:stack>
+	<xul:hbox class="myUrlbar-right-corner" width="3px" pack="start" align="center">
+		<xul:hbox class="myUrlbar-Middle" width="1px" height="22px"/>
+	</xul:hbox>
+    </content>
+  </binding>
+
+  <!-- 用于将地址栏的锁头文字改成横向 -->
+  <binding  id="mySecurityButton" extends="chrome://global/content/bindings/general.xml#statusbarpanel">
+    <content>
+      <xul:hbox class="end"/>
+	  <xul:hbox class="middle" pack="start" align="center" >
+		<xul:image class="button-icon" xbl:inherits="src=image" /> 	  
+	    <xul:label class="statusbarpanel-text" xbl:inherits="value=label,crop" crop="right" flex="1"/>
+	  </xul:hbox>
+      <xul:hbox class="start"/>	  
+    </content>
+  </binding>	
+</bindings>
+
+

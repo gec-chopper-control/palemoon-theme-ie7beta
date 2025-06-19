@@ -1,0 +1,293 @@
+
+/* Toolbar */
+#placesToolbar {
+  border: none;
+  min-height: 36px;
+}
+
+/* back & forward buttons */
+#back-button, #forward-button {
+  list-style-image: url(libraryNavigation.png);
+  -moz-appearance: none;
+  padding: 0;
+  border: none;
+}
+
+#placesToolbar > toolbarbutton > image,
+#placesToolbar > toolbarbutton > label {
+  margin: 0;
+  padding: 0;
+}
+
+#back-button,
+#forward-button[chromedir="rtl"] {  
+  -moz-margin-start: 8px;
+  -moz-image-region: rect(0px, 24px, 24px, 0px);
+}
+#back-button:not([disabled="true"]):hover,
+#forward-button:not([disabled="true"]):hover[chromedir="rtl"] {
+  -moz-image-region: rect(24px, 24px, 48px, 0px);
+}
+#back-button[disabled="true"],
+#forward-button[chromedir="rtl"][disabled="true"] {
+  -moz-image-region: rect(48px, 24px, 72px, 0px) !important;
+}
+#back-button:not([disabled="true"]):hover:active,
+#forward-button:not([disabled="true"]):hover:active[chromedir="rtl"] {
+  -moz-image-region: rect(72px, 24px, 96px, 0px);
+}
+
+#forward-button,
+#back-button[chromedir="rtl"] {
+  -moz-margin-end: 8px;
+  -moz-image-region: rect(0px, 48px, 24px, 24px);
+}
+#forward-button:not([disabled="true"]):hover,
+#back-button:not([disabled="true"]):hover[chromedir="rtl"] {
+  -moz-image-region: rect(24px, 48px, 48px, 24px);
+}
+#forward-button[disabled="true"],
+#back-button[chromedir="rtl"][disabled="true"] {
+  -moz-image-region: rect(48px, 48px, 72px, 24px) !important;
+}
+#forward-button:not([disabled="true"]):hover:active,
+#back-button:not([disabled="true"]):hover:active[chromedir="rtl"] {
+  -moz-image-region: rect(72px, 48px, 96px, 24px);
+}
+
+/* Menu */
+#placesMenu {
+  -moz-appearance: none;
+  border: none;
+}
+
+#placesMenu > menu {
+  -moz-padding-start: 4px;
+  -moz-padding-end: 1px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  -moz-appearance: none;
+  color: white !important;
+  border: 2px solid transparent  !important;
+  -moz-border-radius: 3px;  
+  -moz-background-clip: padding !important;
+}
+
+#placesMenu > menu:hover {
+	-moz-border-top-colors:rgba(0, 0, 0, 0.3) rgba(255, 255, 255, 0.7)  ;
+	-moz-border-right-colors: rgba(0, 0, 0, 0.3)  rgba(225, 225, 225, 0.7) ;
+	-moz-border-bottom-colors: rgba(0, 0, 0, 0.3)  rgba(225, 225, 225, 0.7) ;
+	-moz-border-left-colors:  rgba(0, 0, 0, 0.3) rgba(225, 225, 225, 0.7) ;  
+	background:url("chrome://browser/skin/places/placesMenu-hover.png") center center repeat-x;
+	background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+#placesMenu > menu[open="true"] {
+	-moz-border-top-colors:rgba(0, 0, 0, 0.65) rgba(0, 0, 0, 0.2)  ;
+	-moz-border-right-colors: rgba(0, 0, 0, 0.65)  rgba(225, 225, 225, 0.01) ;
+	-moz-border-bottom-colors: rgba(0, 0, 0, 0.65)  rgba(0, 0, 0, 0.2) ;
+	-moz-border-left-colors:  rgba(0, 0, 0, 0.65) rgba(225, 225, 225, 0.01) ;  
+	background:url("chrome://browser/skin/places/placesMenu-active.png") center center repeat-x;
+	background-color: rgba(0, 0, 0, 0.7) !important;
+
+  -moz-padding-start: 5px;
+  -moz-padding-end: 0px;
+  padding-top: 3px;
+  padding-bottom: 1px;
+}
+
+#placesMenu > menu > label {
+  -moz-padding-end: 11px;
+  background: url(chrome://global/skin/arrow/Place-menu.png) right center no-repeat;
+}
+#placesMenu > menu:hover > label,
+#placesMenu > menu[open="true"] > label {
+  -moz-padding-end: 11px;
+  background: url(chrome://global/skin/arrow/Place-menu-hover.png) right center no-repeat;
+}
+#placesMenu[chromedir="rtl"] > menu > label {
+  background-position: left center;
+}
+
+/* organize button */
+#organizeButton {
+  list-style-image: url("chrome://browser/skin/places/organize.png");
+}
+
+/* view button */
+#viewMenu {
+  list-style-image: url("chrome://browser/skin/places/view.png");
+}
+
+/* maintenance button */
+#maintenanceButton {
+  list-style-image: url("chrome://browser/skin/places/importAndBackup.png");
+}
+
+/* Root View */
+#placesView {
+  border-top: 1px solid ThreeDDarkShadow;
+}
+
+/* Place List, Place Content */
+.placesTree {
+  margin: 0px;
+}
+
+#placesList {
+  -moz-appearance: none;
+  margin: 0px;
+  border: none;
+  padding: 0;
+}
+
+#placeContent {
+  -moz-appearance: none;
+  border: 0px;
+}
+
+/* Search Bar */
+#searchbar {
+  margin: 6px -4px 0px 2px;
+}
+
+#infoPaneBox {
+  border-top: 1px solid ThreeDShadow;
+  padding: 5px;
+}
+
+.textbox-input-closebutton {
+  -moz-appearance: none;
+  margin: 0px 1px 0px 0px;
+  min-width: 0;
+  background-color: transparent;
+  border: none;
+  padding: 0 !important;
+  list-style-image: url("chrome://global/skin/icons/Search-close.png");
+  -moz-image-region: rect(0px 16px 16px 0px);
+  width: 16px;
+  height: 16px;
+  cursor: default;
+}
+.textbox-input-closebutton > hbox{
+  background:none ;
+  }
+
+.textbox-input-closebutton > .button-box {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.textbox-input-closebutton:hover {
+  -moz-image-region: rect(0px 32px 16px 16px);
+}
+
+.textbox-input-closebutton:hover:active {
+  -moz-image-region: rect(0px 48px 16px 32px);
+}
+
+.small, .small[disabled="true"] {
+  font-size: x-small;
+  min-width: 0px;
+  padding: 0px 4px 0px 4px;
+  margin: 0px;  
+  border: 0px;
+}
+
+.small .button-text,
+.small .button-box {
+  padding: 0px;
+  border: 0px;
+}
+
+#searchFilter {
+  padding: 0px;
+  -moz-border-radius: 2px;  
+}
+
+#searchFilter .textbox-input-box {
+  padding: 2px 2px 3px 4px;
+}
+
+
+#organizerScopeBar {
+  -moz-appearance: toolbox;
+  padding: 2px 0;
+  -moz-padding-end: 3px;
+}
+
+#organizerScopeBar > toolbarbutton {
+  -moz-appearance: none;
+  border: 1px solid transparent;
+  -moz-border-radius: 2px;
+  padding: 0 !important;
+  margin: 0 1px;
+}
+
+#organizerScopeBar > toolbarbutton > label,
+#organizerScopeBar > toolbarbutton > image {
+  padding: 0;
+  margin: 0;
+}
+
+#organizerScopeBar .toolbarbutton-text {
+   margin: 0;
+   padding: 2px 5px;
+}
+
+#organizerScopeBar > toolbarbutton:not([disabled="true"]):not([checked="true"]):hover {
+  border-color: ThreeDShadow;
+}
+
+#organizerScopeBar > toolbarbutton[checked="true"] {
+  border-color: ThreeDDarkShadow !important;
+}
+
+#placesView:-moz-system-metric(windows-default-theme) {
+  border-top: none;
+}
+
+#placesToolbar {
+  -moz-appearance: none;
+  color: white;
+  background:url("chrome://browser/skin/places/places-toolbar.png") top center repeat-x;
+}
+
+#placesMenu > menu {
+  color: -moz-win-mediatext;
+}
+
+#placesView > splitter:-moz-system-metric(windows-default-theme) {
+  border: 0;
+  -moz-border-end: 1px solid;
+  -moz-border-right-colors: #A9B7C9;
+  -moz-border-left-colors: #A9B7C9;
+  min-width: 0;
+  width: 3px !important;
+  background-color: transparent;
+  -moz-margin-start: -3px;
+  position: relative;
+  z-index: 10;
+}
+
+#searchModifiers:-moz-system-metric(windows-default-theme) {
+  border-bottom: 1px solid #A9B7C9;
+}
+
+#organizerScopeBar:-moz-system-metric(windows-default-theme) {
+  -moz-appearance: none;
+  border: none;
+}
+
+#infoPaneBox:-moz-system-metric(windows-default-theme) {
+  border-top-color: #A9B7C9;
+}
+
+#placesView:-moz-system-metric(windows-default-theme),
+#searchModifiers:-moz-system-metric(windows-default-theme),
+#infoPane:-moz-system-metric(windows-default-theme),
+#placesList:-moz-system-metric(windows-default-theme),
+#placeContent:-moz-system-metric(windows-default-theme) {
+  background-color: #EEF3FA;
+}

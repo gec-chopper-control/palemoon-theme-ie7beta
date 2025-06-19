@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!DOCTYPE bindings [
+<!ENTITY % identityDTD SYSTEM "chrome://tabmixplus/locale/pref-tabmix.dtd" >
+%identityDTD;
+<!ENTITY % tabmixDTD SYSTEM "chrome://tabmixplus/locale/tabmix.dtd" >
+%tabmixDTD;
+<!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
+%globalDTD;
+<!ENTITY % tabBrowserDTD SYSTEM "chrome://global/locale/tabbrowser.dtd" >
+%tabBrowserDTD;
+<!ENTITY % tabBrowserDTD3 SYSTEM "chrome://browser/locale/tabbrowser.dtd" >
+%tabBrowserDTD3;
+]>
+
+<bindings id="tabxbindings_3"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+          
+  <binding id="browser-tab" display="xul:box"
+        extends="chrome://tabmixplus/content/tab/tabmix.xml#browser-tab">
+    <resources>
+      <stylesheet src="chrome://global/skin/myFirefox/Tmp/Tmp.css"/>
+    </resources>        
+     <content >
+        <xul:image class="myTab-left-corner" xbl:inherits="selected"/>
+      <xul:hbox class="tab-image-left tab-startcap tab-left tab-left-border" xbl:inherits="selected"/>
+      <xul:hbox class="tab-drag-indicator-left"/>
+      <xul:toolbarbutton anonid="tmp-close-button" tabindex="-1" class="tab-close-button always-left"/>
+      <xul:hbox flex="1" class="tab-middle box-inherit tab-image-middle tab-body" align="center" xbl:inherits="selected">
+        <xul:stack class="tab-icon">
+          <xul:image class="tab-icon-image" xbl:inherits="validate,src=image"/>
+          <xul:image class="tab-protect-icon" />
+          <xul:image class="tab-lock-icon"/>
+        </xul:stack>
+        <xul:stack class="tab-text-container" flex="1">
+          <xul:progressmeter class="tab-progress" flex="2" mode="normal" value="0" xbl:inherits="value=tab-progress"/>
+          <xul:label class="tab-text" xbl:inherits="value=label,accesskey,crop,disabled" flex="1"/>
+          <xul:hbox class="showhover-box">
+            <xul:spacer flex="1" class="showhover-flex"/>
+            <xul:toolbarbutton anonid="tmp-close-button" tabindex="-1" class="showhover tabs-closebutton"/>
+          </xul:hbox>
+        </xul:stack>
+      </xul:hbox>
+      <xul:toolbarbutton anonid="tmp-close-button" tabindex="-1" class="tab-close-button always-right"/>
+      <xul:hbox class="tab-drag-indicator-right"/>
+      <xul:hbox class="tab-image-right tab-endcap tab-right tab-right-border" xbl:inherits="selected"/>
+      <xul:image class="myTab-right-corner" xbl:inherits="selected"  />
+     </content>
+  </binding>
+
+  
+  <binding id="scroll-tabs_3"
+            extends="chrome://tabmixplus/content/tab/tabmix_3.xml#scroll-tabs_3">
+    <resources>
+      <stylesheet src="chrome://global/skin/myFirefox/Tmp/Tmp.css"/>
+    </resources>
+    <content hidebutton="true">
+      <xul:stack flex="1" class="tabs-stack">
+        <xul:vbox class="tmp-tabs-bottom">
+          <xul:spacer flex="1"/>
+          <xul:hbox class="tabs-bottom" align="center"/>
+        </xul:vbox>
+        <xul:hbox class="tabs-container"
+                  xbl:inherits="overflow,flowing,scrollbutton-up,newtab_side">
+          <xul:spacer id="tabs-left-space"/>
+          <xul:box id="tabs-newTab" class="tabs-newTab" orient="horizontal">
+            <xul:vbox id="tabs-newbutton-box" class="tabs-newtab-topbox">
+              <xul:toolbarbutton class="tabs-newtab-button tabs-newbutton" anonid="newtab-button" 
+					id="tabs-newbutton"
+					xbl:inherits="platform"
+					command="cmd_newNavigatorTab" chromedir="&locale.dir;"
+					tooltiptext="&clicktab.addtab;"
+					ondblclick="event.stopPropagation();"/>
+			</xul:vbox>
+          </xul:box>          
+            <xul:vbox> 
+				<xul:toolbarbutton id="myShowCaseButton" anonid="alltabs-popup"	 align="top" pack="end"
+					type="menu" tooltiptext="Firefox ShowCase">
+					<xul:menupopup class="tabs-alltabs-popup" position="after_start"/>
+				</xul:toolbarbutton>
+			</xul:vbox>
+			<xul:vbox>
+				<xul:stack class="myTabs-alltabs-box" align="center" pack="end" chromedir="&locale.dir;">
+					<xul:hbox flex="1" class="tabs-alltabs-box" anonid="alltabs-box"/>
+					<xul:hbox flex="1" class="tabs-alltabs-box-animate" anonid="alltabs-box-animate"/>
+					<xul:toolbarbutton class="tabs-alltabs-button" type="menu" anonid="alltabs-button">
+					  <xul:menupopup class="tabs-alltabs-popup" anonid="alltabs-popup" position="after_start"/>
+					</xul:toolbarbutton>
+				</xul:stack>
+			</xul:vbox>          
+          <xul:hbox class="tabbrowser-arrowscrollbox" _side="left" type="tabmix"
+                    xbl:inherits="flowing,collapsed=underflow,scrollbutton-up,Mac">
+            <xul:toolbarbutton class="scrollbutton-up" orient="horizontal"
+				   chromedir="&locale.dir;"
+				   anonid="scrollbutton-up"
+				   xbl:inherits="disabled=disableScrollTabsLeft"
+				   oncommand="tabsScroll(-1);"
+				   oncontextmenu="_createTabsList(event, 'left');"
+				   ondblclick="event.stopPropagation();"/>
+          </xul:hbox>
+          <xul:scrollbox class="tabs-frame tabbrowser-arrowscrollbox" type="tabmix-scrollbox"
+                         anonid="scroll-tabs-frame" orient="horizontal" flex="1">
+            <children includes="tab"/>
+            <xul:toolbarbutton class="tabs-newtab-button"
+                               command="cmd_newNavigatorTab" chromedir="&locale.dir;"
+                               tooltiptext="&clicktab.addtab;"/>
+          </xul:scrollbox>
+          <xul:box class="tabbrowser-arrowscrollbox" _side="right" type="tabmix"
+                   xbl:inherits="flowing,collapsed=underflow,scrollbutton-up,Mac">
+            <xul:toolbarbutton class="scrollbutton-up" orient="horizontal"
+				   chromedir="&locale.dir;"
+				   anonid="scrollbutton-up"
+				   xbl:inherits="disabled=disableScrollTabsLeft"
+				   oncommand="tabsScroll(-1);"
+				   oncontextmenu="_createTabsList(event, 'left');"
+				   ondblclick="event.stopPropagation();"/>
+            <xul:toolbarbutton class="scrollbutton-down" orient="horizontal"
+				   chromedir="&locale.dir;"
+				   anonid="scrollbutton-down"
+				   xbl:inherits="disabled=disableScrollTabsRight,notonbottom"
+				   oncommand="tabsScroll(1);"
+				   oncontextmenu="_createTabsList(event, 'right');"
+				   ondblclick="event.stopPropagation();"/>
+          </xul:box>
+          
+          <xul:spacer id="tabs-right-space"/>
+          <xul:vbox id="alltabs-place-holder"/>
+          
+          <xul:stack hidden="true" align="center" pack="end" chromedir="&locale.dir;" class="tabs-alltabs-stack">
+            <xul:hbox flex="1" class="tabs-alltabs-box tmp-alltabs-3" anonid="alltabs-box"/>
+            <xul:hbox flex="1" class="tabs-alltabs-box-animate tmp-alltabs-3" anonid="alltabs-box-animate"/>
+            <xul:toolbarbutton class="tabs-alltabs-button tmp-alltabs-3" type="menu" anonid="alltabs-button">
+              <xul:menupopup class="tabs-alltabs-popup"
+					 oncommand="event.stopPropagation();"
+					 onclick="event.stopPropagation();"
+					 anonid="alltabs-popup"
+					 position="after_end"/>
+            </xul:toolbarbutton>
+          </xul:stack>
+          <xul:toolbarbutton id="myTabBarClose" anonid="tabs-closebutton"
+                class="close-button tabs-closebutton" chromedir="&locale.dir;" />
+
+        </xul:hbox>
+      </xul:stack>
+      <xul:hbox anonid="arrowscrollbox" hidden="true" class="tabbrowser-arrowscrollbox"/>
+    </content>
+  </binding>
+</bindings>

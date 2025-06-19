@@ -1,0 +1,325 @@
+ /* *** winstripe *** */
+toolbar[iconsize="large"] #mySearchTextBox{
+ 	width:54px ;
+}
+	
+#main-window toolbar[iconsize="large"]  #searchbar .searchbar-textbox {
+  -moz-appearance: none !important;
+  -moz-border-radius: 0  !important;
+  -moz-background-clip: padding !important;
+  background-color: rgba(255, 255, 255, 0.75) ;
+  border-top: 3px solid ;
+  -moz-border-top-colors: rgba(252, 254, 253, 0.27 ) rgba(51, 51, 51, 0.76) rgba(254, 254, 254, 0.93)  ;
+  border-bottom: 3px solid ;
+  -moz-border-bottom-colors:rgba(253, 255, 255, 0.36) rgba(157, 157, 157, 0.56) rgba(254, 254, 254,0.93) ; 
+}
+
+#main-window toolbar[iconsize="large"] .searchbar-box > .myUrlbar-left-corner{
+ background:url("chrome://global/skin/myFirefox/urlBar/urlbarLeft.png") no-repeat top left;
+}
+
+#main-window toolbar[iconsize="large"] .searchbar-box > .myUrlbar-right-corner{
+ background:url("chrome://global/skin/myFirefox/urlBar/urlbarRight.png") no-repeat top left;
+}
+
+#main-window toolbar[iconsize="large"] .searchbar-box  hbox > .myUrlbar-Middle{
+ background:url("chrome://global/skin/myFirefox/urlBar/urlbarMiddle.png") no-repeat top left;
+}
+
+toolbar[iconsize="large"]  #searchbar:hover .searchbar-textbox {
+	background-color: rgba(255, 255, 255, 0.90) ;
+}
+
+toolbar[iconsize="large"] #searchbar .searchbar-textbox[focused="true"]{
+	background-color: rgba(255, 255, 255, 0.99) !important;
+	-moz-border-top-colors: rgba(255, 255, 255, 0.5) rgba(50, 50, 50, 0.7) rgba(255, 255, 255, 0.99) !important;
+	-moz-border-bottom-colors: rgba(255, 255, 255, 0.5) rgba(50, 50, 50, 0.3) rgba(255, 255, 255, 0.99)!important;
+}
+#main-window toolbar[iconsize="large"] #searchbar[focused="true"]  .searchbar-box > hbox > .myUrlbar-Middle{
+ background:rgba(255, 255, 255, 0.99) !important
+}
+
+.searchbar-popup{
+  margin-top:-3px 
+} 
+
+toolbar[mode="text"] .searchbar-box{
+  height: 22px  ;
+  margin:0px ;
+  background: transparent !important;
+  border:0px !important;  
+}
+
+.searchbar-textbox {
+  -moz-appearance: none;
+  width: 4em;
+  min-width: 4em;
+  margin:0;
+  padding-right:1px ;
+  border: 0px ;
+  height: 26px ;
+  background-color: transparent;
+}
+
+#main-window toolbar[iconsize="small"] .searchbar-box > .myUrlbar-left-corner,
+#main-window toolbar[iconsize="small"] .searchbar-box > .myUrlbar-right-corner{
+  display:none !important ;
+}
+
+toolbar[iconsize="small"] .searchbar-textbox {
+  -moz-appearance: none;
+  margin-left:-1px !important;
+  margin-right:0px !important;
+  height: 22px ;
+  border: 1px solid;
+  -moz-border-top-colors: #7e9cb8;
+  -moz-border-bottom-colors: #7e9cb8;
+  -moz-border-right-colors: #7e9cb8;
+  -moz-border-left-colors: #7e9cb8;
+  background-color: rgba(255, 255, 255, 0.75) ;
+}
+toolbar[iconsize="small"] .searchbar-textbox:hover ,
+toolbar[iconsize="small"] .searchbar-textbox:hover:active ,
+toolbar[iconsize="small"] .searchbar-textbox[focused="true"]{
+  background: white ;
+}
+
+toolbar[mode="text"] .searchbar-textbox {  
+  margin:2px !important;
+  padding:0px !important;
+  border: 1px solid !important;
+  -moz-border-top-colors: #7e9cb8;
+  -moz-border-bottom-colors: #7e9cb8;
+  -moz-border-right-colors: #7e9cb8;
+  -moz-border-left-colors: #7e9cb8;
+  background-color: white ;
+}
+
+.textbox-input {
+  padding: 0px !important;
+  margin: 0 !important;
+}
+
+/* ::::: searchbar-engine-button ::::: */
+.searchbar-engine-button {
+  -moz-appearance: none;
+  padding: 0px ;
+  margin : -1px 0 -1px 0 ;
+  border: 0;
+  position:relative  !important;
+  z-index:1  !important;   
+}
+toolbar[mode="text"] .searchbar-engine-button {
+  display:none  ;
+}
+
+toolbar[iconsize="small"] .searchbar-engine-button {
+  list-style-image:url("chrome://browser/skin/search/searchbar-add-engine.png") ;
+  -moz-image-region: rect(0px, 15px, 22px, 0px) ;
+  width: 22px !important;  
+  margin-right:-8px !important;
+}
+
+toolbar[iconsize="large"]  .mySearch-go-box:hover  .searchbar-engine-button {
+  background:url("chrome://browser/skin/search/searchbar-engine-button-hover.png") left center no-repeat !important;
+}
+
+toolbar[iconsize="large"] .mySearch-go-box:hover .search-go-button:hover:active + .searchbar-engine-button ,
+toolbar[iconsize="large"] .mySearch-go-box:hover .searchbar-engine-button[open="true"] ,
+toolbar[iconsize="large"] .searchbar-engine-button[open="true"] {
+  background:url("chrome://browser/skin/search/searchbar-engine-button-open.png") left center no-repeat !important;
+}
+
+.searchbar-engine-image {
+  list-style-image: url("chrome://global/skin/icons/folder-item.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+  -moz-margin-start: 0px;
+  padding:0px 0px 0px 2px ;
+}
+
+
+toolbar[iconsize="large"] .searchbar-engine-button .searchbar-dropmarker-image {
+  -moz-appearance: none !important;
+  display:-moz-box  ;
+  width: 15px;
+  height: 22px;
+  list-style-image:url("chrome://browser/skin/search/searchbar-add-engine.png") ;
+  -moz-image-region: rect(0px, 15px, 22px, 0px) ;
+}
+toolbar[iconsize="large"] .mySearch-go-box:hover .searchbar-engine-button[addengines="true"] .searchbar-dropmarker-image,
+toolbar[iconsize="large"] .mySearch-go-box:hover .searchbar-engine-button .searchbar-dropmarker-image,
+toolbar[iconsize="large"] .searchbar-engine-button .searchbar-dropmarker-image:hover{
+  -moz-image-region: rect(0px, 30px, 22px, 15px) ;
+ 
+} 
+
+toolbar[iconsize="large"] .mySearch-go-box:hover .search-go-button:hover:active + .searchbar-engine-button .searchbar-dropmarker-image ,
+toolbar[iconsize="large"] .searchbar-engine-button[open="true"][addengines="true"] .searchbar-dropmarker-image,
+toolbar[iconsize="large"] .searchbar-engine-button[open="true"] .searchbar-dropmarker-image {
+  -moz-image-region: rect(0px, 45px, 22px, 30px) !important;
+}
+
+toolbar[iconsize="large"] .searchbar-engine-button[addengines="true"]  .searchbar-dropmarker-image{
+  -moz-image-region: rect(0px, 60px, 22px, 45px)  ;
+}
+
+toolbar[iconsize="small"] .searchbar-engine-button .searchbar-dropmarker-image{
+  display:-moz-box  ;
+  padding:0px !important;
+  margin:-1px 0px -1px -10px !important;
+  list-style-image: url("chrome://browser/skin/search/searchbar-engine-button-small.png");
+  -moz-image-region: rect(0px, 14px, 22px, 0px);
+}
+toolbar[iconsize="small"] .searchbar-engine-button:hover .searchbar-dropmarker-image{
+  -moz-image-region: rect(0px, 28px, 22px, 14px);
+}
+toolbar[iconsize="small"] .searchbar-engine-button[open="true"] .searchbar-dropmarker-image{
+  -moz-image-region: rect(0px, 42px, 22px, 28px);
+}
+.searchbar-engine-button[open="true"] {
+  background-position: -64px 0px;
+}
+toolbar[iconsize="small"] .searchbar-engine-button[addengines="true"]  .searchbar-dropmarker-image{
+  -moz-image-region: rect(0px, 56px, 22px, 42px);
+}
+toolbar[iconsize="small"] .searchbar-engine-button[addengines="true"]:hover  .searchbar-dropmarker-image{
+  -moz-image-region: rect(0px, 70px, 22px, 56px);
+}
+toolbar[iconsize="small"] .searchbar-engine-button[addengines="true"][open="true"]  .searchbar-dropmarker-image{
+  -moz-image-region: rect(0px, 84px, 22px, 70px);
+}
+/* ::::: search-go-button ::::: */
+
+/* In text icon mode, the Search Go button scales independently of the field,
+ * and the button can be much taller, so we have to center align the elements
+ * (instead of stretching them) to prevent the field from stretching vertically
+ * to match the button's height and growing too tall.  We still stretch
+ * the search engine dropmarker to the height of the field via a stretchy box
+ * around just those two elements.
+ */
+ .searchbar-box {
+  -moz-appearance: none ;
+}
+
+toolbar[iconsize="large"]  .search-go-button {
+  -moz-appearance: none;
+  padding: 0px ;
+  margin : -3px 0 -3px 0 ;
+  border: 0;
+  list-style-image: url("chrome://browser/skin/search/search-large.png") ;
+  -moz-image-region: rect(0px 26px 22px 0px);
+}
+toolbar[iconsize="large"]  .search-go-button:hover {
+  -moz-image-region: rect(0px 52px 22px 26px) !important;
+}
+toolbar[iconsize="large"]  .search-go-button:hover:active {
+  -moz-image-region: rect(0px 78px 22px 52px) !important;
+}
+
+toolbar[iconsize="large"] .mySearch-go-box:hover .search-go-button {
+  -moz-image-region: rect(0px 104px 22px 78px) 
+}
+
+
+toolbar  .search-go-button > image { 
+  margin: 0px !important;
+  padding:0px !important;
+}
+
+toolbar[iconsize="small"] .search-go-button {
+  list-style-image: url("chrome://browser/skin/Search-glass-small.png") !important;
+  border: 0px !important;
+  padding: 0px !important;
+  -moz-appearance: none !important;
+  -moz-margin-start:3px !important;
+  -moz-margin-end:0 !important;
+  -moz-image-region: rect(0px 24px 22px 0px) !important;
+}
+toolbar[iconsize="small"] .search-go-button:hover {
+  -moz-image-region: rect(0px 49px 22px 25px) !important;
+}
+toolbar[iconsize="small"] .search-go-button[disabled="true"] {
+  -moz-image-region: rect(0px, 74px, 22px, 50px) !important;
+}
+toolbar[iconsize="small"] .search-go-button:hover:active {
+  -moz-image-region: rect(0px, 99px, 22px, 75px) !important;
+}
+
+toolbar[mode="text"] .search-go-button {
+  padding:0px ;
+  margin:0px ;
+  background-image: none;
+  list-style-image: none;
+  width: auto;
+}
+
+.searchbar-engine-menuitem[selected="true"] > .menu-iconic-text {
+  font-weight: bold;
+}
+
+
+/* :::::  mySearch-go-box ::::: */
+
+
+toolbar[iconsize="large"] .mySearch-go-box {
+  margin-left:-43px ;
+  margin-right:2px ;
+    position:relative  ;
+  z-index:1  ; 
+  }
+
+
+
+
+/* ÐÂ¼ÓµÄ.autocomplete-history-dropmarker */
+toolbar .searchbar-textbox .autocomplete-history-dropmarker {
+  -moz-binding: url("chrome://global/content/bindings/autocomplete.xml#history-dropmarker");
+  display:-moz-box ;
+  -moz-appearance: none !important;    
+}
+toolbar[iconsize="large"] .searchbar-textbox .autocomplete-history-dropmarker {
+  margin : -1px 39px -1px -57px ;
+  position:relative  ;
+  z-index:1  ;  
+  padding: 0 ;
+  border: 0px;
+  list-style-image:url("chrome://browser/skin/search/searchbar-add-engine.png") ;
+  -moz-image-region: rect(0px, 75px, 22px, 60px) ;
+  background : transparent;
+}
+toolbar[iconsize="large"] .searchbar-textbox[focused="true"] .autocomplete-history-dropmarker{
+  padding: 0 ; 
+  -moz-image-region: rect(0px, 15px, 22px, 0px) ;
+}
+
+toolbar[iconsize="large"] .searchbar-textbox[focused="true"] .autocomplete-history-dropmarker:hover {
+  -moz-image-region: rect(0px, 30px, 22px, 15px) ;
+}
+toolbar[iconsize="large"]  .searchbar-textbox[focused="true"] .autocomplete-history-dropmarker:hover:active ,
+toolbar[iconsize="large"]  .searchbar-textbox[focused="true"] .autocomplete-history-dropmarker[open="true"]  {
+  -moz-image-region: rect(0px, 45px, 22px, 30px) ;
+}
+
+toolbar[iconsize="small"] .searchbar-textbox .autocomplete-history-dropmarker {
+  margin:0px 0px 0px 0px !important;
+  padding: 0px !important;
+  border: 0px  !important;
+  background:none !important;
+  background-color:transparent !important;
+  list-style-image: url("chrome://global/skin/icons/autocomplete-dropmark-arrow1.png") !important;
+  -moz-image-region: rect(0px, 16px, 20px, 0px) !important;
+}
+
+toolbar[iconsize="small"]  .autocomplete-history-dropmarker:hover,
+toolbar[iconsize="small"] .searchbar-textbox .autocomplete-history-dropmarker:hover:active ,
+toolbar[iconsize="small"] .searchbar-textbox[focused="true"] .autocomplete-history-dropmarker{ 
+  margin-top: 0px !important;
+  background:white !important;
+  list-style-image:none !important;
+  background-color:transparent !important;
+  -moz-image-region: rect(0px, 32px, 20px, 16px) !important;
+  background:url("chrome://global/skin/icons/history-dropmarkersmall.png") no-repeat top left !important;
+}
+toolbar[mode="text"]  .autocomplete-history-dropmarker{
+  display:none ;
+}

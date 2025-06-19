@@ -1,0 +1,231 @@
+
+/* unfortunatly tab-sidebar support only possible in global.css (imported there) or userChrome.css... 
+I hope there won't be too much changes in TabSidebar in the future...
+*/
+
+#tab-sidebar .tbs-icon {opacity: 0.3 !important;}
+#tab-sidebar .tbs-bottomstrip:hover {opacity: 1.0 !important;}
+#tab-sidebar .tbs-tabpreview:hover .tbs-icon/* , 
+#tab-sidebar .tbs-tabpreview[selected="true"] .tbs-canvas */ {
+  opacity: 1 !important;
+}
+
+#tab-sidebar tabpreview image[anonid="loading"] {
+  list-style-image: url("chrome://global/skin/icons/loading-front.gif") !important;
+}
+
+
+
+#tab-sidebar tabpreview toolbarbutton[anonid="close"] {
+  list-style-image: url("chrome://global/skin/icons/tabclose-front.png") !important;
+  -moz-appearance: none !important;
+  -moz-image-region: rect(3px 14px 16px 2px) !important;
+  border: none !important;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  min-height: 13px !important;
+  min-width: 12px !important;
+}
+
+#tab-sidebar tabpreview toolbarbutton[anonid="close"]:hover {
+   list-style-image: url("chrome://global/skin/icons/tabclose-front-hover.png") !important;
+   -moz-image-region: rect(3px 14px 16px 2px) !important;
+}
+
+#tab-sidebar tabpreview toolbarbutton[anonid="close"]:hover:active {
+   list-style-image: url("chrome://global/skin/icons/tabclose-front-pressed.png") !important;
+   -moz-image-region: rect(3px 14px 16px 2px) !important;
+}
+
+#tab-sidebar tabpreview image[anonid="security"] {
+  list-style-image: url("chrome://browser/skin/lock-secure.png") !important;
+}
+
+#tab-sidebar .tbs-tabpreview[security="high"] .tbs-security,
+#tab-sidebar .tbs-tabpreview[security="high"] .tbs-security:hover,
+#tab-sidebar .tbs-tabpreview[security="high"] .tbs-security:hover:active,
+#tab-sidebar .tbs-tabpreview[security="low"] .tbs-security,
+#tab-sidebar .tbs-tabpreview[security="low"] .tbs-security:hover,
+#tab-sidebar .tbs-tabpreview[security="low"] .tbs-security:hover:active,
+#tab-sidebar tabpreview[security="high"] image[anonid="security"],
+#tab-sidebar tabpreview[security="low"] image[anonid="security"] {
+  list-style-image: url("chrome://browser/skin/lock-secure.png") !important;
+  -moz-image-region: rect(0px 16px 13px 0px) !important;
+}
+#tab-sidebar .tbs-tabpreview[security="broken"] .tbs-security, 
+#tab-sidebar .tbs-tabpreview[security="broken"] .tbs-security:hover, 
+#tab-sidebar .tbs-tabpreview[security="broken"] .tbs-security:hover:active,
+#tab-sidebar tabpreview[security="broken"] image[anonid="security"] {
+  list-style-image: url("chrome://browser/skin/lock-broken.png") !important;
+  -moz-image-region: rect(0px 16px 13px 0px) !important;
+}
+
+/* Stop button */
+#tab-sidebar .tbs-stop {
+  list-style-image: url("chrome://browser/skin/buttons-small.png") !important;
+  -moz-image-region: rect(0px 420px 25px 392px) !important;
+}
+
+/* width only works this way, whyever... */
+/* #tab-sidebar .tbs-stop .toolbarbutton-icon  {
+  max-width: 17px !important;
+  max-height: 16px !important;
+}  */
+/* doesn't work for disabled states... ...so full button size */
+
+
+#tab-sidebar .tbs-stop:hover {
+  -moz-image-region: rect(0px 420px 25px 392px) !important;
+}
+
+#tab-sidebar .tbs-stop:hover:active {
+  -moz-image-region: rect(25px 420px 50px 392px) !important;
+}
+
+#tab-sidebar .tbs-stop[disabled="true"] {
+  -moz-image-region: rect(50px 420px 75px 392px) !important;
+}
+
+/* Back button */
+#tab-sidebar .tbs-back,
+#tab-sidebar .tbs-back .toolbarbutton-menubutton-button {
+  list-style-image: url("chrome://browser/skin/buttons-small.png") !important;
+  -moz-image-region: rect(0px 447px 25px 420px);
+  margin-right: 0px !important;
+  margin-top: 4px !important;
+}
+/* width only works this way, whyever... */
+/* #tab-sidebar .tbs-back .toolbarbutton-icon {
+  max-width: 17px !important;
+  max-height: 16px !important;
+}  */
+
+#tab-sidebar .tbs-back:hover, 
+#tab-sidebar .tbs-back.toolbarbutton-menubutton-button :hover {
+  -moz-image-region: rect(0px 447px 25px 420px) !important;
+}
+
+#tab-sidebar .tbs-back:hover:active:not([disabled="true"]) ,
+#tab-sidebar .tbs-back .toolbarbutton-menubutton-button:hover:active:not([disabled="true"]) {
+  -moz-image-region: rect(25px 447px 50px 420px) !important;
+}
+
+#tab-sidebar .tbs-back[disabled="true"] ,
+#tab-sidebar .tbs-back .toolbarbutton-menubutton-button[disabled="true"] {
+  -moz-image-region: rect(50px 447px 75px 420px) !important;
+}
+
+#tab-sidebar .tbs-back[chromedir="rtl"] ,
+#tab-sidebar .tbs-back.toolbarbutton-menubutton-button[chromedir="rtl"]{
+  -moz-image-region: rect(0px 474px 25px 448px) !important;
+}
+
+#tab-sidebar .tbs-back[chromedir="rtl"]:hover,
+#tab-sidebar .tbs-back .toolbarbutton-menubutton-button[chromedir="rtl"]:hover {
+  -moz-image-region: rect(0px 474px 25px 448px) !important;
+}
+
+#tab-sidebar .tbs-back[chromedir="rtl"]:hover:active:not([disabled="true"]),
+#tab-sidebar .tbs-back .toolbarbutton-menubutton-button[chromedir="rtl"]:hover:active:not([disabled="true"])  {
+  -moz-image-region: rect(25px 474px 50px 448px) !important;
+}
+
+#tab-sidebar .tbs-back[chromedir="rtl"][disabled="true"] ,
+#tab-sidebar .tbs-back .toolbarbutton-menubutton-button[chromedir="rtl"][disabled="true"]  {
+  -moz-image-region: rect(50px 474px 75px 448px) !important;
+}
+
+/* Forward button */
+#tab-sidebar .tbs-forward,
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button {
+  list-style-image: url("chrome://browser/skin/buttons-small.png") !important;
+  -moz-image-region: rect(0px 474px 25px 448px) !important;
+  margin-left: 0px !important;
+  margin-top: 4px !important;
+}
+/* width only works this way, whyever... */
+/* #tab-sidebar .tbs-forward .toolbarbutton-icon  {
+  max-width: 17px !important;
+  max-height: 16px !important;
+}   */
+
+#tab-sidebar .tbs-forward:hover,
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button:hover {
+  -moz-image-region: rect(0px 474px 25px 448px) !important;
+}
+
+#tab-sidebar .tbs-forward:hover:active:not([disabled="true"]),
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button:hover:active:not([disabled="true"]) {
+  -moz-image-region: rect(25px 474px 50px 448px) !important;
+}
+
+#tab-sidebar .tbs-forward[disabled="true"],
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button[disabled="true"] {
+  -moz-image-region: rect(50px 474px 75px 448px) !important;
+}
+
+#tab-sidebar .tbs-forward[chromedir="rtl"],
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button[chromedir="rtl"] {
+  -moz-image-region: rect(0px 447px 25px 420px) !important;
+}
+
+#tab-sidebar .tbs-forward[chromedir="rtl"]:hover,
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button[chromedir="rtl"]:hover {
+  -moz-image-region: rect(0px 447px 25px 420px) !important;
+}
+
+#tab-sidebar .tbs-forward[chromedir="rtl"]:hover:active:not([disabled="true"]),
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button[chromedir="rtl"]:hover:active:not([disabled="true"]) {
+  -moz-image-region: rect(25px 447px 50px 420px) !important;
+}
+
+#tab-sidebar .tbs-forward[chromedir="rtl"][disabled="true"],
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-button[chromedir="rtl"][disabled="true"] {
+  -moz-image-region: rect(50px 447px 75px 420px) !important;
+}
+
+
+/*Dropmarker*/
+
+#tab-sidebar  .tbs-back, 
+#tab-sidebar  .tbs-forward {
+ -moz-box-orient: vertical !important;
+}
+
+#tab-sidebar .toolbarbutton-menubutton-dropmarker {
+  margin-top: -4px !important;
+}
+
+#tab-sidebar .tbs-back .toolbarbutton-menubutton-dropmarker {
+  margin-left: 7px !important;
+}
+
+#tab-sidebar .tbs-forward .toolbarbutton-menubutton-dropmarker {
+  margin-left: 4px !important;
+}
+
+/* Reload button */
+#tab-sidebar .tbs-reload {
+   list-style-image: url("chrome://browser/skin/buttons-small.png") !important;
+  -moz-image-region: rect(0px 84px 25px 56px) !important;
+}
+/* width only works this way, whyever... */
+/* #tab-sidebar .tbs-reload .toolbarbutton-icon {
+  max-width: 17px !important;
+  max-height: 16px !important;
+}  */
+
+#tab-sidebar .tbs-reload:hover {
+  -moz-image-region: rect(0px 84px 25px 56px) !important;
+}
+
+#tab-sidebar .tbs-reload:hover:active {
+  -moz-image-region: rect(25px 84px 50px 56px) !important;
+}
+
+#tab-sidebar .tbs-reload[disabled="true"] {
+  -moz-image-region: rect(0px 84px 25px 56px) !important;
+}
+
+.tbs-back + spacer { max-width: 0px !important; }
+

@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!DOCTYPE bindings [
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+<!ENTITY % tabBrowserDTD SYSTEM "chrome://browser/locale/tabbrowser.dtd" >
+%tabBrowserDTD;
+<!ENTITY % historyDTD SYSTEM "chrome://browser/locale/history/history.dtd">
+%historyDTD;
+<!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
+%globalDTD;
+<!ENTITY % extensionsDTD SYSTEM "chrome://mozapps/locale/extensions/extensions.dtd">
+%extensionsDTD;
+]>
+<bindings id="myBookmarkCenter"
+	xmlns="http://www.mozilla.org/xbl"
+	xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:xbl="http://www.mozilla.org/xbl">
+  <!-- 本功能由FlyWorld设计 -->
+  <binding id="myUnified-Bookmark-History-button" >
+	<resources>
+		<stylesheet src="chrome://global/skin/myFirefoxTab/myBookmarkCenter.css"/>
+	</resources>
+	<content onmouseover="myBookMarkJs.initPanel();this.onmouseover=null;">
+		<xul:toolbarbutton id="myTabBookmarks-Menu" tooltiptext="&bookmarksButton.label;" checked="false" 
+			label="&bookmarksMenu.label;" class="bookMarkCenter" popup="myPanel"/>
+		<children/>
+	</content>
+ </binding>
+ 
+ <binding id="myBookMarkPanel"  extends="chrome://global/content/bindings/popup.xml#panel">
+	<resources>
+		<stylesheet src="chrome://browser/skin/places/places.css"/>
+		<stylesheet src="chrome://global/skin/myFirefoxTab/myBookmarkCenter.css"/>
+	</resources> 
+    <content onpopupshowing="if(event.target==this) myBookMarkJs.openPanel(this);"
+		onpopupshown="if(event.target==this) myBookMarkJs.BookMarkFillData();this.onpopupshown=null;" 
+		onpopuphidden="if(event.target==this) myBookMarkJs.onPanelClose(this);">
+	 <xul:hbox flex="1" id="myPanelBox">
+	  <xul:vbox flex="1">
+		<xul:hbox id="myPanelHead" maxheight="60">
+			<xul:toolbarbutton id="myAddBookMark-button" type="menu-button" class="mySideBarButton" 
+				command="Browser:AddBookmarkAs" label="&bookmarkThisPageCmd.label;" tooltiptext="" flex="1">
+				<xul:menupopup position="after_start" oncommand="event.stopPropagation();">
+					<xul:menuitem label="&bookmarkThisPageCmd.label;" command="Browser:AddBookmarkAs"/>
+					<xul:menuitem label="&bookmarkAllCmd.label;" command="Browser:BookmarkAllTabs"/>
+					<xul:menuseparator/>
+					<xul:menuitem label="&import.label;" oncommand="BrowserImport();"/>	 			
+					<xul:menuseparator/>			
+					<xul:menuitem label="&organizeBookmarks.label;" command="Browser:ShowAllBookmarks"/>
+				 </xul:menupopup>
+			</xul:toolbarbutton>
+			<xul:hbox flex="1000" pack="end" align="center">
+				<xul:toolbarbutton id="myBookCenterClose" class="myShowSideBar" tooltiptext=""
+					oncommand="myBookMarkJs.setSidebarCloseCmd();"/>
+			</xul:hbox>
+		</xul:hbox>
+
+		<xul:tabbox flex="1">
+			<xul:hbox aligh="center" onclick="myBookMarkJs.isFocus=false;">
+			<xul:tabs id="myBookMarksTabs" orient="horizontal" flex="1" >
+				<xul:tab id="AAA" selected ="true" class="myTab" label="&bookmarksButton.label;"
+					value="viewBookmarksSidebar"
+					tooltiptext="&bookmarksButton.label;" linkedpanel="aaa"
+					onclick="myBookMarkJs.BookMarkFillData();"/>
+				<xul:tab id="BBB" class="myTab" tooltiptext="&historyButton.label;" label="&historyButton.label;"
+					value="viewHistorySidebar" linkedpanel="bbb"
+					onclick="myBookMarkJs.HistoryFillData();"/>
+				<xul:tab id="CCC" moz-collapsed="true" value="" class="myTab" tooltiptext="&extensions.label;" 
+					label="&extensions.label;" linkedpanel="ccc" crop="right" flex="1" style="margin-right:2px;"
+					onclick="myBookMarkJs.openAddOnsPanel();"/>					
+			</xul:tabs>
+			<xul:space flex="1000"/>
+		</xul:hbox>
+			
+		<xul:tabpanels id="myTabPopBrowser" flex="1">			
+		  <xul:tabpanel id="aaa" flex="1">
+			 <xul:vbox flex="1">
+				<xul:hbox align="center" style="background:#ffffff">
+					<xul:label value="&find.label;" accesskey="&search.accesskey;" control="search-box"/>
+					<xul:textbox id="myBookmarkSearch-box" flex="1" type="timed" timeout="500"
+						 oncommand="myBookMarkJs.BookMarkSearch(this);"/>
+			 </xul:hbox>
+			<xul:tree id="myBookmarks-view" class="sidebar-placesTree" type="places" hidecolumnpicker="true"
+				context="placesContext" flex="1" onclick="myBookMarkJs.SU_handleTreeClick(this,event,true);">
+				<xul:treecols>
+					<xul:treecol id="title" flex="1" primary="true" hideheader="true"/>
+				</xul:treecols>
+				<xul:treechildren id="bookmarks-view-children" view="bookmarks-view" flex="1" 
+					class="sidebar-placesTreechildren"/>					
+			</xul:tree>
+		</xul:vbox>
+		</xul:tabpanel>
+		
+		<xul:tabpanel id="bbb" flex="1">
+			<xul:vbox flex="1">
+			<xul:hbox align="center" style="background:#ffffff">
+				<xul:label value="&find.label;" accesskey="&find.accesskey;" control="search-box"/>
+				<xul:textbox id="search-box" flex="1" type="timed" timeout="500"
+					oncommand="myBookMarkJs.searchHistory(this.value);"/>
+				<xul:button id="viewButton" style="min-width:0px !important;" type="menu"
+					label="&view.label;" accesskey="&view.accesskey;" selectedsort1="day" persist="selectedsort1">
+				 <xul:menupopup>
+					<xul:menuitem id="bydayandsite" label="&byDayAndSite.label;" type="radio"
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort1', 'dayandsite'); 
+						myBookMarkJs.searchHistory('');"/>
+					<xul:menuitem id="bysite" label="&bySite.label;" type="radio"
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort1', 'site');
+						myBookMarkJs.searchHistory('');"/>
+					<xul:menuitem id="byday" label="&byDate.label;" type="radio"
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort1', 'day');
+						myBookMarkJs.searchHistory('');"/>
+					<xul:menuitem id="byvisited" label="&byMostVisited.label;" type="radio"
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort1', 'visited');
+						myBookMarkJs.searchHistory('');"/>
+					<xul:menuitem id="bylastvisited" label="&byLastVisited.label;" type="radio"
+						oncommand="this.parentNode.parentNode.setAttribute('selectedsort1', 'lastvisited');
+						myBookMarkJs.searchHistory('');"/>
+				 </xul:menupopup>
+				</xul:button>
+			</xul:hbox>
+			 <xul:tree id="myHistoryTree" class="sidebar-placesTree" flex="1" type="places" context="placesContext"
+				 hidecolumnpicker="true" onclick="myBookMarkJs.SU_handleTreeClick(this,event,true);">
+					<xul:treecols>
+						<xul:treecol id="title" flex="1" primary="true" hideheader="true"/>
+					</xul:treecols>
+					<xul:treechildren class="sidebar-placesTreechildren" flex="1"/>
+			 </xul:tree>
+		 </xul:vbox>
+		</xul:tabpanel>
+		<xul:tabpanel id="ccc" flex="1">
+			<xul:vbox id="mySidebarBox" flex="1" style="background:white;" imgIdList="" persist="imgIdList">
+				<xul:toolbar id="AddOnsPanelBox" iconsize="small" height="28"
+					style="border-bottom:1px solid rgb(160,160,160);">
+					<xul:radiogroup id="myAddOnsGroup" currentRadio="" orient="horizontal" flex="1" persist="currentRadio"/>
+					<xul:toolbarbutton id="mySelectTab" class="toolbarbutton-1" type="menu" selectedTabs="" 
+						persist="selectedTabs">
+						<xul:menupopup id="selectTabPop" onpopupshowing="myBookMarkJs.cteateTabPopMenu();"
+							oncommand="event.stopPropagation();" position="after_end"/>
+					</xul:toolbarbutton>
+				</xul:toolbar>
+				<xul:browser id="mySidebar" flex="1" autoscroll="false" disablehistory="true" onmouseover=" myBookMarkJs.mySideBarHideboxLoad(this);"/>
+				<xul:iframe id="mySideBarHidebox" width="1" height="1" maxheight="1" sytle="height:1px;max-height:1px;"/>
+			</xul:vbox>
+		</xul:tabpanel>
+		</xul:tabpanels>
+	</xul:tabbox>
+	</xul:vbox>
+	<xul:vbox width="6" style="cursor:ew-resize;"
+		onmousedown="if(event.target==this) setPanelSize.onBeginDrag(event,0);"/>
+ </xul:hbox>
+ 	<xul:hbox > 
+		<xul:vbox flex="1">
+			<xul:hbox flex="1">
+				<xul:toolbarbutton id="myGetFxva" class="bookMarkCenter" label="Get Theme Modifier" 
+					tooltiptext="" oncommand="myBookMarkJs.myGetFxva();"/>	  
+			</xul:hbox>
+			<xul:hbox align="right" pack="end" flex="1" height="5" style="cursor:ns-resize;"
+				onmousedown="if(event.target==this) setPanelSize.onBeginDrag(event,1);"/>
+		</xul:vbox>
+		<xul:hbox height="10" width="10" style="cursor:se-resize;" 
+			 onmousedown="if(event.target==this) setPanelSize.onBeginDrag(event,2);"/>
+	</xul:hbox>
+    </content>
+  </binding>
+</bindings>
