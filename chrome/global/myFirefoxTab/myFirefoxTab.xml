@@ -88,10 +88,8 @@
           <xul:hbox class="tabs-bottom" align="center"/>
         </xul:vbox>
         <xul:hbox xbl:inherits="overflow" class="tabs-container">
-			<xul:toolbarbutton id="myShowCaseButton" anonid="alltabs-button" type="menu"
-				tooltiptext="Firefox ShowCase">
-				<xul:menupopup class="tabs-alltabs-popup" id="alltabs-popup" position="after_start"/>
-			</xul:toolbarbutton>				
+			<xul:toolbarbutton id="myShowCaseButton" anonid="alltabs-button" 
+				tooltiptext="Firefox ShowCase" onclick="allTabs.open();" />
 				
 			<xul:stack class="myTabs-alltabs-box" align="center" pack="end" chromedir="&locale.dir;">
 				<xul:hbox flex="1" class="tabs-alltabs-box" anonid="alltabs-box"/>
